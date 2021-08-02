@@ -12,6 +12,15 @@ use app\models\ContactForm;
 
 class SiteController extends Controller
 {
+    public function init()
+    {
+        if (!Yii::$app->db->isActive) {
+            Yii::error("No connection to Database.");
+        }
+
+        parent::init();
+    }
+
     /**
      * {@inheritdoc}
      */
