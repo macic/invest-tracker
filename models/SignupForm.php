@@ -14,7 +14,6 @@ class SignupForm extends \yii\base\Model
     public function rules()
     {
         return [
-            // username and password are both required
             [['username', 'password', 'password_repeat'], 'required'],
             [['username', 'password', 'password_repeat'], 'string', 'min' => 3, 'max' => 16],
             ['password_repeat', 'compare', 'compareAttribute' => 'password']
