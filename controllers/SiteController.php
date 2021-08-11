@@ -33,7 +33,7 @@ class SiteController extends Controller
                 'only' => ['logout'],
                 'rules' => [
                     [
-                        'actions' => ['login', 'error', 'forgot-password'],
+                        'actions' => ['login', 'error', 'forgot-password', 'signup'],
                         'allow' => true,
 
                     ],
@@ -104,6 +104,8 @@ class SiteController extends Controller
     }
     public function actionSignup()
     {
+        $this->layout = 'blank';
+
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post()) && $model->signup()) {
             return $this->redirect(Yii::$app->homeUrl);

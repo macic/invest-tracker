@@ -39,7 +39,6 @@ $this->title = 'Login';
             <?= $form->field($model, 'rememberMe')->checkbox() ?>
 
             <?= Html::submitButton('Login', ['class' => 'btn btn-primary btn-user btn-block', 'name' => 'login-button']) ?>
-            <hr>
             <?php ActiveForm::end()?>
 
             <hr>
@@ -47,7 +46,7 @@ $this->title = 'Login';
                 <a class="small" href="<?php echo \yii\helpers\Url::to(['site/forgot-password'])?>">Forgot Password?</a>
             </div>
             <div class="text-center">
-                <a class="small" href="<?php echo \yii\helpers\Url::to(['site/register']) ?>>">Create an Account!</a>
+                <a class="small" href="<?php echo \yii\helpers\Url::to(['site/signup']) ?>">Create an Account!</a>
             </div>
         </div>
     </div>
