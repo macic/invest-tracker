@@ -20,6 +20,9 @@ $this->title = 'Login';
             <?php $form = ActiveForm::begin([
                 'id' => 'login-form',
                 'options' => ['class'=>'user'],
+                'fieldConfig' => [
+                    'template' => "{beginWrapper}\n{input}\n{hint}\n{error}\n{endWrapper}",
+                ]
             ]); ?>
 
             <?= $form->field($model, 'username', [
