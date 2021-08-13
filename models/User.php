@@ -9,6 +9,7 @@ use yii\web\IdentityInterface;
 /**
     * @property int $id
     * @property string $username
+    * @property string $email
     * @property string $password
     * @property string $auth_key
     * @property string $access_token
@@ -27,6 +28,13 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
     public static function findIdentity($id)
     {
         return self::findOne($id);
+    }
+    /**
+     * {@inheritdoc}
+     */
+    public static function findEmail($email)
+    {
+        return self::findOne($email);
     }
 
     /**

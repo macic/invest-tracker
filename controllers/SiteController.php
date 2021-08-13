@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\ForgotPasswordForm;
 use app\models\SignupForm;
 use Yii;
 use yii\filters\AccessControl;
@@ -102,6 +103,7 @@ class SiteController extends Controller
             'model' => $model,
         ]);
     }
+
     public function actionSignup()
     {
         $this->layout = 'blank';
@@ -158,6 +160,19 @@ class SiteController extends Controller
 
     public function actionForgotPassword()
     {
-        return 'Forgot password';
+        $this->layout = 'blank';
+
+        $model = new ForgotPasswordForm();
+        {
+            if ($model->load(Yii::$app->request->post()) && $model->ForgotPassword()) {
+                return $this->refresh();
+            }
+
+            return $this->render('forgotPassword', [
+                'model' => $model,
+            ]);
+        }
     }
 }
+
+

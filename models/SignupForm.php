@@ -7,6 +7,7 @@ use yii\helpers\VarDumper;
 class SignupForm extends \yii\base\Model
 {
     public $username;
+    public $email;
     public $password;
     public $password_repeat;
 
@@ -14,8 +15,8 @@ class SignupForm extends \yii\base\Model
     public function rules()
     {
         return [
-            [['username', 'password', 'password_repeat'], 'required'],
-            [['username', 'password', 'password_repeat'], 'string', 'min' => 3, 'max' => 16],
+            [['username', 'email', 'password', 'password_repeat'], 'required'],
+            [['username', 'email', 'password', 'password_repeat'], 'string', 'min' => 3, 'max' => 16],
             ['password_repeat', 'compare', 'compareAttribute' => 'password']
         ];
     }
@@ -24,6 +25,7 @@ class SignupForm extends \yii\base\Model
     {
         $user = new User();
         $user->username = $this->username;
+        $user->email = $this->email;
         $user->password =  \Yii::$app->security->generatePasswordHash($this->password);
         $user->access_token = \Yii::$app->security->generateRandomString();
         $user->auth_key = \Yii::$app->security->generateRandomString();

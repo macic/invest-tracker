@@ -18,7 +18,7 @@ $this->title = 'Signup';
                 <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
             </div>
             <?php $form = ActiveForm::begin([
-                'id' => 'login-form',
+                'id' => 'signup-form',
                 'options' => ['class'=>'user'],
                 'fieldConfig' => [
                     'template' => "{beginWrapper}\n{input}\n{hint}\n{error}\n{endWrapper}",
@@ -30,6 +30,13 @@ $this->title = 'Signup';
                             'placeholder' => 'Enter your username',
                             'class' => 'form-control form-control-user'
                     ]
+            ])->textInput(['autofocus' => true]) ?>
+
+            <?= $form->field($model, 'email', [
+                'inputOptions' => [
+                    'placeholder' => 'Enter your email address',
+                    'class' => 'form-control form-control-user'
+                ]
             ])->textInput(['autofocus' => true]) ?>
 
             <div class="form-group row">
@@ -59,7 +66,7 @@ $this->title = 'Signup';
 
             <hr>
             <div class="text-center">
-                <a class="small" href="forgot-password.html">Forgot Password?</a>
+                <a class="small" href="<?php echo \yii\helpers\Url::to(['site/forgot-password'])?>">Forgot Password?</a>
             </div>
             <div class="text-center">
                 <a class="small" href="<?php echo \yii\helpers\Url::to(['site/login'])?>"<a>Already have an account? Login!</a>
