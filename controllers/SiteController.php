@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\ForgotPasswordForm;
 use app\models\SignupForm;
 use Yii;
 use yii\filters\AccessControl;
@@ -33,7 +34,12 @@ class SiteController extends Controller
                 'only' => ['logout'],
                 'rules' => [
                     [
-                        'actions' => ['logout'],
+                        'actions' => ['login', 'error', 'forgot-password', 'signup'],
+                        'allow' => true,
+
+                    ],
+                    [
+                        'actions' => ['logout', 'index'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -85,6 +91,8 @@ class SiteController extends Controller
             return $this->goHome();
         }
 
+        $this->layout = 'blank';
+
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();
@@ -95,8 +103,11 @@ class SiteController extends Controller
             'model' => $model,
         ]);
     }
+
     public function actionSignup()
     {
+        $this->layout = 'blank';
+
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post()) && $model->signup()) {
             return $this->redirect(Yii::$app->homeUrl);
@@ -116,7 +127,7 @@ class SiteController extends Controller
     {
         Yii::$app->user->logout();
 
-        return $this->goHome();
+        return $this->goHome() ;
     }
 
     /**
@@ -146,4 +157,22 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
+
+    public function actionForgotPassword()
+    {
+        $this->layout = 'blank';
+
+        $model = new ForgotPasswordForm();
+        {
+            if ($model->load(Yii::$app->request->post()) && $model->ForgotPassword()) {
+                return $this->refresh();
+            }
+
+            return $this->render('forgotPassword', [
+                'model' => $model,
+            ]);
+        }
+    }
 }
+
+
