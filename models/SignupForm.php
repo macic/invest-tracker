@@ -16,7 +16,7 @@ class SignupForm extends \yii\base\Model
     {
         return [
             [['username', 'email', 'password', 'password_repeat'], 'required'],
-            [['username', 'email', 'password', 'password_repeat'], 'string', 'min' => 3, 'max' => 16],
+            [['username', 'email', 'password', 'password_repeat'], 'string', 'min' => 3, 'max' => 55],
             ['password_repeat', 'compare', 'compareAttribute' => 'password']
         ];
     }
