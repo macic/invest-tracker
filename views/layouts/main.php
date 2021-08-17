@@ -33,6 +33,7 @@ AppAsset::register($this);
 
         <!-- Custom styles for this template-->
         <link href="css/sb-admin-2.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 
     </head>
 
@@ -81,13 +82,14 @@ AppAsset::register($this);
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
+                    <i class="bi bi-wallet-fill"></i>
                     <span>Assets</span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Type of assets:</h6>
-                        <a class="collapse-item" href="buttons.html">ETF</a>
+
+                        <a class="collapse-item" href="assets.html?type=etf">ETF</a>
                         <a class="collapse-item" href="cards.html">Stocks</a>
                         <a class="collapse-item" href="cards.html">Government Bonds</a>
                     </div>
