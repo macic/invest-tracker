@@ -107,6 +107,7 @@ AppAsset::register($this);
                      data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Type of accounts:</h6>
+                        <a class="collapse-item" href="<?php echo \yii\helpers\Url::to(['/account'])?>"> Create account</a>
                         <a class="collapse-item" href="utilities-color.html">IKE</a>
                         <a class="collapse-item" href="utilities-border.html">IKZE</a>
                         <a class="collapse-item" href="utilities-animation.html">Obligacje Skarbowe</a>
@@ -382,7 +383,7 @@ AppAsset::register($this);
                 </nav>
                 <!-- End of Topbar -->
 
-                <?php echo $content ?>
+                <div class="p-4"><?php echo $content ?></div>
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
