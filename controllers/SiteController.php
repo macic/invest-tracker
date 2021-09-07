@@ -33,7 +33,7 @@ class SiteController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['login', 'error', 'forgot-password', 'signup'],
+                        'actions' => ['login', 'error', 'forgot-password', 'signup', 'gii'],
                         'allow' => true,
 
                     ],
