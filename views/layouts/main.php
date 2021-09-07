@@ -81,7 +81,7 @@ AppAsset::register($this);
 
             <!-- Nav Item - Assets Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapseTwo"
                    aria-expanded="true" aria-controls="collapseTwo">
                     <i class="bi bi-wallet-fill"></i>
                     <span>Assets</span>
@@ -90,6 +90,7 @@ AppAsset::register($this);
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Type of assets:</h6>
 
+                        <a class="collapse-item" href="<?php echo \yii\helpers\Url::to(['/asset/index'])?>">Create asset</a>
                         <a class="collapse-item" href="assets.html?type=etf">ETF</a>
                         <a class="collapse-item" href="cards.html">Stocks</a>
                         <a class="collapse-item" href="cards.html">Government Bonds</a>
@@ -108,7 +109,7 @@ AppAsset::register($this);
                      data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Type of accounts:</h6>
-                        <a class="collapse-item" href="<?php echo \yii\helpers\Url::to(['/account'])?>"> Create account</a>
+                        <a class="collapse-item" href="<?php echo \yii\helpers\Url::to(['/account/index'])?>"> Create account</a>
                         <a class="collapse-item" href="utilities-color.html">IKE</a>
                         <a class="collapse-item" href="utilities-border.html">IKZE</a>
                         <a class="collapse-item" href="utilities-animation.html">Obligacje Skarbowe</a>
