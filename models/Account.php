@@ -8,14 +8,19 @@ use Yii;
  * This is the model class for table "{{%account}}".
  *
  * @property int $id
- * @property string $account_type
+ * @property int $account_type
  * @property string $account_holder
  */
+
+define('account_type', ['IKE', 'IKZE', 'Government Bonds', 'Broker Account', 'Gold']);
+define('account_holder', ['Ania Jeruzal', 'Radek Jeruzal']);
+
 class Account extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
+
     public static function tableName()
     {
         return '{{%account}}';

@@ -93,6 +93,10 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
 
     public function getDisplayName()
     {
+        if (Yii::$app->user->isGuest) {
+            return null;
+        }
         return $this->username;
+
     }
 }

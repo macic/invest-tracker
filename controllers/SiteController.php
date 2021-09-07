@@ -31,7 +31,6 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout'],
                 'rules' => [
                     [
                         'actions' => ['login', 'error', 'forgot-password', 'signup'],
@@ -121,13 +120,13 @@ class SiteController extends Controller
     /**
      * Logout action.
      *
-     * @return Response
+     * @return string
      */
     public function actionLogout()
     {
         Yii::$app->user->logout();
 
-        return $this->goHome() ;
+        return $this->goHome();
     }
 
     /**
