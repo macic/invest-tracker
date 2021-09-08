@@ -19,11 +19,15 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'account_id') ?>
 
+    <?= $form->field($model, 'type') ?>
+
     <?= $form->field($model, 'name') ?>
 
     <?= $form->field($model, 'ticker') ?>
 
-    <?= $form->field($model, 'buy_price') ?>
+    <?php // echo $form->field($model, 'buy_price') ?>
+
+    <?php // echo $form->field($model, 'currency') ?>
 
     <?php // echo $form->field($model, 'last_price') ?>
 

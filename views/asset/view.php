@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\asset */
+/* @var $model app\models\Asset */
 
 $this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Assets', 'url' => ['index']];
@@ -31,9 +31,11 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'account_id',
+            'type',
             'name',
             'ticker',
             'buy_price',
+            'currency',
             'last_price',
             'quantity',
             'buy_date',

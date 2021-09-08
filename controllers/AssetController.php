@@ -3,14 +3,14 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\asset;
+use app\models\Asset;
 use app\models\AssetSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * AssetController implements the CRUD actions for asset model.
+ * AssetController implements the CRUD actions for Asset model.
  */
 class AssetController extends Controller
 {
@@ -30,7 +30,7 @@ class AssetController extends Controller
     }
 
     /**
-     * Lists all asset models.
+     * Lists all Asset models.
      * @return mixed
      */
     public function actionIndex()
@@ -45,7 +45,7 @@ class AssetController extends Controller
     }
 
     /**
-     * Displays a single asset model.
+     * Displays a single Asset model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -58,13 +58,13 @@ class AssetController extends Controller
     }
 
     /**
-     * Creates a new asset model.
+     * Creates a new Asset model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new asset();
+        $model = new Asset();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -76,7 +76,7 @@ class AssetController extends Controller
     }
 
     /**
-     * Updates an existing asset model.
+     * Updates an existing Asset model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -96,7 +96,7 @@ class AssetController extends Controller
     }
 
     /**
-     * Deletes an existing asset model.
+     * Deletes an existing Asset model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -110,15 +110,15 @@ class AssetController extends Controller
     }
 
     /**
-     * Finds the asset model based on its primary key value.
+     * Finds the Asset model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return asset the loaded model
+     * @return Asset the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = asset::findOne($id)) !== null) {
+        if (($model = Asset::findOne($id)) !== null) {
             return $model;
         }
 

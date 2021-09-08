@@ -9,15 +9,21 @@ use Yii;
  *
  * @property int $id
  * @property int|null $account_id
+ * @property string $type
  * @property string|null $name
  * @property string|null $ticker
  * @property float $buy_price
+ * @property string|null $currency
  * @property float|null $last_price
  * @property int $quantity
  * @property int|null $buy_date
  *
  * @property Account $account
  */
+
+define('asset_type', ['Stocks', 'ETF', 'Gold Units', 'Government Bonds']);
+define('currency', ['PLN', 'EUR', 'USD', 'GBP']);
+
 class Asset extends \yii\db\ActiveRecord
 {
     /**
@@ -35,9 +41,9 @@ class Asset extends \yii\db\ActiveRecord
     {
         return [
             [['account_id', 'quantity', 'buy_date'], 'integer'],
-            [['buy_price', 'quantity'], 'required'],
+            [['type', 'buy_price', 'quantity'], 'required'],
             [['buy_price', 'last_price'], 'number'],
-            [['name', 'ticker'], 'string', 'max' => 255],
+            [['type', 'name', 'ticker', 'currency'], 'string', 'max' => 255],
             [['account_id'], 'exist', 'skipOnError' => true, 'targetClass' => Account::className(), 'targetAttribute' => ['account_id' => 'id']],
         ];
     }
@@ -50,9 +56,11 @@ class Asset extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'account_id' => 'Account ID',
+            'type' => 'Asset Type',
             'name' => 'Name',
             'ticker' => 'Ticker',
             'buy_price' => 'Buy Price',
+            'currency' => 'Currency',
             'last_price' => 'Last Price',
             'quantity' => 'Quantity',
             'buy_date' => 'Buy Date',

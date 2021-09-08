@@ -4,12 +4,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\asset;
+use app\models\Asset;
 
 /**
- * AssetSearch represents the model behind the search form of `app\models\asset`.
+ * AssetSearch represents the model behind the search form of `app\models\Asset`.
  */
-class AssetSearch extends asset
+class AssetSearch extends Asset
 {
     /**
      * {@inheritdoc}
@@ -18,7 +18,7 @@ class AssetSearch extends asset
     {
         return [
             [['id', 'account_id', 'quantity', 'buy_date'], 'integer'],
-            [['name', 'ticker'], 'safe'],
+            [['type', 'name', 'ticker', 'currency'], 'safe'],
             [['buy_price', 'last_price'], 'number'],
         ];
     }
@@ -41,7 +41,7 @@ class AssetSearch extends asset
      */
     public function search($params)
     {
-        $query = asset::find();
+        $query = Asset::find();
 
         // add conditions that should always apply here
 
@@ -67,8 +67,10 @@ class AssetSearch extends asset
             'buy_date' => $this->buy_date,
         ]);
 
-        $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'ticker', $this->ticker]);
+        $query->andFilterWhere(['like', 'type', $this->type])
+            ->andFilterWhere(['like', 'name', $this->name])
+            ->andFilterWhere(['like', 'ticker', $this->ticker])
+            ->andFilterWhere(['like', 'currency', $this->currency]);
 
         return $dataProvider;
     }

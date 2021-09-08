@@ -8,7 +8,7 @@ use yii\db\Migration;
  *
  * - `{{%account}}`
  */
-class m210907_103405_create_asset_table extends Migration
+class m210908_070944_create_asset_table extends Migration
 {
     /**
      * {@inheritdoc}
@@ -17,12 +17,14 @@ class m210907_103405_create_asset_table extends Migration
     {
         $this->createTable('{{%asset}}', [
             'id' => $this->primaryKey(),
-            'account_id' => $this->integer(11),
+            'account_id' => $this->integer(),
+            'type' => $this->string(255)->NotNull(),
             'name' => $this->string(255),
             'ticker' => $this->string(255)->Null(),
             'buy_price' => $this->decimal(10, 2)->notNull(),
+            'currency' => $this->string(255)->Null(),
             'last_price' => $this->decimal(10, 2)->Null(),
-            'quantity' => $this->integer(255)->notNull(),
+            'quantity' => $this->integer()->notNull(),
             'buy_date' => $this->integer(11)->Null(),
         ]);
 

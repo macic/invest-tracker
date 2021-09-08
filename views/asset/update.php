@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\asset */
+/* @var $model app\models\Asset */
 
 $this->title = 'Update Asset: ' . $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Assets', 'url' => ['index']];
