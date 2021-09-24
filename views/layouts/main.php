@@ -2,6 +2,7 @@
 
 /* @var $this \yii\web\View */
 /* @var $content string */
+/* @var $accounts yii\models\Account */
 
 use app\widgets\Alert;
 use yii\helpers\Html;
@@ -91,9 +92,9 @@ AppAsset::register($this);
                         <h6 class="collapse-header">Type of assets:</h6>
 
                         <a class="collapse-item" href="<?php echo \yii\helpers\Url::to(['/asset/index'])?>">Create asset</a>
-                        <a class="collapse-item" href="assets.html?type=etf">ETF</a>
-                        <a class="collapse-item" href="cards.html">Stocks</a>
-                        <a class="collapse-item" href="cards.html">Government Bonds</a>
+                        <a class="collapse-item" href="<?php echo yii\helpers\Url::to(['/asset/list', 'asset_type'=>'etf'])?>">ETF</a>
+                        <a class="collapse-item" href="<?php echo yii\helpers\Url::to(['/asset/list', 'asset_type'=>'stocks'])?>">Stocks</a>
+                        <a class="collapse-item" href="<?php echo yii\helpers\Url::to(['/asset/list', 'asset_type'=>'government_bonds'])?>">Bonds</a>
                     </div>
                 </div>
             </li>
@@ -110,6 +111,7 @@ AppAsset::register($this);
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Type of accounts:</h6>
                         <a class="collapse-item" href="<?php echo \yii\helpers\Url::to(['/account/index'])?>"> Create account</a>
+
                         <a class="collapse-item" href="utilities-color.html">IKE</a>
                         <a class="collapse-item" href="utilities-border.html">IKZE</a>
                         <a class="collapse-item" href="utilities-animation.html">Obligacje Skarbowe</a>

@@ -3,6 +3,8 @@
 namespace app\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
+use app\models\Account;
 
 /**
  * This is the model class for table "{{%asset}}".
@@ -21,7 +23,7 @@ use Yii;
  * @property Account $account
  */
 
-define('asset_type', ['Stocks', 'ETF', 'Gold Units', 'Government Bonds']);
+define('asset_type', ['Stocks', 'ETF', 'Gold Units', 'Government Bonds', 'Cryptocurrency']);
 define('currency', ['PLN', 'EUR', 'USD', 'GBP']);
 
 class Asset extends \yii\db\ActiveRecord
@@ -40,7 +42,8 @@ class Asset extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['account_id', 'quantity', 'buy_date'], 'integer'],
+            [['account_id', 'quantity'], 'integer'],
+            [['buy_date'], 'date'],
             [['type', 'buy_price', 'quantity'], 'required'],
             [['buy_price', 'last_price'], 'number'],
             [['type', 'name', 'ticker', 'currency'], 'string', 'max' => 255],
@@ -74,7 +77,7 @@ class Asset extends \yii\db\ActiveRecord
      */
     public function getAccount()
     {
-        return $this->hasOne(Account::className(), ['id' => 'account_id']);
+        return $this->hasOne(Account::class, ['id' => 'account_id']);
     }
 
     /**

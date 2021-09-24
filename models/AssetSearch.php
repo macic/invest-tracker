@@ -17,7 +17,8 @@ class AssetSearch extends Asset
     public function rules()
     {
         return [
-            [['id', 'account_id', 'quantity', 'buy_date'], 'integer'],
+            [['id', 'account_id', 'quantity'], 'integer'],
+            [['buy_date'], 'date'],
             [['type', 'name', 'ticker', 'currency'], 'safe'],
             [['buy_price', 'last_price'], 'number'],
         ];

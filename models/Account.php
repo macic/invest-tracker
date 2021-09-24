@@ -58,4 +58,11 @@ class Account extends \yii\db\ActiveRecord
     {
         return new \app\models\query\AccountQuery(get_called_class());
     }
+
+    public function findAssets()
+    {
+        return $this->hasMany(Asset::class, ['account_id' => 'id']);
+    }
+
+
 }

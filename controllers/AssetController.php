@@ -2,12 +2,16 @@
 
 namespace app\controllers;
 
+use app\models\Account;
 use Yii;
 use app\models\Asset;
 use app\models\AssetSearch;
+use yii\base\BaseObject;
+use yii\db\Query;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+
 
 /**
  * AssetController implements the CRUD actions for Asset model.
@@ -36,11 +40,16 @@ class AssetController extends Controller
     public function actionIndex()
     {
         $searchModel = new AssetSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataSearchProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'dataSearchProvider' => $dataSearchProvider,
+        ]);
+        $dataProvider = Asset::find()->all();
+
+        return $this->render('index', [
+            'dataProvider' => $dataProvider
         ]);
     }
 
@@ -64,16 +73,27 @@ class AssetController extends Controller
      */
     public function actionCreate()
     {
+
         $model = new Asset();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
+        $accountsData = Account::find()->all();
+
+        $formattedAccounts = array();
+        foreach ($accountsData as $account) {
+            $formattedAccounts[$account['id']] = strval($account['account_holder']) . ' - ' . strval($account['account_type']);
+        }
+
         return $this->render('create', [
             'model' => $model,
+            'accounts' => $accountsData,
+            'formattedAccounts' => $formattedAccounts
         ]);
     }
+
 
     /**
      * Updates an existing Asset model.
@@ -124,4 +144,15 @@ class AssetController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
+    public function actionList($asset_type)
+    {
+        $items = Asset::find()->where(['type' => $asset_type])->all();
+
+        return $this->render('list', [
+            'items' => $items,
+            'asset_type' => $asset_type,
+        ]);
+    }
 }
+

@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
     <h1><?= Html::encode($this->title) ?></h1>
 
-<!--    -->BRAKUJE TUTAJ < ?php //echo $this->render('_search', ['model' => $searchModel]); ?>
+<?php echo $this->render('_search', ['model' => $searchModel]); ?>
 <!---->
 <!--    -->BRAKUJE TUTAJ < ?//= ListView::widget([
 //        'dataProvider' => $dataProvider,

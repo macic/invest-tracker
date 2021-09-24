@@ -35,14 +35,10 @@ class AccountController extends Controller
      */
     public function actionIndex()
     {
-//        $searchModel = new AccountSearch();
-//        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         $accounts = Account::find()->all();
 
         return $this->render('index', [
-//            'searchModel' => $searchModel,
-//            'dataProvider' => $dataProvider,
             'accounts' => $accounts,
         ]);
     }
