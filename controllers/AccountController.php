@@ -124,4 +124,14 @@ class AccountController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
+    public function actionList($account_type)
+    {
+        $items = Account::find()->where(['account_type' => $account_type])->all();
+
+        return $this->render('list', [
+            'items' => $items,
+            'account_type' => $account_type,
+        ]);
+    }
 }

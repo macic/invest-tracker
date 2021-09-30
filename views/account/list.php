@@ -7,39 +7,37 @@ use yii\data\ActiveRecord;
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\AccountSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
-#/* @var $items yii\models\Account */
-/* @var $items yii\models\Asset */
-#/* @var $account_type string */
-/* @var $account_id integer */
-/* @var $model app\models\Asset */
-/* @var $formattedId app\models\Account */
+/* @var $items yii\models\Account */
+/* @var $account_type string */
 
 
-$this->title = implode("", $formattedId);
+$this->title = $account_type;
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<div class="account-id-list-of-asset">
+<div class="asset-etf">
 
     <p>
-        <?= Html::a('Add asset', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Add  ' . $account_type, ['create'], ['class' => 'btn btn-success']) ?>
     </p>
+
+    <h1><?= Html::encode($this->title) ?></h1>
 
     <div>
         <ul class="list-group">
 
             <li class="list-group-item list-group-item-dark d-flex justify-content-between align-items-center">
-                <?= (implode("", $formattedId))?> assets:
+                Your <?= $account_type ?> accounts:
                 <span class="badge badge-primary badge-pill">
-                Type:</span>
+                Holder:</span>
             </li>
 
             <?php foreach($items as $item): ?>
 
             <li class="list-group-item d-flex justify-content-between align-items-center">
-                <a class="collapse-item" href="<?= yii\helpers\Url::to(['asset/view', 'id' => $item['id']])?>"><?php echo $item['name'] ?></a>
+                <?php echo $item['account_type'] ?>
                 <span class="badge badge-primary badge-pill">
-                    <?php echo $item['type']?>
+                    <?php echo $item['account_holder']?>
 
                     <?php endforeach; ?>
 
@@ -47,3 +45,4 @@ $this->params['breadcrumbs'][] = $this->title;
         </ul>
     </div>
 </div>
+

@@ -2,9 +2,9 @@
 
 namespace app\models;
 
+use app\models\Account;
 use Yii;
 use yii\helpers\ArrayHelper;
-use app\models\Account;
 
 /**
  * This is the model class for table "{{%asset}}".

@@ -3,6 +3,10 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 /* @var $accounts yii\models\Account */
+/* @var $account yii\models\Account */
+/* @var $items yii\models\Asset */
+/* @var $account_type string */
+/* @var $asset_type string */
 
 use app\widgets\Alert;
 use yii\helpers\Html;
@@ -80,44 +84,20 @@ AppAsset::register($this);
                 Your Wallet
             </div>
 
-            <!-- Nav Item - Assets Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapseTwo"
-                   aria-expanded="true" aria-controls="collapseTwo">
+                <a class="nav-link" href="<?php echo yii\helpers\Url::to(['account/index'])?>">
                     <i class="bi bi-wallet-fill"></i>
-                    <span>Assets</span>
-                </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Type of assets:</h6>
-
-                        <a class="collapse-item" href="<?php echo \yii\helpers\Url::to(['/asset/index'])?>">Create asset</a>
-                        <a class="collapse-item" href="<?php echo yii\helpers\Url::to(['/asset/list', 'asset_type'=>'etf'])?>">ETF</a>
-                        <a class="collapse-item" href="<?php echo yii\helpers\Url::to(['/asset/list', 'asset_type'=>'stocks'])?>">Stocks</a>
-                        <a class="collapse-item" href="<?php echo yii\helpers\Url::to(['/asset/list', 'asset_type'=>'government_bonds'])?>">Bonds</a>
-                    </div>
-                </div>
+                    <span>Portfolios</span></a>
             </li>
-
-            <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-                   aria-expanded="true" aria-controls="collapseUtilities">
+                <a class="nav-link" href="<?php echo yii\helpers\Url::to(['account/index'])?>">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Accounts</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<?php echo yii\helpers\Url::to(['asset/listing', 'asset_type' => 'etf'])?>">
                     <i class="fas fa-fw fa-wrench"></i>
-                    <span>Accounts</span>
-                </a>
-                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-                     data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Type of accounts:</h6>
-                        <a class="collapse-item" href="<?php echo \yii\helpers\Url::to(['/account/index'])?>"> Create account</a>
-
-                        <a class="collapse-item" href="utilities-color.html">IKE</a>
-                        <a class="collapse-item" href="utilities-border.html">IKZE</a>
-                        <a class="collapse-item" href="utilities-animation.html">Obligacje Skarbowe</a>
-                        <a class="collapse-item" href="utilities-other.html">Konta Maklerskie</a>
-                    </div>
-                </div>
+                    <span>Assets</span></a>
             </li>
 
             <!-- Divider -->

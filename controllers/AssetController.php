@@ -71,6 +71,7 @@ class AssetController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
+
     public function actionCreate()
     {
 
@@ -93,7 +94,6 @@ class AssetController extends Controller
             'formattedAccounts' => $formattedAccounts
         ]);
     }
-
 
     /**
      * Updates an existing Asset model.
@@ -145,14 +145,30 @@ class AssetController extends Controller
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 
-    public function actionList($asset_type)
+    public function actionListing($asset_type)
     {
         $items = Asset::find()->where(['type' => $asset_type])->all();
 
-        return $this->render('list', [
+        return $this->render('liststary', [
             'items' => $items,
             'asset_type' => $asset_type,
         ]);
     }
+    public function actionList($account_id)
+    {
+        $items = Asset::find()->where(['account_id' => $account_id])->all();
+
+        foreach ($items as $lols) {
+            $formattedId[$lols['account_id']] = strval($lols->account->account_holder) . ' - ' . strval($lols->account->account_type);
+
+            return $this->render('list', [
+                'items' => $items,
+                'account_id' => $account_id,
+                'formattedId' => $formattedId
+
+            ]);
+        }
+    }
+
 }
 

@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Account;
 use app\models\ForgotPasswordForm;
 use app\models\SignupForm;
 use Yii;
@@ -33,7 +34,7 @@ class SiteController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['login', 'error', 'forgot-password', 'signup', 'gii'],
+                        'actions' => ['login', 'error', 'forgot-password', 'signup', 'gii', 'menu'],
                         'allow' => true,
 
                     ],
