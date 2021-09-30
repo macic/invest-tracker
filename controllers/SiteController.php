@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Account;
 use app\models\ForgotPasswordForm;
 use app\models\SignupForm;
 use Yii;
@@ -31,10 +32,9 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout'],
                 'rules' => [
                     [
-                        'actions' => ['login', 'error', 'forgot-password', 'signup'],
+                        'actions' => ['login', 'error', 'forgot-password', 'signup', 'gii', 'menu'],
                         'allow' => true,
 
                     ],
@@ -121,13 +121,13 @@ class SiteController extends Controller
     /**
      * Logout action.
      *
-     * @return Response
+     * @return string
      */
     public function actionLogout()
     {
         Yii::$app->user->logout();
 
-        return $this->goHome() ;
+        return $this->goHome();
     }
 
     /**
