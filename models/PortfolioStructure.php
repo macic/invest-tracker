@@ -5,32 +5,24 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "{{%asset}}".
+ * This is the model class for table "{{%portfolio_structure}}".
  *
  * @property int $id
- * @property int|null $account_id
- * @property string|null $name
- * @property string|null $ticker
- * @property float $buy_price
- * @property string|null $currency
- * @property float|null $last_price
- * @property int $quantity
- * @property int|null $buy_date
  * @property int|null $portfolio_id
  * @property int|null $asset_type
+ * @property int|null $percentage
  *
- * @property Account $account
  * @property AssetType $assetType
  * @property Portfolio $portfolio
  */
-class Asset extends \yii\db\ActiveRecord
+class PortfolioStructure extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return '{{%asset}}';
+        return '{{%portfolio_structure}}';
     }
 
     /**
@@ -39,11 +31,7 @@ class Asset extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['account_id', 'quantity', 'buy_date', 'portfolio_id', 'asset_type'], 'integer'],
-            [['buy_price', 'quantity'], 'required'],
-            [['buy_price', 'last_price'], 'number'],
-            [['name', 'ticker', 'currency'], 'string', 'max' => 255],
-            [['account_id'], 'exist', 'skipOnError' => true, 'targetClass' => Account::className(), 'targetAttribute' => ['account_id' => 'id']],
+            [['portfolio_id', 'asset_type', 'percentage'], 'integer'],
             [['asset_type'], 'exist', 'skipOnError' => true, 'targetClass' => AssetType::className(), 'targetAttribute' => ['asset_type' => 'id']],
             [['portfolio_id'], 'exist', 'skipOnError' => true, 'targetClass' => Portfolio::className(), 'targetAttribute' => ['portfolio_id' => 'id']],
         ];
@@ -56,27 +44,10 @@ class Asset extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'account_id' => 'Account ID',
-            'name' => 'Name',
-            'ticker' => 'Ticker',
-            'buy_price' => 'Buy Price',
-            'currency' => 'Currency',
-            'last_price' => 'Last Price',
-            'quantity' => 'Quantity',
-            'buy_date' => 'Buy Date',
             'portfolio_id' => 'Portfolio ID',
             'asset_type' => 'Asset Type',
+            'percentage' => 'Percentage',
         ];
-    }
-
-    /**
-     * Gets query for [[Account]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getAccount()
-    {
-        return $this->hasOne(Account::className(), ['id' => 'account_id']);
     }
 
     /**
