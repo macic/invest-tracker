@@ -39,7 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <li class="list-group-item d-flex justify-content-between align-items-center">
                 <a class="collapse-item" href="<?= yii\helpers\Url::to(['asset/view', 'id' => $item['id']])?>"><?php echo $item['name'] ?></a>
                 <span class="badge badge-primary badge-pill">
-                    <?php echo $item['type']?>
+                    <?php echo $item['name']?>
 
                     <?php endforeach; ?>
 

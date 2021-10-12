@@ -8,18 +8,19 @@ use yii\data\ActiveRecord;
 /* @var $searchModel app\models\AccountSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 /* @var $items yii\models\Asset */
-/* @var $formattedAccounts app\models\Account */
-/* @var $asset_type string */
+/* @var $asset_type_id string */
+/* @var $name string */
 
 
-$this->title = $asset_type;
+$this->title = $name;
+
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="asset-etf">
 
     <p>
-        <?= Html::a('Add  ' . $asset_type, ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Add  ' . $name, ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <h1><?= Html::encode($this->title) ?></h1>
@@ -28,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <ul class="list-group">
 
             <li class="list-group-item list-group-item-dark d-flex justify-content-between align-items-center">
-                Your <?= $asset_type ?> wallet:
+                Your <?= $name ?> wallet:
                 <span class="badge badge-primary badge-pill">
                 Account:</span>
             </li>
@@ -36,9 +37,9 @@ $this->params['breadcrumbs'][] = $this->title;
             <?php foreach($items as $item): ?>
 
             <li class="list-group-item d-flex justify-content-between align-items-center">
-                <?php echo $item['name'] ?>
+                <a class="collapse-item" href="<?php echo \yii\helpers\Url::to(['/asset/view', 'id'=>$item['id']])?>"><?php echo $item['name'] ?></a>
                 <span class="badge badge-primary badge-pill">
-                    <?php echo $item->account->account_type . " - " . $item->account->account_holder?>
+                    <?php echo $item->account->name ?>
 
                     <?php endforeach; ?>
 

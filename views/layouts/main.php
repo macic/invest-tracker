@@ -6,7 +6,7 @@
 /* @var $account yii\models\Account */
 /* @var $items yii\models\Asset */
 /* @var $account_type string */
-/* @var $asset_type string */
+/* @var $asset_type_id string */
 
 use app\widgets\Alert;
 use yii\helpers\Html;
@@ -85,7 +85,7 @@ AppAsset::register($this);
             </div>
 
             <li class="nav-item">
-                <a class="nav-link" href="<?php echo yii\helpers\Url::to(['account/index'])?>">
+                <a class="nav-link" href="<?php echo yii\helpers\Url::to(['portfolioStructure/index'])?>">
                     <i class="bi bi-wallet-fill"></i>
                     <span>Portfolios</span></a>
             </li>
@@ -95,7 +95,7 @@ AppAsset::register($this);
                     <span>Accounts</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="<?php echo yii\helpers\Url::to(['asset/listing', 'asset_type' => 'etf'])?>">
+                <a class="nav-link" href="<?php echo yii\helpers\Url::to(['asset/listing'])?>">
                     <i class="fas fa-fw fa-wrench"></i>
                     <span>Assets</span></a>
             </li>

@@ -8,9 +8,11 @@ use yii\jui\DatePicker;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Asset */
+/* @var $formattedAssetName app\models\AssetType */
 /* @var $accounts app\models\Account */
-/* @var $formattedAccounts app\models\Account */
 /* @var $form yii\bootstrap4\ActiveForm */
+/* @var $assetsTypeData app\models\Asset */
+const currency = ["PLN", "EUR", 'USD', 'GBP'];
 ?>
 
 <div class="asset-form">
@@ -25,24 +27,16 @@ use yii\jui\DatePicker;
 //            'template' => "{beginWrapper}\n{input}\n{hint}\n{error}\n{endWrapper}",
 //         ]
     ]); ?>
-
     <?= $form->field($model, 'account_id',[
         'inputOptions' => [
             'class' => 'custom-select',
-        ]])->dropdownList($formattedAccounts,
+        ]])->dropdownList(ArrayHelper::map($accounts, 'id', 'name'),
         ['prompt'=>'Choose account here:']) ?>
 
-    <?= $form->field($model, 'type',[
+    <?= $form->field($model, 'asset_type_id',[
         'inputOptions' => [
             'class' => 'custom-select',
-        ]
-    ])->dropdownList([
-        'Stocks' => asset_type[0],
-        'ETF' => asset_type[1],
-        'Gold Units' => asset_type[2],
-        'Government Bonds' => asset_type[3],
-        'Cryptocurrency' => asset_type[4]
-    ],
+        ]])->dropdownList(ArrayHelper::map($assetsTypeData, 'id', 'name'),
         ['prompt'=>'Choose asset type here:']) ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>

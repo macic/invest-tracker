@@ -19,7 +19,7 @@ class m210930_105559_create_portfolio_structure_table extends Migration
         $this->createTable('{{%portfolio_structure}}', [
             'id' => $this->primaryKey(),
             'portfolio_id' => $this->integer(),
-            'asset_type' => $this->integer(),
+            'asset_type_id' => $this->integer(),
             'percentage' => $this->integer(),
         ]);
 
@@ -40,11 +40,11 @@ class m210930_105559_create_portfolio_structure_table extends Migration
             'CASCADE'
         );
 
-        // creates index for column `asset_type`
+        // creates index for column `asset_type_id`
         $this->createIndex(
-            '{{%idx-portfolio_structure-asset_type}}',
+            '{{%idx-portfolio_structure-asset_type_id}}',
             '{{%portfolio_structure}}',
-            'asset_type'
+            'asset_type_id'
         );
 
         // add foreign key for table `{{%asset_type}}`
@@ -77,13 +77,13 @@ class m210930_105559_create_portfolio_structure_table extends Migration
 
         // drops foreign key for table `{{%asset_type}}`
         $this->dropForeignKey(
-            '{{%fk-portfolio_structure-asset_type}}',
+            '{{%fk-portfolio_structure-asset_type_id}}',
             '{{%portfolio_structure}}'
         );
 
-        // drops index for column `asset_type`
+        // drops index for column `asset_type_id`
         $this->dropIndex(
-            '{{%idx-portfolio_structure-asset_type}}',
+            '{{%idx-portfolio_structure-asset_type_id}}',
             '{{%portfolio_structure}}'
         );
 

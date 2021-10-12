@@ -9,10 +9,10 @@ use Yii;
  *
  * @property int $id
  * @property int|null $portfolio_id
- * @property int|null $asset_type
+ * @property int|null $asset_type_id
  * @property int|null $percentage
  *
- * @property AssetType $assetType
+ * @property AssetType $assetType_id
  * @property Portfolio $portfolio
  */
 class PortfolioStructure extends \yii\db\ActiveRecord
@@ -32,7 +32,7 @@ class PortfolioStructure extends \yii\db\ActiveRecord
     {
         return [
             [['portfolio_id', 'asset_type', 'percentage'], 'integer'],
-            [['asset_type'], 'exist', 'skipOnError' => true, 'targetClass' => AssetType::className(), 'targetAttribute' => ['asset_type' => 'id']],
+            [['asset_type_id'], 'exist', 'skipOnError' => true, 'targetClass' => AssetType::className(), 'targetAttribute' => ['asset_type_id' => 'id']],
             [['portfolio_id'], 'exist', 'skipOnError' => true, 'targetClass' => Portfolio::className(), 'targetAttribute' => ['portfolio_id' => 'id']],
         ];
     }
@@ -45,7 +45,7 @@ class PortfolioStructure extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'portfolio_id' => 'Portfolio ID',
-            'asset_type' => 'Asset Type',
+            'asset_type_id' => 'Asset Type',
             'percentage' => 'Percentage',
         ];
     }
@@ -57,7 +57,7 @@ class PortfolioStructure extends \yii\db\ActiveRecord
      */
     public function getAssetType()
     {
-        return $this->hasOne(AssetType::className(), ['id' => 'asset_type']);
+        return $this->hasOne(AssetType::className(), ['id' => 'asset_type_id']);
     }
 
     /**

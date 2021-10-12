@@ -17,7 +17,7 @@ use Yii;
  * @property int $quantity
  * @property int|null $buy_date
  * @property int|null $portfolio_id
- * @property int|null $asset_type
+ * @property int|null $asset_type_id
  *
  * @property Account $account
  * @property AssetType $assetType
@@ -39,12 +39,12 @@ class Asset extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['account_id', 'quantity', 'buy_date', 'portfolio_id', 'asset_type'], 'integer'],
+            [['account_id', 'quantity', 'buy_date', 'portfolio_id', 'asset_type_id'], 'integer'],
             [['buy_price', 'quantity'], 'required'],
             [['buy_price', 'last_price'], 'number'],
             [['name', 'ticker', 'currency'], 'string', 'max' => 255],
             [['account_id'], 'exist', 'skipOnError' => true, 'targetClass' => Account::className(), 'targetAttribute' => ['account_id' => 'id']],
-            [['asset_type'], 'exist', 'skipOnError' => true, 'targetClass' => AssetType::className(), 'targetAttribute' => ['asset_type' => 'id']],
+            [['asset_type_id'], 'exist', 'skipOnError' => true, 'targetClass' => AssetType::className(), 'targetAttribute' => ['asset_type_id' => 'id']],
             [['portfolio_id'], 'exist', 'skipOnError' => true, 'targetClass' => Portfolio::className(), 'targetAttribute' => ['portfolio_id' => 'id']],
         ];
     }
@@ -65,7 +65,7 @@ class Asset extends \yii\db\ActiveRecord
             'quantity' => 'Quantity',
             'buy_date' => 'Buy Date',
             'portfolio_id' => 'Portfolio ID',
-            'asset_type' => 'Asset Type',
+            'asset_type_id' => 'Asset Type',
         ];
     }
 
@@ -86,7 +86,7 @@ class Asset extends \yii\db\ActiveRecord
      */
     public function getAssetType()
     {
-        return $this->hasOne(AssetType::className(), ['id' => 'asset_type']);
+        return $this->hasOne(AssetType::className(), ['id' => 'asset_type_id']);
     }
 
     /**
@@ -97,5 +97,14 @@ class Asset extends \yii\db\ActiveRecord
     public function getPortfolio()
     {
         return $this->hasOne(Portfolio::className(), ['id' => 'portfolio_id']);
+    }
+
+    public function getType()
+    {
+        return $this->assetType->name;
+    }
+    public function getAccountName()
+    {
+        return $this->account->account_type .' - '.$this->account->account_holder;
     }
 }

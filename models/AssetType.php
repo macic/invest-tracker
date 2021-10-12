@@ -52,7 +52,7 @@ class AssetType extends \yii\db\ActiveRecord
      */
     public function getAssets()
     {
-        return $this->hasMany(Asset::className(), ['asset_type' => 'id']);
+        return $this->hasMany(Asset::className(), ['asset_type_id' => 'id']);
     }
 
     /**
@@ -62,6 +62,6 @@ class AssetType extends \yii\db\ActiveRecord
      */
     public function getPortfolioStructures()
     {
-        return $this->hasMany(PortfolioStructure::className(), ['asset_type' => 'id']);
+        return $this->hasMany(PortfolioStructure::className(), ['asset_type_id' => 'id']);
     }
 }

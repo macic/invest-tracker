@@ -3,11 +3,13 @@
 namespace app\controllers;
 
 use app\models\Account;
+use app\models\AssetType;
 use Yii;
 use app\models\Asset;
 use app\models\AssetSearch;
 use yii\base\BaseObject;
 use yii\db\Query;
+use yii\debug\panels\EventPanel;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -61,9 +63,18 @@ class AssetController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+        $item = Asset::find()->where(['id' => $id])->one();
+
+//        foreach ($items as $item) {
+//            $asset_name[$item['asset_type_id']] = $item->assetType->name;
+
+
+            return $this->render('view', [
+                'model' => $this->findModel($id),
+                'item' => $item,
+//                'asset_name' => $asset_name
+            ]);
+//        }
     }
 
     /**
@@ -82,16 +93,12 @@ class AssetController extends Controller
         }
 
         $accountsData = Account::find()->all();
-
-        $formattedAccounts = array();
-        foreach ($accountsData as $account) {
-            $formattedAccounts[$account['id']] = strval($account['account_holder']) . ' - ' . strval($account['account_type']);
-        }
+        $assetsTypeData = AssetType::find()->all();
 
         return $this->render('create', [
             'model' => $model,
             'accounts' => $accountsData,
-            'formattedAccounts' => $formattedAccounts
+            'assetsTypeData' => $assetsTypeData
         ]);
     }
 
@@ -109,9 +116,15 @@ class AssetController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
+        $accountsData = Account::find()->all();
+        $assetsTypeData = AssetType::find()->all();
+
 
         return $this->render('update', [
             'model' => $model,
+            'accounts' => $accountsData,
+            'assetsTypeData' => $assetsTypeData
+
         ]);
     }
 
@@ -145,13 +158,20 @@ class AssetController extends Controller
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 
-    public function actionListing($asset_type)
+    public function actionListing($asset_type_id=null)
     {
-        $items = Asset::find()->where(['type' => $asset_type])->all();
+        if (!is_null($asset_type_id)) {
+            $items = Asset::find()->where(['asset_type_id' => $asset_type_id])->all();
+            $name = count($items)>0 ? $items[0]->assetType->name : "Wrong asset type id";
+        } else {
+            $items = Asset::find()->all();
+            $name = 'Assets';
+        }
 
         return $this->render('liststary', [
             'items' => $items,
-            'asset_type' => $asset_type,
+            'asset_type_id' => $asset_type_id,
+            'name' => $name
         ]);
     }
     public function actionList($account_id)
