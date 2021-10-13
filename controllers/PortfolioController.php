@@ -10,9 +10,9 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * PortfolioStructureController implements the CRUD actions for PortfolioStructure model.
+ * PortfolioController implements the CRUD actions for PortfolioStructure model.
  */
-class PortfolioStructureController extends Controller
+class PortfolioController extends Controller
 {
     /**
      * {@inheritdoc}

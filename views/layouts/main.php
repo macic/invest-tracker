@@ -85,7 +85,7 @@ AppAsset::register($this);
             </div>
 
             <li class="nav-item">
-                <a class="nav-link" href="<?php echo yii\helpers\Url::to(['portfolioStructure/index'])?>">
+                <a class="nav-link" href="<?php echo yii\helpers\Url::to(['portfolio/index'])?>">
                     <i class="bi bi-wallet-fill"></i>
                     <span>Portfolios</span></a>
             </li>

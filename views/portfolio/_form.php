@@ -14,7 +14,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'portfolio_id')->textInput() ?>
 
-    <?= $form->field($model, 'asset_type')->textInput() ?>
+    <?= $form->field($model, 'asset_type_id')->textInput() ?>
 
     <?= $form->field($model, 'percentage')->textInput() ?>
 

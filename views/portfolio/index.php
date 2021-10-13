@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'portfolio_id',
-            'asset_type',
+            'asset_type_id',
             'percentage',
 
             ['class' => 'yii\grid\ActionColumn'],
