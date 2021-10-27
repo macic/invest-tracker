@@ -16,9 +16,9 @@ use yii\bootstrap4\ActiveForm;
         <?php $form = ActiveForm::begin([
             'id' => 'account-form',
             'options' => ['class'=>'account'],
-            'fieldConfig' => [
-                'template' => "{beginWrapper}\n{input}\n{hint}\n{error}\n{endWrapper}",
-            ]
+//            'fieldConfig' => [
+//                'template' => "{beginWrapper}\n{input}\n{hint}\n{error}\n{endWrapper}",
+//           ]
         ]); ?>
 
         <?= $form->field($model, 'account_type', [
@@ -34,11 +34,16 @@ use yii\bootstrap4\ActiveForm;
         ],
             ['prompt'=>'Choose account type here:']) ?>
 
+        <?= $form->field($model, 'broker', [
+            'inputOptions' => [
+                'class' => 'form-control form-control-sm',
+                'placeholder' => 'Type here broker name...',
+            ]])->textInput(['maxlength' => true])?>
+
         <?= $form->field($model, 'account_holder', [
             'inputOptions' => [
                 'class' => 'custom-select custom-select-sm',
-            ]
-        ])->dropdownList([
+            ]])->dropdownList([
             'Ania' => account_holder[0],
             'Radek' => account_holder[1],
         ],

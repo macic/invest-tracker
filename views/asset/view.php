@@ -39,7 +39,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'last_price',
             'quantity',
             'buy_date',
-            'portfolio_id'
+            'portfolio_id',
+            'value'
 
         ],
     ]) ?>

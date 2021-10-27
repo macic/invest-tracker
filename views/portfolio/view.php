@@ -5,6 +5,7 @@ use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\PortfolioStructure */
+/* @var $assetsTypeData app\models\Asset */
 
 $this->title = $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Portfolio Structures', 'url' => ['index']];
@@ -28,10 +29,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= DetailView::widget([
         'model' => $model,
+
         'attributes' => [
             'id',
             'portfolio_id',
-            'asset_type_id',
+            'type',
             'percentage',
         ],
     ]) ?>

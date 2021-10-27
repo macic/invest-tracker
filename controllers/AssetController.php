@@ -179,7 +179,7 @@ class AssetController extends Controller
         $items = Asset::find()->where(['account_id' => $account_id])->all();
 
         foreach ($items as $lols) {
-            $formattedId[$lols['account_id']] = strval($lols->account->account_holder) . ' - ' . strval($lols->account->account_type);
+            $formattedId[$lols['account_id']] = strval($lols->account->account_type) .' '. strval($lols->account->broker) . ', Holder: ' . $lols->account->account_holder;
 
             return $this->render('list', [
                 'items' => $items,

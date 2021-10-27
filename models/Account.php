@@ -10,6 +10,7 @@ use Yii;
  * @property int $id
  * @property int $account_type
  * @property string $account_holder
+ * @property string|null $broker
  */
 
 define('account_type', ['IKE', 'IKZE', 'Government Bonds', 'Broker Account', 'Gold']);
@@ -35,6 +36,7 @@ class Account extends \yii\db\ActiveRecord
             [['account_type', 'account_holder'], 'required'],
             [['account_type'], 'string', 'max' => 55],
             [['account_holder'], 'string', 'max' => 99],
+            [['broker'], 'string', 'max' => 64],
         ];
     }
 
@@ -47,6 +49,7 @@ class Account extends \yii\db\ActiveRecord
             'id' => 'ID',
             'account_type' => 'Account Type',
             'account_holder' => 'Account Holder',
+            'broker' => 'Broker',
         ];
     }
 

@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\AssetType;
 use Yii;
 use app\models\PortfolioStructure;
 use yii\data\ActiveDataProvider;
@@ -52,8 +53,11 @@ class PortfolioController extends Controller
      */
     public function actionView($id)
     {
+       // $assetsTypeData = AssetType::find()->all();
+
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'assetsTypeData' => AssetType::find()->all(),
         ]);
     }
 
@@ -69,9 +73,11 @@ class PortfolioController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
+        $assetsTypeData = AssetType::find()->all();
 
         return $this->render('create', [
             'model' => $model,
+            'assetsTypeData' => $assetsTypeData
         ]);
     }
 
@@ -89,9 +95,11 @@ class PortfolioController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
+        $assetsTypeData = AssetType::find()->all();
 
         return $this->render('update', [
             'model' => $model,
+            'assetsTypeData' => $assetsTypeData
         ]);
     }
 

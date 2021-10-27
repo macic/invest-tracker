@@ -14,6 +14,7 @@ use Yii;
  *
  * @property AssetType $assetType_id
  * @property Portfolio $portfolio
+ * @property AssetType $assetType
  */
 class PortfolioStructure extends \yii\db\ActiveRecord
 {
@@ -31,7 +32,7 @@ class PortfolioStructure extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['portfolio_id', 'asset_type', 'percentage'], 'integer'],
+            [['portfolio_id', 'asset_type_id', 'percentage'], 'integer'],
             [['asset_type_id'], 'exist', 'skipOnError' => true, 'targetClass' => AssetType::className(), 'targetAttribute' => ['asset_type_id' => 'id']],
             [['portfolio_id'], 'exist', 'skipOnError' => true, 'targetClass' => Portfolio::className(), 'targetAttribute' => ['portfolio_id' => 'id']],
         ];
@@ -68,5 +69,14 @@ class PortfolioStructure extends \yii\db\ActiveRecord
     public function getPortfolio()
     {
         return $this->hasOne(Portfolio::className(), ['id' => 'portfolio_id']);
+    }
+    public function getName()
+    {
+        return $this->portfolio->name;
+    }
+
+    public function getType()
+    {
+        return $this->assetType->name;
     }
 }

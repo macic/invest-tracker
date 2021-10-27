@@ -107,4 +107,8 @@ class Asset extends \yii\db\ActiveRecord
     {
         return $this->account->account_type .' - '.$this->account->account_holder;
     }
+    public function getValue()
+    {
+        return $this->buy_price * $this->quantity . ' ' .$this->currency ;
+    }
 }

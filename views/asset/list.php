@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <ul class="list-group">
 
             <li class="list-group-item list-group-item-dark d-flex justify-content-between align-items-center">
-                <?= (implode("", $formattedId))?> assets:
+                <?= (implode("", $formattedId))?>
                 <span class="badge badge-primary badge-pill">
                 Type:</span>
             </li>
