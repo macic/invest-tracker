@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 use yii\bootstrap4\ActiveForm;
 use yii\helpers\ArrayHelper;
-use yii\jui\DatePicker;
+
 
 
 /* @var $this yii\web\View */
@@ -73,7 +73,6 @@ const currency = ["PLN", "EUR", 'USD', 'GBP'];
         </div>
         <div class="col">
     <?= $form->field($model, 'buy_date', ['inputOptions'=>['id'=>'datepicker']])?>
-<!--    // < ?= $form->field($model,'buy_date')->widget(DatePicker::className())?>-->
     </div>
     </div>
 

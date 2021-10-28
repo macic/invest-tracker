@@ -39,7 +39,8 @@ class Asset extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['account_id', 'quantity', 'buy_date', 'portfolio_id', 'asset_type_id'], 'integer'],
+            [['account_id', 'quantity', 'portfolio_id', 'asset_type_id'], 'integer'],
+            [['buy_date'], 'date', 'format' => 'php:Y-m-d'],
             [['buy_price', 'quantity'], 'required'],
             [['buy_price', 'last_price'], 'number'],
             [['name', 'ticker', 'currency'], 'string', 'max' => 255],
