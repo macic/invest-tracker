@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'account_type',
-            'account_holder',
+            'name',
             'broker'
         ],
     ]) ?>

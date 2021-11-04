@@ -8,20 +8,20 @@ use Yii;
  * This is the model class for table "{{%account}}".
  *
  * @property int $id
- * @property int $account_type
- * @property string $account_holder
+ * @property string $account_type
+ * @property int|null $account_holder_id
  * @property string|null $broker
+ *
+ * @property AccountHolder $accountHolder
+ * @property Asset[] $assets
  */
-
 define('account_type', ['IKE', 'IKZE', 'Government Bonds', 'Broker Account', 'Gold']);
-define('account_holder', ['Ania Jeruzal', 'Radek Jeruzal']);
 
 class Account extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
-
     public static function tableName()
     {
         return '{{%account}}';
@@ -33,10 +33,11 @@ class Account extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['account_type', 'account_holder'], 'required'],
+            [['account_type'], 'required'],
+            [['account_holder_id'], 'integer'],
             [['account_type'], 'string', 'max' => 55],
-            [['account_holder'], 'string', 'max' => 99],
             [['broker'], 'string', 'max' => 64],
+            [['account_holder_id'], 'exist', 'skipOnError' => true, 'targetClass' => AccountHolder::className(), 'targetAttribute' => ['account_holder_id' => 'id']],
         ];
     }
 
@@ -48,18 +49,29 @@ class Account extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'account_type' => 'Account Type',
-            'account_holder' => 'Account Holder',
+            'account_holder_id' => 'Account Holder ID',
             'broker' => 'Broker',
         ];
     }
 
     /**
-     * {@inheritdoc}
-     * @return \app\models\query\AccountQuery the active query used by this AR class.
+     * Gets query for [[AccountHolder]].
+     *
+     * @return \yii\db\ActiveQuery
      */
-    public static function find()
+    public function getAccountHolder()
     {
-        return new \app\models\query\AccountQuery(get_called_class());
+        return $this->hasOne(AccountHolder::className(), ['id' => 'account_holder_id']);
+    }
+
+    /**
+     * Gets query for [[Assets]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAssets()
+    {
+        return $this->hasMany(Asset::className(), ['account_id' => 'id']);
     }
 
     public function findAssets()
@@ -69,8 +81,6 @@ class Account extends \yii\db\ActiveRecord
 
     public function getName()
     {
-        return $this->account_type .' - '.$this->account_holder;
+        return $this->account_type .' - '.$this->accountHolder->name;
     }
-
-
 }

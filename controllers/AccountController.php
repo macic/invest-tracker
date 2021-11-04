@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\AccountHolder;
 use Yii;
 use app\models\Account;
 use app\models\AccountSearch;
@@ -70,8 +71,14 @@ class AccountController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
+        $holderName = AccountHolder::find()->all();
+
+        $holder = new AccountHolder();
+
         return $this->render('create', [
             'model' => $model,
+            'holderName' => $holderName,
+            'holder' => $holder,
         ]);
     }
 

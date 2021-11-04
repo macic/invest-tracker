@@ -35,7 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <li class="list-group-item d-flex justify-content-between align-items-center">
             <a class="collapse-item" href="<?php echo \yii\helpers\Url::to(['/asset/list', 'account_id'=>$account['id']])?>"><?php echo $account['account_type'] ?></a>
             <span class="badge badge-primary badge-pill">
-                <?php echo $account['account_holder'] ?></span>
+                <?php echo $account->accountHolder->name ?></span>
         </li>
       <?php endforeach; ?>
     </ul>

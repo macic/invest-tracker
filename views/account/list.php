@@ -37,7 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <li class="list-group-item d-flex justify-content-between align-items-center">
                 <?php echo $item['account_type'] ?>
                 <span class="badge badge-primary badge-pill">
-                    <?php echo $item['account_holder']?>
+                    <?php echo $item->account->accountHolder->name ?>
 
                     <?php endforeach; ?>
 

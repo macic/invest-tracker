@@ -12,6 +12,7 @@ use yii\helpers\ArrayHelper;
 /* @var $accounts app\models\Account */
 /* @var $form yii\bootstrap4\ActiveForm */
 /* @var $assetsTypeData app\models\Asset */
+
 const currency = ["PLN", "EUR", 'USD', 'GBP'];
 ?>
 
