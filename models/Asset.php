@@ -112,4 +112,8 @@ class Asset extends \yii\db\ActiveRecord
     {
         return $this->buy_price * $this->quantity . ' ' .$this->currency ;
     }
+    public function getTotalValue()
+    {
+
+    }
 }

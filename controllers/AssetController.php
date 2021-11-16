@@ -65,16 +65,16 @@ class AssetController extends Controller
     {
         $item = Asset::find()->where(['id' => $id])->one();
 
-//        foreach ($items as $item) {
-//            $asset_name[$item['asset_type_id']] = $item->assetType->name;
+//        foreach ($item as $items) {
+//            $account_name = $items->account->name;
 
 
             return $this->render('view', [
                 'model' => $this->findModel($id),
                 'item' => $item,
-//                'asset_name' => $asset_name
+     //           'account_name' => $account_name
             ]);
-//        }
+    //    }
     }
 
     /**

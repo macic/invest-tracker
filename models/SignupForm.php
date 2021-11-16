@@ -9,14 +9,15 @@ class SignupForm extends \yii\base\Model
     public $username;
     public $email;
     public $password;
+    public $firstname;
     public $password_repeat;
 
 
     public function rules()
     {
         return [
-            [['username', 'email', 'password', 'password_repeat'], 'required'],
-            [['username', 'email', 'password', 'password_repeat'], 'string', 'min' => 3, 'max' => 55],
+            [['username', 'email', 'password', 'password_repeat', 'firstname'], 'required'],
+            [['username', 'email', 'password', 'password_repeat', 'firstname'], 'string', 'min' => 3, 'max' => 55],
             ['password_repeat', 'compare', 'compareAttribute' => 'password']
         ];
     }
@@ -31,11 +32,12 @@ class SignupForm extends \yii\base\Model
         $user->auth_key = \Yii::$app->security->generateRandomString();
 
         if($user->save()) {
-            return true;
+            return $user->getPrimaryKey();
         }
 
         \Yii::error('User was not saved'. VarDumper::dumpAsString($user->errors));
         return false;
 
     }
+
 }

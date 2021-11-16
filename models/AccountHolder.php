@@ -7,8 +7,9 @@ use Yii;
 /**
  * This is the model class for table "{{%account_holder}}".
  *
- * @property int|null $id
+ * @property int $id
  * @property string|null $name
+ * @property int $user_id
  *
  * @property Account[] $accounts
  */
@@ -31,6 +32,8 @@ class AccountHolder extends \yii\db\ActiveRecord
             [['id'], 'integer'],
             [['name'], 'string', 'max' => 99],
             [['name'], 'required'],
+            [['user_id'], 'required'],
+            [['user_id'], 'integer'],
         ];
     }
 
@@ -42,6 +45,7 @@ class AccountHolder extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'name' => 'Name',
+            'user_id' => 'User ID',
         ];
     }
 

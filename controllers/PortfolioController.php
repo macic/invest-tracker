@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\AssetType;
+use app\models\Portfolio;
 use Yii;
 use app\models\PortfolioStructure;
 use yii\data\ActiveDataProvider;
@@ -77,7 +78,8 @@ class PortfolioController extends Controller
 
         return $this->render('create', [
             'model' => $model,
-            'assetsTypeData' => $assetsTypeData
+            'assetsTypeData' => $assetsTypeData,
+
         ]);
     }
 

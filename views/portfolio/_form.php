@@ -8,6 +8,7 @@ use yii\helpers\ArrayHelper;
 /* @var $model app\models\PortfolioStructure */
 /* @var $form yii\bootstrap4\ActiveForm */
 /* @var $assetsTypeData app\models\Asset */
+/* @var $name app\models\Portfolio */
 ?>
 
 <div class="portfolio-structure-form">

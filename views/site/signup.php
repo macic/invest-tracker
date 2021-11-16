@@ -2,7 +2,7 @@
 
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap4\ActiveForm */
-/* @var $model app\models\SignupForm */
+/* @var $modelForm app\models\SignupForm */
 
 use yii\helpers\Html;
 use yii\bootstrap4\ActiveForm;
@@ -17,6 +17,7 @@ $this->title = 'Signup';
             <div class="text-center">
                 <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
             </div>
+
             <?php $form = ActiveForm::begin([
                 'id' => 'signup-form',
                 'options' => ['class'=>'user'],
@@ -25,23 +26,30 @@ $this->title = 'Signup';
                 ]
             ]); ?>
 
-            <?= $form->field($model, 'username', [
+            <?= $form->field($modelForm, 'username', [
                     'inputOptions' => [
                             'placeholder' => 'Enter your username',
                             'class' => 'form-control form-control-user'
                     ]
             ])->textInput(['autofocus' => true]) ?>
 
-            <?= $form->field($model, 'email', [
+            <?= $form->field($modelForm, 'email', [
                 'inputOptions' => [
                     'placeholder' => 'Enter your email address',
                     'class' => 'form-control form-control-user'
                 ]
             ])->textInput(['autofocus' => true]) ?>
 
+            <?= $form->field($modelForm, 'firstname', [
+                'inputOptions' => [
+                    'placeholder' => 'Enter your firstname',
+                    'class' => 'form-control form-control-user'
+                ]
+            ])->textInput(['autofocus' => true]) ?>
+
             <div class="form-group row">
                 <div class="col-sm-6 mb-3 mb-sm-0">
-                <?= $form->field($model, 'password', [
+                <?= $form->field($modelForm, 'password', [
                     'inputOptions' => [
                             'class' => 'form-control form-control-user',
                             'placeholder' => 'Password'
@@ -50,7 +58,7 @@ $this->title = 'Signup';
                 )->passwordInput()?>
                 </div>
                 <div class="col-sm-6">
-                <?= $form->field($model, 'password_repeat', [
+                <?= $form->field($modelForm, 'password_repeat', [
                     'inputOptions' => [
                         'class' => 'form-control form-control-user',
                         'placeholder' => 'Repeat Password'

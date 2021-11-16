@@ -3,9 +3,11 @@
 namespace app\controllers;
 
 use app\models\Account;
+use app\models\AccountHolder;
 use app\models\ForgotPasswordForm;
 use app\models\SignupForm;
 use Yii;
+use yii\base\BaseObject;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\Response;
@@ -108,12 +110,28 @@ class SiteController extends Controller
     {
         $this->layout = 'blank';
 
-        $model = new SignupForm();
-        if ($model->load(Yii::$app->request->post()) && $model->signup()) {
-            return $this->redirect(Yii::$app->homeUrl);
+        $modelForm = new SignupForm();
+        $postData = Yii::$app->request->post();
+
+        if (count($postData)>0) {
+            $accountHolder = $postData['SignupForm']['firstname'];
+            unset($postData['SignupForm']['firstname']);
         }
+
+        if ($modelForm->load($postData)) {
+            $user_id = $modelForm->signup();
+            if ($user_id) {
+                $ac = new AccountHolder();
+                $ac->user_id = $user_id;
+                $ac->name = $accountHolder;
+                if($ac->save()) {
+                    return $this->redirect(Yii::$app->homeUrl);
+                }
+            }
+        }
+        
         return $this->render('signup', [
-            'model' => $model
+            'modelForm' => $modelForm,
         ]);
 
     }

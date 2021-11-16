@@ -48,6 +48,7 @@ class PortfolioStructure extends \yii\db\ActiveRecord
             'portfolio_id' => 'Portfolio ID',
             'asset_type_id' => 'Asset Type',
             'percentage' => 'Percentage',
+            'name' => 'Name'
         ];
     }
 

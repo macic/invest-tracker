@@ -11,12 +11,15 @@ use Yii;
  * @property string $account_type
  * @property int|null $account_holder_id
  * @property string|null $broker
+ * @property int|null $user_id
  *
  * @property AccountHolder $accountHolder
+ * @property User $user
  * @property Asset[] $assets
+ *
  */
-define('account_type', ['IKE', 'IKZE', 'Government Bonds', 'Broker Account', 'Gold']);
 
+define('account_type', ['IKE', 'IKZE', 'Government Bonds', 'Broker Account', 'Gold']);
 class Account extends \yii\db\ActiveRecord
 {
     /**
@@ -34,10 +37,11 @@ class Account extends \yii\db\ActiveRecord
     {
         return [
             [['account_type'], 'required'],
-            [['account_holder_id'], 'integer'],
+            [['account_holder_id', 'user_id'], 'integer'],
             [['account_type'], 'string', 'max' => 55],
             [['broker'], 'string', 'max' => 64],
             [['account_holder_id'], 'exist', 'skipOnError' => true, 'targetClass' => AccountHolder::className(), 'targetAttribute' => ['account_holder_id' => 'id']],
+            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];
     }
 
@@ -51,6 +55,7 @@ class Account extends \yii\db\ActiveRecord
             'account_type' => 'Account Type',
             'account_holder_id' => 'Account Holder ID',
             'broker' => 'Broker',
+            'user_id' => 'User ID',
         ];
     }
 
@@ -65,6 +70,16 @@ class Account extends \yii\db\ActiveRecord
     }
 
     /**
+     * Gets query for [[User]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUser()
+    {
+        return $this->hasOne(User::className(), ['id' => 'user_id']);
+    }
+
+    /**
      * Gets query for [[Assets]].
      *
      * @return \yii\db\ActiveQuery
@@ -74,12 +89,7 @@ class Account extends \yii\db\ActiveRecord
         return $this->hasMany(Asset::className(), ['account_id' => 'id']);
     }
 
-    public function findAssets()
-    {
-        return $this->hasMany(Asset::class, ['account_id' => 'id']);
-    }
-
-    public function getName()
+    public function getAccountName()
     {
         return $this->account_type .' - '.$this->accountHolder->name;
     }

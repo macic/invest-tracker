@@ -99,4 +99,12 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
         return $this->username;
 
     }
+    public function getAccounts()
+    {
+        return $this->hasMany(Account::className(), ['user_id' => 'id']);
+    }
+    public function getAccountHolders()
+    {
+        return $this->hasMany(AccountHolder::className(), ['user_id' => 'id']);
+    }
 }

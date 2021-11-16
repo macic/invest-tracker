@@ -6,6 +6,7 @@ use yii\helpers\Html;
 /* @var $model app\models\PortfolioStructure */
 /* @var $assetsTypeData app\models\Asset */
 
+
 $this->title = 'Create Portfolio Structure';
 $this->params['breadcrumbs'][] = ['label' => 'Portfolio Structures', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
@@ -16,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= $this->render('_form', [
         'model' => $model,
-        'assetsTypeData' => $assetsTypeData
+        'assetsTypeData' => $assetsTypeData,
     ]) ?>
 
 </div>
