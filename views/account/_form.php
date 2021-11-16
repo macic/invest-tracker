@@ -70,7 +70,7 @@ use yii\helpers\ArrayHelper;
 <?php \yii\bootstrap4\ActiveForm::end(); ?>
 
 <div class="right">
-<button class="btn btn-outline-info btn-sm "id="add-holder-btn">Add new holder</button>
+<button type="button" class="btn btn-outline-info btn-sm "id="add-holder-btn">Add new holder</button>
 </div>
 
 

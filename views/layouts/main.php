@@ -55,7 +55,7 @@ AppAsset::register($this);
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
                 <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-fw fa-chart-area" style="font-size: 3rem"></i>
+                    <i class="fab fa-artstation" style="font-size: 3rem"></i>
                 </div>
                 <div class="sidebar-brand-text mx-3">Invest Tracker</div>
             </a>

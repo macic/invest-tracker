@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="chart-pie pt-4">
                     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?php echo yii\helpers\Url::to(['create'])?>">
                         <div class="sidebar-brand-icon">
-                            <i class="fas fa-folder-plus" style="font-size: 15rem"></i>
+                            <i class="fas fa-plus-circle" style="font-size: 15rem"></i>
                         </div>
                     </a>
                 </div>

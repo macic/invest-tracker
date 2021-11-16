@@ -6,6 +6,7 @@ use app\models\AssetType;
 use app\models\Portfolio;
 use Yii;
 use app\models\PortfolioStructure;
+use yii\base\BaseObject;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -67,17 +68,48 @@ class PortfolioController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($id=null)
     {
-        $model = new PortfolioStructure();
+        $postData = Yii::$app->request->post();
+        if (count($postData)>0) {
+            #save
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            # zapisuje portfolio name albo updateuje - zaleznie czy jest przekazane $id
+
+            # jezeli sie to uda to robie foreach na danych z portfoliostructure i zapisuje
+
+            #@TODO
+//            $portfolioStructure = new PortfolioStructure();
+//            if ($portfolioStructure->load(Yii::$app->request->post()) && $portfolioStructure->save()) {
+//                return $this->redirect(['view', 'id' => $portfolioStructure->id]);
+//            }
         }
+
         $assetsTypeData = AssetType::find()->all();
 
+        if (is_null($id)) {
+            #empty portfolio
+            $portfolio = new Portfolio();
+            $portfolioStructure = array(new PortfolioStructure());
+        }
+        else {
+            $portfolio_id = $id;
+            $portfolio = Portfolio::find()->where(['id'=>$portfolio_id])->one();
+            $portfolioStructure = $portfolio->portfolioStructures;
+        }
+
+//
+//            $portfolio_id = $postData['Portfolio']['id'];
+//            $portfolio = Portfolio::find()->where(['id'=>$portfolio_id]);
+//            $portfolioStructure = $portfolio->getPortfolioStructures();
+//            #unset($postData['SignupForm']['firstname']);
+
+
+
+
         return $this->render('create', [
-            'model' => $model,
+            'portfolioStructure' => $portfolioStructure,
+            'portfolio' => $portfolio,
             'assetsTypeData' => $assetsTypeData,
 
         ]);
