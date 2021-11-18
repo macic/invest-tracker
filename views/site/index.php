@@ -88,7 +88,8 @@ $this->title = 'My Yii Application';
 
                         </div>
                         <div class="col-auto">
-                            <i class="fas fa-wallet fa-2x text-gray-300"></i>
+                            <i class="fab fa-bitcoin fa-3x text-gray-300"></i>
+<!--                            <i class="fas fa-wallet fa-2x text-gray-300"></i>-->
                         </div>
                     </div>
                 </div>

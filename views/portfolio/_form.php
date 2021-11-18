@@ -27,9 +27,13 @@ use yii\helpers\ArrayHelper;
         'inputOptions' => [
             'class' => 'custom-select',
         ]])->dropdownList(ArrayHelper::map($assetsTypeData, 'id', 'name'),
-        ['prompt'=>'Choose asset type here:']) ?>
+        ['prompt'=>'Choose asset type here:',
+          'options' => [$structure->asset_type_id =>["Selected"=>true]]
+            ]) ?>
 
-    <?= $form->field($structure, 'percentage['.$i.']')->textInput() ?>
+    <?= $form->field($structure, 'percentage['.$i.']')->textInput([
+            'value' => $structure->percentage
+        ]) ?>
 
     <?php $i++; endforeach; ?>
     <div class="form-group">
