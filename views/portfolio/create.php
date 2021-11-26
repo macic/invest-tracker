@@ -17,14 +17,14 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <?= $this->render('_form', [
+    <?= $this->render('_form_create', [
         'portfolioStructure' => $portfolioStructure,
         'portfolio' => $portfolio,
         'assetsTypeData' => $assetsTypeData,
     ]) ?>
 
 </div>
-<div class="col"><canvas id="portfolio-charts"></canvas></div>
+<div class="col chart-wrapper" ><canvas id="portfolio-charts"></canvas></div>
 </div>
 
 <?php
@@ -33,6 +33,8 @@ $this->registerJs('
         displayDonut($("#portfolio-charts"), ["Stocks", "Bonds", "Gold"], [55, 30, 15]);
     });');
 ?>
+
+<!-- @TODO poniższy plik nie działa, funkcja jest dodana w form_create w <script> </script> nie ładuje się z tego pliku-->
 <?php
-    $this->registerJsFile(Yii::$app->request->BaseUrl . '/js/portfolios-form.js', ['depends' => [yii\web\JqueryAsset::className()]]);
+$this->registerJsFile(Yii::$app->request->BaseUrl . '/js/portfolios-form.js', ['depends' => [yii\web\JqueryAsset::className()]]);
 ?>

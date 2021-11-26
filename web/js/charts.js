@@ -1,5 +1,5 @@
 function displayDonut($element, labels, data) {
-    new Chart($element, {
+    var graph = new Chart($element, {
         type: 'doughnut',
         data: {
             labels: labels,
@@ -23,9 +23,17 @@ function displayDonut($element, labels, data) {
                 caretPadding: 10,
             },
             legend: {
-                display: false
+                display: true,
             },
             cutoutPercentage: 80,
         },
     });
+    $element.data('graph', graph)
+}
+
+function updateDonut($element, labels, data) {
+    var graph = $element.data('graph');
+    graph.data.labels = labels;
+    graph.data.datasets[0].data=data;
+    graph.update();
 }

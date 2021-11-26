@@ -15,10 +15,11 @@ class AccountHolderController extends \yii\web\Controller
     public function actionCreate() {
 
         $holder = new AccountHolder();
+        $postData = Yii::$app->request->post();
+        $postData["AccountHolder"]["user_id"] = Yii::$app->user->getId();
 
-        if ($holder->load(Yii::$app->request->post()) && $holder->save()) {
+        if ($holder->load($postData) && $holder->save()) {
             return $this->redirect(['/account/create']);
-
         }
     }
 

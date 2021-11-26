@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\AssetType;
 use app\models\Portfolio;
+use TheSeer\Tokenizer\Exception;
 use Yii;
 use app\models\PortfolioStructure;
 use yii\base\BaseObject;
@@ -38,12 +39,10 @@ class PortfolioController extends Controller
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => PortfolioStructure::find(),
-        ]);
+        $items = Portfolio::find()->all();
 
         return $this->render('index', [
-            'dataProvider' => $dataProvider,
+            'items' => $items,
         ]);
     }
 
@@ -68,51 +67,85 @@ class PortfolioController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate($id=null)
+    public function actionCreate()
     {
-        $postData = Yii::$app->request->post();
-        if (count($postData)>0) {
-            #save
-
-            # zapisuje portfolio name albo updateuje - zaleznie czy jest przekazane $id
-
-            # jezeli sie to uda to robie foreach na danych z portfoliostructure i zapisuje
-
-            #@TODO
-//            $portfolioStructure = new PortfolioStructure();
-//            if ($portfolioStructure->load(Yii::$app->request->post()) && $portfolioStructure->save()) {
-//                return $this->redirect(['view', 'id' => $portfolioStructure->id]);
-//            }
-        }
-
         $assetsTypeData = AssetType::find()->all();
+        $portfolio = new Portfolio();
+        $portfolioStructure = new PortfolioStructure();
+        $postData = Yii::$app->request->post();
 
-        if (is_null($id)) {
-            #empty portfolio
-            $portfolio = new Portfolio();
-            $portfolioStructure = array(new PortfolioStructure());
+
+        // ["PortfolioStructure"]=> array(2) { ["asset_type_id"]=> array(1) { [0]=> string(1) "2" } ["percentage"]=> array(1) { [0]=> string(3) "123" }
+        if (count($postData)>0) {
+
+            if ($portfolio->load($postData) && $portfolio->save()) {
+                $count = count($postData['PortfolioStructure']['asset_type_id']);
+                for($i = 0; $i < $count; $i++) {
+                    $portfolioStructure = new PortfolioStructure();
+                    $dataToSave['_csrf'] = $postData['_csrf'];
+                    $dataToSave['PortfolioStructure']['asset_type_id'] = $postData['PortfolioStructure']['asset_type_id'][$i];
+                    $dataToSave['PortfolioStructure']['percentage'] = $postData['PortfolioStructure']['percentage'][$i];
+                    $dataToSave['PortfolioStructure']['portfolio_id'] = $portfolio->getPrimaryKey();
+                    if(!($portfolioStructure->load($dataToSave) && $portfolioStructure->save())) {
+                        break;
+                    }
+                }
+            }
+            return $this->redirect('/index');
         }
-        else {
-            $portfolio_id = $id;
-            $portfolio = Portfolio::find()->where(['id'=>$portfolio_id])->one();
-            $portfolioStructure = $portfolio->portfolioStructures;
-        }
-
-//
-//            $portfolio_id = $postData['Portfolio']['id'];
-//            $portfolio = Portfolio::find()->where(['id'=>$portfolio_id]);
-//            $portfolioStructure = $portfolio->getPortfolioStructures();
-//            #unset($postData['SignupForm']['firstname']);
-
-
-
 
         return $this->render('create', [
             'portfolioStructure' => $portfolioStructure,
             'portfolio' => $portfolio,
             'assetsTypeData' => $assetsTypeData,
-
         ]);
+
+
+
+////        to poniżej było oraz $id=null w nawiasie actionCreate()
+//        $postData = Yii::$app->request->post();
+//        if (count($postData)>0) {
+//            #save
+//
+//            # zapisuje portfolio name albo updateuje - zaleznie czy jest przekazane $id
+//
+//            # jezeli sie to uda to robie foreach na danych z portfoliostructure i zapisuje
+//
+//            #@TODO
+////            $portfolioStructure = new PortfolioStructure();
+////            if ($portfolioStructure->load(Yii::$app->request->post()) && $portfolioStructure->save()) {
+////                return $this->redirect(['view', 'id' => $portfolioStructure->id]);
+////            }
+//        }
+//
+//        $assetsTypeData = AssetType::find()->all();
+//
+//        if (is_null($id)) {
+//            #empty portfolio
+//            $portfolio = new Portfolio();
+//            $portfolioStructure = array(new PortfolioStructure());
+//        }
+//        else {
+//            $portfolio_id = $id;
+//            $portfolio = Portfolio::find()->where(['id'=>$portfolio_id])->one();
+//            $portfolioStructure = $portfolio->portfolioStructures;
+//        }
+//
+////
+////            $portfolio_id = $postData['Portfolio']['id'];
+////            $portfolio = Portfolio::find()->where(['id'=>$portfolio_id]);
+////            $portfolioStructure = $portfolio->getPortfolioStructures();
+////            #unset($postData['SignupForm']['firstname']);
+//
+//
+//
+//
+//        return $this->render('create', [
+//            'portfolioStructure' => $portfolioStructure,
+//            'portfolio' => $portfolio,
+//            'assetsTypeData' => $assetsTypeData,
+//
+//        ]);
     }
 
     /**
@@ -124,17 +157,58 @@ class PortfolioController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
         $assetsTypeData = AssetType::find()->all();
 
-        return $this->render('update', [
-            'model' => $model,
-            'assetsTypeData' => $assetsTypeData
-        ]);
+        $postData = Yii::$app->request->post();
+        if (count($postData)>0) {
+            #update portfolio name
+            $portfolio = Portfolio::findOne($id);
+            if ($portfolio->load($postData) && $portfolio->save()) {
+
+                unset($postData['Portfolio']);
+
+                $portfolioStructure = PortfolioStructure::find()->indexBy('id')->all();
+
+                if (PortfolioStructure::loadMultiple($portfolioStructure, $postData) && PortfolioStructure::validateMultiple($portfolioStructure)) {
+                    foreach ($portfolioStructure as $structure) {
+                        $structure->save(false);
+                    }
+                    return $this->redirect('index');
+                }
+                return $this->render('update', [
+                    'portfolioStructure' => $portfolioStructure,
+                    'assetsTypeData' => $assetsTypeData,
+                    'portfolio' => $portfolio
+                    ]);
+
+            }
+            # zapisuje portfolio name albo updateuje - zaleznie czy jest przekazane $id
+
+            # jezeli sie to uda to robie foreach na danych z portfoliostructure i zapisuje
+
+            #@TODO
+//            $portfolioStructure = new PortfolioStructure();
+//            if ($portfolioStructure->load(Yii::$app->request->post()) && $portfolioStructure->save()) {
+//                return $this->redirect(['view', 'id' => $portfolioStructure->id]);
+//            }
+        }
+
+
+
+//        $assetsTypeData = AssetType::find()->all();
+//
+//        $portfolio_id = $id;
+//        $portfolio = Portfolio::find()->where(['id'=>$portfolio_id])->one();
+//        $portfolioStructure = $portfolio->portfolioStructures;
+//
+//
+//
+//        return $this->render('create', [
+//            'portfolioStructure' => $portfolioStructure,
+//            'portfolio' => $portfolio,
+//            'assetsTypeData' => $assetsTypeData,
+
+     //   ]);
     }
 
     /**
