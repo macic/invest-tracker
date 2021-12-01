@@ -39,11 +39,17 @@ class PortfolioController extends Controller
      */
     public function actionIndex()
     {
-        $items = Portfolio::find()->all();
+        $portfolios = Portfolio::find()->where(['user_id' => Yii::$app->user->getId()])->all();
+//        foreach ($portfolios as $portfolio):
+//            {
+//                foreach ($portfolio->portfolioStructure as $structure)
+//                print_r($structure->asset_type_id);
+//            }
+//        endforeach;
 
-        return $this->render('index', [
-            'items' => $items,
-        ]);
+            return $this->render('index', [
+                'items' => $portfolios,
+            ]);
     }
 
     /**
@@ -54,11 +60,12 @@ class PortfolioController extends Controller
      */
     public function actionView($id)
     {
-       // $assetsTypeData = AssetType::find()->all();
+        $portfolio = PortfolioStructure::findOne($id);
 
         return $this->render('view', [
             'model' => $this->findModel($id),
             'assetsTypeData' => AssetType::find()->all(),
+            'items' => $portfolio
         ]);
     }
 
@@ -77,6 +84,8 @@ class PortfolioController extends Controller
 
         // ["PortfolioStructure"]=> array(2) { ["asset_type_id"]=> array(1) { [0]=> string(1) "2" } ["percentage"]=> array(1) { [0]=> string(3) "123" }
         if (count($postData)>0) {
+
+           $portfolio->user_id = Yii::$app->user->getId();
 
             if ($portfolio->load($postData) && $portfolio->save()) {
                 $count = count($postData['PortfolioStructure']['asset_type_id']);
@@ -178,7 +187,8 @@ class PortfolioController extends Controller
                 return $this->render('update', [
                     'portfolioStructure' => $portfolioStructure,
                     'assetsTypeData' => $assetsTypeData,
-                    'portfolio' => $portfolio
+                    'portfolio' => $portfolio,
+
                     ]);
 
             }

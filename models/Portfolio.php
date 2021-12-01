@@ -9,6 +9,7 @@ use Yii;
  *
  * @property int $id
  * @property string $name
+ * @property int $user_id
  *
  * @property Asset[] $assets
  * @property PortfolioStructure[] $portfolioStructures
@@ -29,7 +30,7 @@ class Portfolio extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name'], 'required'],
+            [['name', 'user_id'], 'required'],
             [['name'], 'string', 'max' => 255],
         ];
     }
@@ -42,6 +43,7 @@ class Portfolio extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'name' => 'Name',
+            'user_id' => 'User ID'
         ];
     }
 
@@ -60,8 +62,9 @@ class Portfolio extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getPortfolioStructures()
+    public function getPortfolioStructure()
     {
         return $this->hasMany(PortfolioStructure::className(), ['portfolio_id' => 'id']);
     }
+
 }

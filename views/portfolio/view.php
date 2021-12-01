@@ -5,6 +5,7 @@ use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\PortfolioStructure */
+/* @var $items app\models\PortfolioStructure */
 /* @var $assetsTypeData app\models\Asset */
 
 $this->title = $model->name;
@@ -36,6 +37,42 @@ $this->params['breadcrumbs'][] = $this->title;
             'percentage',
         ],
     ]) ?>
+    <!-- Donut Chart -->
+    <div class="col-xl-4 col-lg-5">
+        <div class="card shadow mb-4">
+            <!-- Card Header - Dropdown -->
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary"><?php echo $model->name . ' chart'?></h6>
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+                <div class="chart">
+                    <div class="col chart-wrapper" ><canvas id="portfolio-charts"></canvas></div>
+                </div>
+                <hr>
+                Tutaj możesz sobie coś wpisać.
+            </div>
+        </div>
+    </div>
+</div>
+    <?php
+        $labels = array();
+        $data =   array();
+
+            $labels[] = $model->type;
+            $data[] = $model->percentage;
+         ?>
+        <div class="chart">
+            <div class="col chart-wrapper" ><canvas id="portfolio-charts"></canvas></div>
+        </div>
+        <?php     $this->registerJs('
+   $(function() {
+   var labels = '. json_encode($labels). ';
+   var data = '. json_encode($data). ';
+        displayDonut($("#portfolio-charts"), labels, data);
+    });');
+
+    ?>
 
 <!-- Donut Chart -->
 <div class="col-xl-4 col-lg-5">

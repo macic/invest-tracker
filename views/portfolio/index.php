@@ -6,6 +6,7 @@ use yii\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 /* @var $items app\models\Portfolio  */
+/* @var $asset string  */
 
 
 $this->title = 'Portfolio Structures';
@@ -16,11 +17,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1> Your portfolios:</h1>
     <br>
 
-<!--    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="--><?php //echo yii\helpers\Url::to(['create'])?><!--">-->
-<!--        <div class="sidebar-brand-icon">-->
-<!--            <i class="fas fa-folder-plus" style="font-size: 15rem"></i>-->
-<!--        </div>-->
-<!--    </a>-->
 <div class="row">
     <div class="col-xl-4 col-lg-5 align-items-center">
         <div class="card shadow mb-4">
@@ -52,23 +48,34 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
             <!-- Card Body -->
             <div class="card-body">
-                <div class="chart-pie pt-4">
 
                     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?php echo yii\helpers\Url::to(['/portfolio/view', 'id'=>$item['id']])?>">
-                        <div class="chart">
-                            <div class="col chart-wrapper" ><canvas id="portfolio-charts"></canvas></div>
+                        <div class="chart-pie pt-0">
+                            <canvas id="portfolio-charts-<?php echo $item['id']?>"></canvas>
                         </div>
                     </a>
-                </div>
                 <hr>
-                Create new portfolio structure.
+                <?php
+                $labels = array();
+                $data =   array();
+                foreach ($item->portfolioStructure as $structure) {
+
+                    $labels[] = $structure->type;
+                    $data[] = $structure->percentage;
+
+                    echo $structure->type . " / " . $structure->percentage . " % <br>";
+                }?>
             </div>
         </div>
     </div>
         <?php
+
+
         $this->registerJs('
    $(function() {
-        displayDonut($("#portfolio-charts"), labels, data);
+   var labels = '. json_encode($labels). ';
+   var data = '. json_encode($data). ';
+        displayDonut($("#portfolio-charts-'. $item['id'] .'"), labels, data);
     });');
         ?>
 

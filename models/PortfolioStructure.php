@@ -81,4 +81,5 @@ class PortfolioStructure extends \yii\db\ActiveRecord
     {
         return $this->assetType->name;
     }
+
 }
