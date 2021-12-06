@@ -9,9 +9,10 @@ use yii\helpers\ArrayHelper;
 /* @var $this yii\web\View */
 /* @var $model app\models\Asset */
 /* @var $formattedAssetName app\models\AssetType */
-/* @var $accounts app\models\Account */
+/* @var $accountsData app\models\Account */
 /* @var $form yii\bootstrap4\ActiveForm */
 /* @var $assetsTypeData app\models\Asset */
+/* @var $portfolioData app\models\Portfolio*/
 
 const currency = ["PLN", "EUR", 'USD', 'GBP'];
 ?>
@@ -31,7 +32,7 @@ const currency = ["PLN", "EUR", 'USD', 'GBP'];
     <?= $form->field($model, 'account_id',[
         'inputOptions' => [
             'class' => 'custom-select',
-        ]])->dropdownList(ArrayHelper::map($accounts, 'id', 'name'),
+        ]])->dropdownList(ArrayHelper::map($accountsData, 'id', 'accountName'),
         ['prompt'=>'Choose account here:']) ?>
 
     <?= $form->field($model, 'asset_type_id',[
@@ -39,6 +40,12 @@ const currency = ["PLN", "EUR", 'USD', 'GBP'];
             'class' => 'custom-select',
         ]])->dropdownList(ArrayHelper::map($assetsTypeData, 'id', 'name'),
         ['prompt'=>'Choose asset type here:']) ?>
+
+    <?= $form->field($model, 'portfolio_id',[
+            'inputOptions' => [
+                'class' => 'custom-select',
+            ]])->dropdownList(ArrayHelper::map($portfolioData, 'id', 'name'),
+            ['prompt'=>'Choose portfolio here:']) ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 

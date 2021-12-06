@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\Account;
 use app\models\AssetType;
+use app\models\Portfolio;
 use Yii;
 use app\models\Asset;
 use app\models\AssetSearch;
@@ -92,13 +93,15 @@ class AssetController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        $accountsData = Account::find()->all();
+        $accountsData = Account::find()->where(['user_id'=>Yii::$app->user->getId()])->all();
         $assetsTypeData = AssetType::find()->all();
+        $portfolioData = Portfolio::find()->where(['user_id'=>Yii::$app->user->getId()])->all();
 
         return $this->render('create', [
             'model' => $model,
-            'accounts' => $accountsData,
-            'assetsTypeData' => $assetsTypeData
+            'accountsData' => $accountsData,
+            'assetsTypeData' => $assetsTypeData,
+            'portfolioData' => $portfolioData
         ]);
     }
 
@@ -158,20 +161,25 @@ class AssetController extends Controller
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 
-    public function actionListing($asset_type_id=null)
+    public function actionListing()
     {
-        if (!is_null($asset_type_id)) {
-            $items = Asset::find()->where(['asset_type_id' => $asset_type_id])->all();
-            $name = count($items)>0 ? $items[0]->assetType->name : "Wrong asset type id";
-        } else {
-            $items = Asset::find()->all();
-            $name = 'Assets';
-        }
+        $items = Asset::find()->innerJoin('portfolio', 'asset.portfolio_id = portfolio.id')
+            ->where(['user_id'=>Yii::$app->user->getId()])->all();
+
+        //        if (!is_null($asset_type_id)) {
+//            $items = Asset::find()->where(['asset_type_id' => $asset_type_id])->all();
+//            $name = count($items)>0 ? $items[0]->assetType->name : "Wrong asset type id";
+//        } else {
+//            $items = Asset::find()->all();
+//            $name = 'Assets';
+//        }
+
+
 
         return $this->render('liststary', [
             'items' => $items,
-            'asset_type_id' => $asset_type_id,
-            'name' => $name
+//            'asset_type_id' => $asset_type_id,
+//            'name' => $name
         ]);
     }
     public function actionList($account_id)

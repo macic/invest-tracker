@@ -37,7 +37,7 @@ class AccountController extends Controller
     public function actionIndex()
     {
 
-        $accounts = Account::find()->all();
+        $accounts = Account::find()->where(['user_id'=>Yii::$app->user->getId()])->all();
 
         return $this->render('index', [
             'accounts' => $accounts,
@@ -89,7 +89,7 @@ class AccountController extends Controller
             }
         }
 
-        $holderName = AccountHolder::find()->all();
+        $holderName = AccountHolder::find()->where(['user_id'=>Yii::$app->user->getId()])->all();
 
         $holder = new AccountHolder();
 

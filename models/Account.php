@@ -55,7 +55,7 @@ class Account extends \yii\db\ActiveRecord
             'account_type' => 'Account Type',
             'account_holder_id' => 'Account Holder ID',
             'broker' => 'Broker',
-            'user_id' => 'User ID',
+            'user_id' => 'User ID'
         ];
     }
 

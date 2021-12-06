@@ -67,4 +67,16 @@ class Portfolio extends \yii\db\ActiveRecord
         return $this->hasMany(PortfolioStructure::className(), ['portfolio_id' => 'id']);
     }
 
+    public function getAssetTypeValue($asset_type_id)
+
+    {
+        $assets = $this->getAssets()->where(['asset_type_id'=>$asset_type_id])->all();
+        $sum = 0;
+        foreach ($assets as $asset) {
+            $sum += $asset->buy_price*$asset->quantity;
+        }
+        return $sum;
+        //$this->buy_price * $this->quantity . ' ' .$this->currency;
+    }
+
 }

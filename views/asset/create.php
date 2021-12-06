@@ -5,8 +5,9 @@ use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Asset */
-/* @var $accounts app\models\Account */
+/* @var $accountsData app\models\Account */
 /* @var $assetsTypeData app\models\Asset */
+/* @var $portfolioData app\models\Portfolio */
 
 $this->title = 'Create Asset';
 $this->params['breadcrumbs'][] = ['label' => 'Assets', 'url' => ['index']];
@@ -18,8 +19,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= $this->render('_form', [
         'model' => $model,
-        'accounts' => $accounts,
-        'assetsTypeData' => $assetsTypeData
+        'accountsData' => $accountsData,
+        'assetsTypeData' => $assetsTypeData,
+        'portfolioData' => $portfolioData
     ]) ?>
 
 </div>

@@ -65,7 +65,7 @@ class Asset extends \yii\db\ActiveRecord
             'last_price' => 'Last Price',
             'quantity' => 'Quantity',
             'buy_date' => 'Buy Date',
-            'portfolio_id' => 'Portfolio ID',
+            'portfolio_id' => 'Portfolio',
             'asset_type_id' => 'Asset Type',
         ];
     }

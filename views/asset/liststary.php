@@ -8,11 +8,8 @@ use yii\data\ActiveRecord;
 /* @var $searchModel app\models\AccountSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 /* @var $items yii\models\Asset */
-/* @var $asset_type_id string */
-/* @var $name string */
 
 
-$this->title = $name;
 
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -20,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="asset-etf">
 
     <p>
-        <?= Html::a('Add  ' . $name, ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Add asset', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <h1><?= Html::encode($this->title) ?></h1>
@@ -29,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <ul class="list-group">
 
             <li class="list-group-item list-group-item-dark d-flex justify-content-between align-items-center">
-                Your <?= $name ?> wallet:
+                Your  wallet:
                 <span class="badge badge-primary badge-pill">
                 Account:</span>
             </li>
