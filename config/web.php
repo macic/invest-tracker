@@ -28,7 +28,9 @@ $config = [
         ],
         'assetManager' => [
             'bundles' => [
-                yii\bootstrap4\BootstrapAsset::class => false
+                yii\bootstrap4\BootstrapAsset::class => false,
+                'kartik\form\ActiveFormAsset' => [
+                    'bsDependencyEnabled' => false ]
             ]
         ],
         'mailer' => [

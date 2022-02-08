@@ -18,6 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <br>
 
 <div class="row">
+<!--    add new div-->
     <div class="col-xl-4 col-lg-5 align-items-center">
         <div class="card shadow mb-4">
             <!-- Add portfolio Header - Dropdown -->
@@ -38,6 +39,8 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
         </div>
     </div>
+
+<!--    existing portfolios view-->
     <?php foreach($items as $item): ?>
     <div class="col-xl-4 col-lg-5 align-items-center">
         <div class="card shadow mb-4">
@@ -63,7 +66,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     $labels[] = $structure->type;
                     $data[] = $structure->percentage;
 
-                    echo $structure->type . " / " . $structure->percentage . " % <br>";
+                    echo $structure->type . ": " . $structure->percentage . " % <br>";
                 }?>
             </div>
         </div>

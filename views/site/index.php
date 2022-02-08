@@ -15,6 +15,41 @@ $this->title = 'My Yii Application';
 <!-- Custom styles for this template-->
 <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
+<!-- TradingView Widget BEGIN -->
+<div class="tradingview-widget-container">
+    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+        {
+            "symbols": [
+            {
+                "proName": "FOREXCOM:SPXUSD",
+                "title": "S&P 500"
+            },
+            {
+                "proName": "FOREXCOM:NSXUSD",
+                "title": "US 100"
+            },
+            {
+                "proName": "FX_IDC:EURUSD",
+                "title": "EUR/USD"
+            },
+            {
+                "proName": "BITSTAMP:BTCUSD",
+                "title": "Bitcoin"
+            },
+            {
+                "description": "WIG20",
+                "proName": "GPW:WIG20"
+            }
+        ],
+            "showSymbolLogo": true,
+            "colorTheme": "light",
+            "isTransparent": false,
+            "displayMode": "adaptive",
+            "locale": "en"
+        }
+    </script>
+</div><br>
+<!-- TradingView Widget END -->
 
 
 <div class="site-index">
@@ -36,7 +71,7 @@ $this->title = 'My Yii Application';
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                safety pillow</div>
+                                safety cushion</div>
                             <div class="row no-gutters align-items-center">
                                 <div class="col-auto">
                                     <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
@@ -82,7 +117,7 @@ $this->title = 'My Yii Application';
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Speculating wallet
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Dyvidend wallet
                             </div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">21,000 PLN</div>
 
@@ -124,7 +159,7 @@ $this->title = 'My Yii Application';
             <!-- Area Chart -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Area Chart</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Wealth Chart</h6>
                 </div>
                 <div class="card-body">
                     <div class="chart-area">

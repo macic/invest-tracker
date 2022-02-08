@@ -13,11 +13,13 @@ use Yii;
  * @property string|null $ticker
  * @property float $buy_price
  * @property string|null $currency
+ * @property string|null $stock
  * @property float|null $last_price
  * @property int $quantity
  * @property int|null $buy_date
  * @property int|null $portfolio_id
  * @property int|null $asset_type_id
+
  *
  * @property Account $account
  * @property AssetType $assetType
@@ -41,9 +43,9 @@ class Asset extends \yii\db\ActiveRecord
         return [
             [['account_id', 'quantity', 'portfolio_id', 'asset_type_id'], 'integer'],
             [['buy_date'], 'date', 'format' => 'php:Y-m-d'],
-            [['buy_price', 'quantity'], 'required'],
+            [['buy_price', 'quantity', 'buy_date', 'stock'], 'required'],
             [['buy_price', 'last_price'], 'number'],
-            [['name', 'ticker', 'currency'], 'string', 'max' => 255],
+            [['name', 'ticker', 'currency', 'stock'], 'string', 'max' => 255],
             [['account_id'], 'exist', 'skipOnError' => true, 'targetClass' => Account::className(), 'targetAttribute' => ['account_id' => 'id']],
             [['asset_type_id'], 'exist', 'skipOnError' => true, 'targetClass' => AssetType::className(), 'targetAttribute' => ['asset_type_id' => 'id']],
             [['portfolio_id'], 'exist', 'skipOnError' => true, 'targetClass' => Portfolio::className(), 'targetAttribute' => ['portfolio_id' => 'id']],
@@ -67,6 +69,7 @@ class Asset extends \yii\db\ActiveRecord
             'buy_date' => 'Buy Date',
             'portfolio_id' => 'Portfolio',
             'asset_type_id' => 'Asset Type',
+            'stock' => 'Stock'
         ];
     }
 
@@ -79,7 +82,6 @@ class Asset extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Account::className(), ['id' => 'account_id']);
     }
-
     /**
      * Gets query for [[AssetType]].
      *
@@ -100,20 +102,25 @@ class Asset extends \yii\db\ActiveRecord
         return $this->hasOne(Portfolio::className(), ['id' => 'portfolio_id']);
     }
 
+    public function getPortfolioName()
+    {
+        return $this->portfolio->name;
+    }
+
     public function getType()
     {
         return $this->assetType->name;
     }
     public function getAccountName()
     {
-        return $this->account->account_type .' - '.$this->account->account_holder;
+        return $this->account->AccountName;
     }
     public function getValue()
     {
         return $this->buy_price * $this->quantity . ' ' .$this->currency ;
     }
-    public function getTotalValue()
+    public function getStock()
     {
-
+        return mb_strtoupper($this->stock);
     }
 }

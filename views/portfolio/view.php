@@ -7,17 +7,16 @@ use yii\widgets\DetailView;
 /* @var $item app\models\Portfolio */
 /* @var $assetsTypeData app\models\Asset */
 
-$this->title = $item->name;
-\yii\web\YiiAsset::register($this);
+//$this->title = $item->name;
+//\yii\web\YiiAsset::register($this);
 ?>
 <div class="portfolio-structure-view">
 
-
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1><?= Html::encode($item->name) ?></h1>
 
     <p>
         <?= Html::a('Update', ['update', 'id' => $item->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $item->id], [
+        <?= Html::a('Delete', ['delete', 'id' => $item->getPortfolioStructure()], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Are you sure you want to delete this item?',
@@ -39,13 +38,13 @@ $this->title = $item->name;
         </tr>
         </thead>
         <tbody>
-        <?php foreach ($item->portfolioStructure as $structure): ?>
-
+        <?php
+        foreach ($item->portfolioStructure as $structure): ?>
         <tr>
             <td><?php echo $structure->type ?></td>
             <td><?php echo $structure->percentage ?> %</td>
-            <td> %</td>
-            <td><?= $item->getAssetTypeValue($structure->asset_type_id); ?></td>
+            <td> <?= $item->getRealValue($structure->asset_type_id); ?> %</td>
+            <td><?= $item->getAssetTypeValue($structure->asset_type_id); ?> PLN</td>
         </tr>
         <?php endforeach; ?>
 
@@ -55,7 +54,7 @@ $this->title = $item->name;
             <td></td>
             <td></td>
             <td>Summary:</td>
-            <td></td>
+            <td><?= $item->getSummary() ?> PLN</td>
             </tfoot>
         </table>
     </div>

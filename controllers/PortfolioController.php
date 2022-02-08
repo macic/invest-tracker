@@ -40,12 +40,6 @@ class PortfolioController extends Controller
     public function actionIndex()
     {
         $portfolios = Portfolio::find()->where(['user_id' => Yii::$app->user->getId()])->all();
-//        foreach ($portfolios as $portfolio):
-//            {
-//                foreach ($portfolio->portfolioStructure as $structure)
-//                print_r($structure->asset_type_id);
-//            }
-//        endforeach;
 
             return $this->render('index', [
                 'items' => $portfolios,
@@ -58,7 +52,7 @@ class PortfolioController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionView(int $id)
     {
         $portfolio = Portfolio::findOne($id);
 
@@ -164,7 +158,7 @@ class PortfolioController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public function actionUpdate(int $id)
     {
         $assetsTypeData = AssetType::find()->all();
 
@@ -228,7 +222,7 @@ class PortfolioController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id)
+    public function actionDelete(int $id)
     {
         $this->findModel($id)->delete();
 

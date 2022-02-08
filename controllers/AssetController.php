@@ -69,7 +69,6 @@ class AssetController extends Controller
 //        foreach ($item as $items) {
 //            $account_name = $items->account->name;
 
-
             return $this->render('view', [
                 'model' => $this->findModel($id),
                 'item' => $item,
@@ -119,14 +118,17 @@ class AssetController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
-        $accountsData = Account::find()->all();
+        $accountsData = Account::find()->where(['user_id'=>Yii::$app->user->getId()])->all();
         $assetsTypeData = AssetType::find()->all();
+        $portfolioData = Portfolio::find()->where(['user_id'=>Yii::$app->user->getId()])->all();
 
 
         return $this->render('update', [
             'model' => $model,
-            'accounts' => $accountsData,
-            'assetsTypeData' => $assetsTypeData
+            'accountsData' => $accountsData,
+            'assetsTypeData' => $assetsTypeData,
+            'portfolioData' => $portfolioData
+
 
         ]);
     }
@@ -142,7 +144,7 @@ class AssetController extends Controller
     {
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(['listing']);
     }
 
     /**

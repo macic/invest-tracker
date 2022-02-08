@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\bootstrap4\ActiveForm;
 use yii\helpers\ArrayHelper;
+use kartik\date\DatePicker;
 
 
 
@@ -25,9 +26,6 @@ const currency = ["PLN", "EUR", 'USD', 'GBP'];
         'id' => 'account-form',
         'options' => ['class'=>'asset'],
 
-//        'fieldConfig' => [
-//            'template' => "{beginWrapper}\n{input}\n{hint}\n{error}\n{endWrapper}",
-//         ]
     ]); ?>
     <?= $form->field($model, 'account_id',[
         'inputOptions' => [
@@ -50,6 +48,8 @@ const currency = ["PLN", "EUR", 'USD', 'GBP'];
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'ticker')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'stock')->textInput(['maxlength' => true]) ?>
 
     <div class="row">
         <div class="col">
@@ -80,7 +80,21 @@ const currency = ["PLN", "EUR", 'USD', 'GBP'];
     <?= $form->field($model, 'quantity')->textInput() ?>
         </div>
         <div class="col">
-    <?= $form->field($model, 'buy_date', ['inputOptions'=>['id'=>'datepicker']])?>
+    <!-- <?= $form->field($model, 'buy_date', ['inputOptions'=>['id'=>'datepicker']])?>
+    -->
+    </div>
+
+    </div>
+        /// TU PRACUJESZ
+
+    <?= $form->field($model, 'buy_date')->widget(DatePicker::classname(), [
+        'options' => ['placeholder' => 'Enter buy date ...'],
+        'pluginOptions' => [
+            'autoclose' => true
+        ]
+    ]);
+    ?>
+
     </div>
     </div>
 

@@ -89,7 +89,7 @@ class Account extends \yii\db\ActiveRecord
         return $this->hasMany(Asset::className(), ['account_id' => 'id']);
     }
 
-    public function getAccountName()
+    public function getAccountName() : string
     {
         return $this->account_type .' - '.$this->accountHolder->name;
     }
