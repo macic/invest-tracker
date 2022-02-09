@@ -71,19 +71,23 @@ class Portfolio extends \yii\db\ActiveRecord
     public function getAssetTypeValue($asset_type_id) : float
     {
             $assets = $this->getAssets()->where(['asset_type_id' => $asset_type_id])->all();
-            $sum = 0;
+            require_once "converter.php";
+
             foreach ($assets as $asset) {
-                $sum += $asset->buy_price * $asset->quantity;
+
+                $val = $asset->buy_price * $asset->quantity;
             }
 
             if (count($assets) > 0) {
                 if($asset->currency == 'EUR') {
-                    $sum = ($asset->buy_price * $asset->quantity) * 4.4;
-
+                    $sum = convertCurrency($val,'EUR','PLN');
                 } elseif($asset->currency == 'GBP') {
-                    $sum = ($asset->buy_price * $asset->quantity) * 6;
+                    $sum = convertCurrency($val,'GBP','PLN');
+                } elseif ($asset->currency == 'USD') {
+                    $sum = convertCurrency($val, 'USD', 'PLN');
+                } else {
+                    $sum = $val;
                 }
-
             return $sum ;
 
             } else {
@@ -92,49 +96,48 @@ class Portfolio extends \yii\db\ActiveRecord
     }
 
     public function getSummary(): float
-    { #NAPRAWIć
+    {
+        require_once "converter.php";
         $assets = $this->getAssets()->all();
         $sum = 0;
 
         foreach ($assets as $asset) {
+            $val = $asset->buy_price * $asset->quantity;
 
             if (count($assets) > 0) {
                 if ($asset->currency == 'EUR') {
-                    $sum += ($asset->buy_price * $asset->quantity) * 4.4;
-
+                    $sum += convertCurrency($val, 'EUR', 'PLN');
                 } elseif ($asset->currency == 'GBP') {
-                    $sum += ($asset->buy_price * $asset->quantity) * 6;
+                    $sum += convertCurrency($val, 'GBP', 'PLN');
+                } elseif ($asset->currency == 'USD') {
+                    $sum += convertCurrency($val, 'USD', 'PLN');
                 } else {
-                    $sum += $asset->buy_price * $asset->quantity;
+                    $sum += $val;
                 }
             }
         }
-
-//        require_once "converter.php";
-//        $assets = $this->getAssets()->all();
-//        foreach ($assets as $asset) {
-//
-//
-//            $val = $asset->buy_price * $asset->quantity;
-//            if ($asset->currency == 'EUR') {
-//                $sum += $val * 4.4;
-//
-//               # WYŁĄCZAM GDYŻ NIE DZIAŁA CONVERTER
-//                $sum += convertCurrency($val,'EUR','PLN');
-//            } elseif ($asset->currency == 'GBP') {
-//                $sum += convertCurrency($val,'GBP','PLN');
-//            } elseif ($asset->currency == 'USD') {
-//                $sum += convertCurrency($val,'USD','PLN');
-//            } else {
-//                $sum += $val;
-//            }
-        return $sum;
+        return round($sum, 2);
     }
+
+//    public function getSummary() : float
+//    {
+//        $assets = $this->getAssets()->all();
+//        $summary = 0;
+//
+//        foreach ($assets as $asset) {
+//            $summary += $asset->getAssetTypeValue();
+//        }
+//
+//        return round($summary, 2);
+//    }
     public function getRealValue($asset_type_id) : float
     {
-        $real = ($this->getAssetTypeValue($asset_type_id) / $this->getSummary()) * 100;
+        if(($this->getSummary())==0) {
+            $real = 0;
+        } else {
+            $real = ($this->getAssetTypeValue($asset_type_id) / $this->getSummary()) * 100;
+        }
 
         return number_format($real, 2);
     }
-
 }
