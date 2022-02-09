@@ -72,27 +72,28 @@ class Portfolio extends \yii\db\ActiveRecord
     {
             $assets = $this->getAssets()->where(['asset_type_id' => $asset_type_id])->all();
             require_once "converter.php";
+            $sum = 0;
 
             foreach ($assets as $asset) {
 
                 $val = $asset->buy_price * $asset->quantity;
-            }
 
-            if (count($assets) > 0) {
-                if($asset->currency == 'EUR') {
-                    $sum = convertCurrency($val,'EUR','PLN');
-                } elseif($asset->currency == 'GBP') {
-                    $sum = convertCurrency($val,'GBP','PLN');
-                } elseif ($asset->currency == 'USD') {
-                    $sum = convertCurrency($val, 'USD', 'PLN');
+                if (count($assets) > 0) {
+                    if ($asset->currency == 'EUR') {
+                        $sum += convertCurrency($val, 'EUR', 'PLN');
+                    } elseif ($asset->currency == 'GBP') {
+                        $sum += convertCurrency($val, 'GBP', 'PLN');
+                    } elseif ($asset->currency == 'USD') {
+                        $sum += convertCurrency($val, 'USD', 'PLN');
+                    } else {
+                        $sum += $val;
+                    }
+
                 } else {
-                    $sum = $val;
+                    return 0;
                 }
-            return $sum ;
-
-            } else {
-                return 0;
             }
+        return round($sum, 2);
     }
 
     public function getSummary(): float
