@@ -5,8 +5,6 @@ use yii\bootstrap4\ActiveForm;
 use yii\helpers\ArrayHelper;
 use kartik\date\DatePicker;
 
-
-
 /* @var $this yii\web\View */
 /* @var $model app\models\Asset */
 /* @var $formattedAssetName app\models\AssetType */

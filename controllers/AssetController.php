@@ -80,10 +80,12 @@ class AssetController extends Controller
     /**
      * Creates a new Asset model.
      * If creation is successful, the browser will be redirected to the 'view' page.
+     * @param int $portfolio_id
+     * @param int $asset_type_id
      * @return mixed
      */
 
-    public function actionCreate()
+    public function actionCreate($portfolio_id = null, $asset_type_id = null)
     {
 
         $model = new Asset();
@@ -100,7 +102,9 @@ class AssetController extends Controller
             'model' => $model,
             'accountsData' => $accountsData,
             'assetsTypeData' => $assetsTypeData,
-            'portfolioData' => $portfolioData
+            'portfolioData' => $portfolioData,
+            'portfolio_id' => $portfolio_id,
+            'asset_type_id' => $asset_type_id
         ]);
     }
 
@@ -188,15 +192,19 @@ class AssetController extends Controller
     {
         $items = Asset::find()->where(['account_id' => $account_id])->all();
 
-        foreach ($items as $lols) {
-            $formattedId[$lols['account_id']] = strval($lols->account->account_type) .' '. strval($lols->account->broker) . ', Holder: ' . $lols->account->accountHolder->name;
+        if (count($items)>0) {
+            foreach ($items as $lols) {
+                $formattedId[$lols['account_id']] = strval($lols->account->account_type) . ' ' . strval($lols->account->broker) . ', Holder: ' . $lols->account->accountHolder->name;
 
-            return $this->render('list', [
-                'items' => $items,
-                'account_id' => $account_id,
-                'formattedId' => $formattedId
+                return $this->render('list', [
+                    'items' => $items,
+                    'account_id' => $account_id,
+                    'formattedId' => $formattedId
 
-            ]);
+                ]);
+            }
+        } else {
+            $this->redirect(['/asset/create']);
         }
     }
 

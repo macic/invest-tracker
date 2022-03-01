@@ -16,10 +16,10 @@ use yii\widgets\DetailView;
 
     <p>
         <?= Html::a('Update', ['update', 'id' => $item->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $item->getPortfolioStructure()], [
+        <?= Html::a('Delete', ['delete', 'id' => $item->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => 'Are you sure you want to delete this portfolio?',
                 'method' => 'post',
             ],
         ]) ?>
@@ -41,7 +41,7 @@ use yii\widgets\DetailView;
         <?php
         foreach ($item->portfolioStructure as $structure): ?>
         <tr>
-            <td><?php echo $structure->type ?></td>
+            <td><a class="collapse-item" href="<?php echo \yii\helpers\Url::to(['/portfolio/list', 'portfolio_id'=>$structure['portfolio_id'], 'asset_type_id'=>$structure['asset_type_id']])?>"><?php echo $structure->type ?></td>
             <td><?php echo $structure->percentage ?> %</td>
             <td> <?= $item->getRealValue($structure->asset_type_id); ?> %</td>
             <td><?= $item->getAssetTypeValue($structure->asset_type_id); ?> PLN</td>

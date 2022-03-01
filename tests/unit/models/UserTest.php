@@ -6,7 +6,17 @@ use app\models\User;
 
 class UserTest extends \Codeception\Test\Unit
 {
-    public function testFindUserById()
+    public function testCreateUserSuccessful()
+    {
+        # dwa sposoby na posiadanie danych w bazie:
+        # 1. recznie w testach + pogrupowanie w metodzie _before - patrz poczatek przykladu ponizej
+        # 2. uzycie fixturek - https://www.yiiframework.com/doc/guide/2.0/pl/test-fixtures
+        $user = new User();
+        $user->username = 'username';
+
+        $this->assertTrue($user->save());
+    }
+    public function testFindUse1rById()
     {
         expect_that($user = User::findIdentity(100));
         expect($user->username)->equals('admin');

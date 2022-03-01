@@ -138,9 +138,9 @@ class AccountController extends Controller
     {
         $items = Account::find()->where(['account_type' => $account_type])->all();
 
-        return $this->render('list', [
-            'items' => $items,
-            'account_type' => $account_type,
-        ]);
+            return $this->render('list', [
+                'items' => $items,
+                'account_type' => $account_type,
+            ]);
     }
 }

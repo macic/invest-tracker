@@ -47,7 +47,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <!-- Portfolio Header - Dropdown -->
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary"><?php echo $item['name'] ?></h6>
+                <h6 class="m-0 font-weight-bold text-primary">
+                    <?php echo $item['name'] ?></h6>
             </div>
             <!-- Portfolio Chart Body -->
             <div class="card-body">

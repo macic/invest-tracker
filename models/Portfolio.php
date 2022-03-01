@@ -80,11 +80,15 @@ class Portfolio extends \yii\db\ActiveRecord
 
                 if (count($assets) > 0) {
                     if ($asset->currency == 'EUR') {
-                        $sum += convertCurrency($val, 'EUR', 'PLN');
+//                        $sum += convertCurrency($val, 'EUR', 'PLN');
+                        $sum += $val * 4.5;
                     } elseif ($asset->currency == 'GBP') {
-                        $sum += convertCurrency($val, 'GBP', 'PLN');
+                      //  $sum += convertCurrency($val, 'GBP', 'PLN');
+                        $sum += $val * 6;
+
                     } elseif ($asset->currency == 'USD') {
-                        $sum += convertCurrency($val, 'USD', 'PLN');
+//                        $sum += convertCurrency($val, 'USD', 'PLN');
+                        $sum += $val * 3.9;
                     } else {
                         $sum += $val;
                     }
@@ -107,11 +111,14 @@ class Portfolio extends \yii\db\ActiveRecord
 
             if (count($assets) > 0) {
                 if ($asset->currency == 'EUR') {
-                    $sum += convertCurrency($val, 'EUR', 'PLN');
+//                    $sum += convertCurrency($val, 'EUR', 'PLN');
+                    $sum += $val * 4.5;
                 } elseif ($asset->currency == 'GBP') {
-                    $sum += convertCurrency($val, 'GBP', 'PLN');
+                    //  $sum += convertCurrency($val, 'GBP', 'PLN');
+                    $sum += $val * 6;
                 } elseif ($asset->currency == 'USD') {
-                    $sum += convertCurrency($val, 'USD', 'PLN');
+//                    $sum += convertCurrency($val, 'USD', 'PLN');
+                    $sum += $val * 3.9;
                 } else {
                     $sum += $val;
                 }

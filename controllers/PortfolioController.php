@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Asset;
 use app\models\AssetType;
 use app\models\Portfolio;
 use TheSeer\Tokenizer\Exception;
@@ -41,9 +42,9 @@ class PortfolioController extends Controller
     {
         $portfolios = Portfolio::find()->where(['user_id' => Yii::$app->user->getId()])->all();
 
-            return $this->render('index', [
-                'items' => $portfolios,
-            ]);
+        return $this->render('index', [
+            'items' => $portfolios,
+        ]);
     }
 
     /**
@@ -57,7 +58,7 @@ class PortfolioController extends Controller
         $portfolio = Portfolio::findOne($id);
 
         return $this->render('view', [
-           // 'model' => $this->findModel($id),
+            // 'model' => $this->findModel($id),
             'assetsTypeData' => AssetType::find()->all(),
             'item' => $portfolio
         ]);
@@ -77,24 +78,24 @@ class PortfolioController extends Controller
 
 
         // ["PortfolioStructure"]=> array(2) { ["asset_type_id"]=> array(1) { [0]=> string(1) "2" } ["percentage"]=> array(1) { [0]=> string(3) "123" }
-        if (count($postData)>0) {
+        if (count($postData) > 0) {
 
-           $portfolio->user_id = Yii::$app->user->getId();
+            $portfolio->user_id = Yii::$app->user->getId();
 
             if ($portfolio->load($postData) && $portfolio->save()) {
                 $count = count($postData['PortfolioStructure']['asset_type_id']);
-                for($i = 0; $i < $count; $i++) {
+                for ($i = 0; $i < $count; $i++) {
                     $portfolioStructure = new PortfolioStructure();
                     $dataToSave['_csrf'] = $postData['_csrf'];
                     $dataToSave['PortfolioStructure']['asset_type_id'] = $postData['PortfolioStructure']['asset_type_id'][$i];
                     $dataToSave['PortfolioStructure']['percentage'] = $postData['PortfolioStructure']['percentage'][$i];
                     $dataToSave['PortfolioStructure']['portfolio_id'] = $portfolio->getPrimaryKey();
-                    if(!($portfolioStructure->load($dataToSave) && $portfolioStructure->save())) {
+                    if (!($portfolioStructure->load($dataToSave) && $portfolioStructure->save())) {
                         break;
                     }
                 }
             }
-            return $this->redirect('/index');
+            return $this->redirect(['portfolio/index']);
         }
 
         return $this->render('create', [
@@ -104,51 +105,6 @@ class PortfolioController extends Controller
         ]);
 
 
-
-////        to poniżej było oraz $id=null w nawiasie actionCreate()
-//        $postData = Yii::$app->request->post();
-//        if (count($postData)>0) {
-//            #save
-//
-//            # zapisuje portfolio name albo updateuje - zaleznie czy jest przekazane $id
-//
-//            # jezeli sie to uda to robie foreach na danych z portfoliostructure i zapisuje
-//
-//            #@TODO
-////            $portfolioStructure = new PortfolioStructure();
-////            if ($portfolioStructure->load(Yii::$app->request->post()) && $portfolioStructure->save()) {
-////                return $this->redirect(['view', 'id' => $portfolioStructure->id]);
-////            }
-//        }
-//
-//        $assetsTypeData = AssetType::find()->all();
-//
-//        if (is_null($id)) {
-//            #empty portfolio
-//            $portfolio = new Portfolio();
-//            $portfolioStructure = array(new PortfolioStructure());
-//        }
-//        else {
-//            $portfolio_id = $id;
-//            $portfolio = Portfolio::find()->where(['id'=>$portfolio_id])->one();
-//            $portfolioStructure = $portfolio->portfolioStructures;
-//        }
-//
-////
-////            $portfolio_id = $postData['Portfolio']['id'];
-////            $portfolio = Portfolio::find()->where(['id'=>$portfolio_id]);
-////            $portfolioStructure = $portfolio->getPortfolioStructures();
-////            #unset($postData['SignupForm']['firstname']);
-//
-//
-//
-//
-//        return $this->render('create', [
-//            'portfolioStructure' => $portfolioStructure,
-//            'portfolio' => $portfolio,
-//            'assetsTypeData' => $assetsTypeData,
-//
-//        ]);
     }
 
     /**
@@ -160,63 +116,70 @@ class PortfolioController extends Controller
      */
     public function actionUpdate(int $id)
     {
+
+
         $assetsTypeData = AssetType::find()->all();
 
         $postData = Yii::$app->request->post();
-        if (count($postData)>0) {
+        if (count($postData) > 0) {
             #update portfolio name
             $portfolio = Portfolio::findOne($id);
             if ($portfolio->load($postData) && $portfolio->save()) {
 
                 unset($postData['Portfolio']);
 
-                $portfolioStructure = PortfolioStructure::find()->indexBy('id')->all();
-
-                if (PortfolioStructure::loadMultiple($portfolioStructure, $postData) && PortfolioStructure::validateMultiple($portfolioStructure)) {
-                    foreach ($portfolioStructure as $structure) {
-                        $structure->save(false);
-                    }
-                    return $this->redirect('index');
+                $portfolioStructure = $portfolio->portfolioStructure;
+                $count = count(Yii::$app->request->post('PortfolioStructure', []));
+                for ($i = 1; $i < $count; $i++) {
+                    $portfolioStructure[] = new PortfolioStructure();
                 }
+
+                if (PortfolioStructure::loadMultiple($portfolioStructure, $postData)) {
+
+                    if (PortfolioStructure::validateMultiple($portfolioStructure)) {
+                        foreach ($portfolioStructure as $structure) {
+                            $structure->save(false);
+                        }
+                        return $this->redirect(['portfolio/index']);
+                    }
+                }
+
                 return $this->render('update', [
                     'portfolioStructure' => $portfolioStructure,
                     'assetsTypeData' => $assetsTypeData,
                     'portfolio' => $portfolio,
 
-                    ]);
+                ]);
+
 
             }
-            # zapisuje portfolio name albo updateuje - zaleznie czy jest przekazane $id
 
-            # jezeli sie to uda to robie foreach na danych z portfoliostructure i zapisuje
+        } else {
+            $assetsTypeData = AssetType::find()->all();
 
-            #@TODO
-//            $portfolioStructure = new PortfolioStructure();
-//            if ($portfolioStructure->load(Yii::$app->request->post()) && $portfolioStructure->save()) {
-//                return $this->redirect(['view', 'id' => $portfolioStructure->id]);
-//            }
+            $portfolio_id = $id;
+            $portfolio = Portfolio::find()->where(['id' => $portfolio_id])->one();
+            $portfolioStructure = $portfolio->portfolioStructure;
+
+
+            return $this->render('update', [
+                'portfolioStructure' => $portfolioStructure,
+                'portfolio' => $portfolio,
+                'assetsTypeData' => $assetsTypeData,
+
+            ]);
+
         }
 
+// Przy dodawaniu 'add asset' -
+// TWORZY za każdym razem 8 NOWYCH REKORDÓW W BAZIE portfolioStructure ale nie przypisuje ich do żadnego portfolio_id
+        // przy updejcie istniejacych rekorow - portfolio longterm - żąda wypełnienia dodatkowych 7 pól tego samego asseta
 
 
-//        $assetsTypeData = AssetType::find()->all();
-//
-//        $portfolio_id = $id;
-//        $portfolio = Portfolio::find()->where(['id'=>$portfolio_id])->one();
-//        $portfolioStructure = $portfolio->portfolioStructures;
-//
-//
-//
-//        return $this->render('create', [
-//            'portfolioStructure' => $portfolioStructure,
-//            'portfolio' => $portfolio,
-//            'assetsTypeData' => $assetsTypeData,
-
-     //   ]);
     }
 
     /**
-     * Deletes an existing PortfolioStructure model.
+     * Deletes an existing Portfoliomodel with PortfolioStructures.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -224,7 +187,7 @@ class PortfolioController extends Controller
      */
     public function actionDelete(int $id)
     {
-        $this->findModel($id)->delete();
+        Portfolio::findOne($id)->delete();
 
         return $this->redirect(['index']);
     }
@@ -243,5 +206,25 @@ class PortfolioController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+    public function actionList($portfolio_id, $asset_type_id)
+    {
+        $items = Asset::find()->where(['portfolio_id' => $portfolio_id, 'asset_type_id'=> $asset_type_id ])->all();
+
+        if (count($items)>0) {
+            foreach ($items as $item) {
+                $item->portfolio->name;
+                $formattedId[$item['portfolio_id']] = strval($item->portfolio->name);
+                $formattedAssetName[$item['asset_type_id']] = strval($item->assetType->name) ;
+
+                return $this->render('list', [
+                    'items' => $items,
+                    'formattedId' => $formattedId,
+                    'formattedAssetName' => $formattedAssetName
+                ]);
+            }
+        } else {
+            $this->redirect(['/asset/create', 'portfolio_id' =>$portfolio_id, 'asset_type_id' => $asset_type_id]);
+        }
     }
 }

@@ -13,7 +13,8 @@ $this->params['breadcrumbs'][] = ['label' => 'Portfolio Structures', 'url' => ['
 //$this->params['breadcrumbs'][] = ['label' => $portfolioStructure->id, 'url' => ['view', 'id' => $portfolioStructure->id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
-<div class="portfolio-structure-update">
+<div class="row">
+<div class="portfolio-structure-update col">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -24,6 +25,8 @@ $this->params['breadcrumbs'][] = 'Update';
 
     ]) ?>
 
+</div>
+<div class="col chart-wrapper" ><canvas id="portfolio-charts"></canvas></div>
 </div>
 <?php
 $this->registerJs('

@@ -17,4 +17,11 @@ $(document).ready(function(){
         })
         updateDonut($("#portfolio-charts"), labels, data);
     });
+
+    $("#form form").submit(function(event){
+        $("#form form .d-none").each(function(){$(this).empty()});
+        $("#form form .d-none").each(function(){$(this).remove()});
+        return true;
+
+    })
 });
