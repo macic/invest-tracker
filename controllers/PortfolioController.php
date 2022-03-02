@@ -220,7 +220,8 @@ class PortfolioController extends Controller
                 return $this->render('list', [
                     'items' => $items,
                     'formattedId' => $formattedId,
-                    'formattedAssetName' => $formattedAssetName
+                    'formattedAssetName' => $formattedAssetName,
+                    'portfolio_id' => $portfolio_id
                 ]);
             }
         } else {

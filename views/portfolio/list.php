@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="portfolio-id-list-of-asset">
 
     <p>
-        <?= Html::a('Add asset', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Add asset', ['/asset/create', 'portfolio_id'=>$portfolio_id], ['class' => 'btn btn-success']) ?>
     </p>
 
     <div>
