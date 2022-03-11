@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\bootstrap4\ActiveForm;
+use kartik\form\ActiveForm;
 use yii\helpers\ArrayHelper;
 use kartik\date\DatePicker;
 
@@ -16,6 +16,7 @@ use kartik\date\DatePicker;
 const currency = ["PLN", "EUR", 'USD', 'GBP'];
 ?>
 
+
 <div class="asset-form">
 
     <div class="form-group">
@@ -25,30 +26,43 @@ const currency = ["PLN", "EUR", 'USD', 'GBP'];
         'options' => ['class'=>'asset'],
 
     ]); ?>
+        <div class="row">
+            <div class="col">
     <?= $form->field($model, 'account_id',[
         'inputOptions' => [
             'class' => 'custom-select',
         ]])->dropdownList(ArrayHelper::map($accountsData, 'id', 'accountName'),
         ['prompt'=>'Choose account here:']) ?>
-
+            </div>
+            <div class="col">
     <?= $form->field($model, 'asset_type_id',[
         'inputOptions' => [
             'class' => 'custom-select',
         ]])->dropdownList(ArrayHelper::map($assetsTypeData, 'id', 'name'),
         ['prompt'=>'Choose asset type here:']) ?>
-
+            </div></div>
+        <div class="row">
+            <div class="col">
     <?= $form->field($model, 'portfolio_id',[
             'inputOptions' => [
                 'class' => 'custom-select',
             ]])->dropdownList(ArrayHelper::map($portfolioData, 'id', 'name'),
             ['prompt'=>'Choose portfolio here:']) ?>
+            </div>
+            <div class="col">
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
+            </div></div>
+        <div class="row">
+            <div class="col">
     <?= $form->field($model, 'ticker')->textInput(['maxlength' => true]) ?>
 
+            </div>
+            <div class="col">
     <?= $form->field($model, 'stock')->textInput(['maxlength' => true]) ?>
 
+            </div></div>
     <div class="row">
         <div class="col">
 
@@ -78,21 +92,13 @@ const currency = ["PLN", "EUR", 'USD', 'GBP'];
     <?= $form->field($model, 'quantity')->textInput() ?>
         </div>
         <div class="col">
-    <!-- <?= $form->field($model, 'buy_date', ['inputOptions'=>['id'=>'datepicker']])?>
-    -->
-    </div>
-
-    </div>
-        /// TU PRACUJESZ
-
-    <?= $form->field($model, 'buy_date')->widget(DatePicker::classname(), [
-        'options' => ['placeholder' => 'Enter buy date ...'],
-        'pluginOptions' => [
-            'autoclose' => true
-        ]
-    ]);
-    ?>
-
+            <?= $form->field($model, 'buy_date')->widget(DatePicker::classname(), [
+                'options' => ['placeholder' => 'YYYY-MM-DD'],
+                'pluginOptions' => [
+                    'autoclose' => true
+                ]
+            ]);
+            ?>
     </div>
     </div>
 

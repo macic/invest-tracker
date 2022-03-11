@@ -36,7 +36,7 @@ class SiteController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['login', 'error', 'forgot-password', 'signup', 'gii', 'menu'],
+                        'actions' => ['login', 'error', 'forgot-password', 'signup', 'gii', 'menu', 'welcome'],
                         'allow' => true,
 
                     ],
@@ -153,6 +153,14 @@ class SiteController extends Controller
      *
      * @return Response|string
      */
+    public function actionWelcome()
+    {
+
+        $this->layout = 'new';
+
+        return $this->render('welcome');
+    }
+
     public function actionContact()
     {
         $model = new ContactForm();
