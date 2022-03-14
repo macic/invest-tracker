@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\models\Account;
 use app\models\AssetType;
 use app\models\Portfolio;
+use app\models\TickerSearch;
 use Yii;
 use app\models\Asset;
 use app\models\AssetSearch;
@@ -14,6 +15,7 @@ use yii\debug\panels\EventPanel;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\Json;
 
 
 /**
@@ -75,6 +77,21 @@ class AssetController extends Controller
      //           'account_name' => $account_name
             ]);
     //    }
+    }
+
+    public function actionSearch($term)
+    {
+        if (Yii::$app->request->isAjax) {
+            $results = [];
+            $q = addslashes($term);
+            foreach (TickerSearch::find()->where("(`name` like '%{$q}%') or (`ticker` like '{$q}%')")->limit(10)->all() as $model) {
+                $results[] = [
+                    'id' => $model['id'],
+                    'label' => ucwords(strtolower($model['name'])) . ' (' . $model['ticker_google'] . ')',
+                ];
+            }
+            return Json::encode($results);
+        }
     }
 
     /**

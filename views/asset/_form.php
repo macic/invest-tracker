@@ -4,6 +4,8 @@ use yii\helpers\Html;
 use kartik\form\ActiveForm;
 use yii\helpers\ArrayHelper;
 use kartik\date\DatePicker;
+use yii\jui\AutoComplete;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Asset */
@@ -14,8 +16,8 @@ use kartik\date\DatePicker;
 /* @var $portfolioData app\models\Portfolio*/
 
 const currency = ["PLN", "EUR", 'USD', 'GBP'];
-?>
 
+?>
 
 <div class="asset-form">
 
@@ -51,8 +53,18 @@ const currency = ["PLN", "EUR", 'USD', 'GBP'];
             </div>
             <div class="col">
 
-    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+    <?php // echo $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
+    <?php
+     echo $form->field($model, 'name')->widget(\yii\jui\AutoComplete::classname(), [
+        'options' => ['class' => 'form-control' ],
+         'clientOptions' => [
+             //'source' => ['TojestTest', 'AbcdTest', 'gówno', 'test234', 'test3424545', 'test millers 1'],
+             'source' =>  Url::to(['asset/search']),
+             'minLength' => '3',
+         ]
+     ])
+    ?>
             </div></div>
         <div class="row">
             <div class="col">
@@ -92,11 +104,8 @@ const currency = ["PLN", "EUR", 'USD', 'GBP'];
     <?= $form->field($model, 'quantity')->textInput() ?>
         </div>
         <div class="col">
-            <?= $form->field($model, 'buy_date')->widget(DatePicker::classname(), [
+            <?= $form->field($model, 'buy_date', [
                 'options' => ['placeholder' => 'YYYY-MM-DD'],
-                'pluginOptions' => [
-                    'autoclose' => true
-                ]
             ]);
             ?>
     </div>

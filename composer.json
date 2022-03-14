@@ -20,7 +20,8 @@
         "yiisoft/yii2-bootstrap4": "^2.0",
         "kartik-v/yii2-widgets": "@dev",
         "kartik-v/yii2-widget-activeform": "@dev",
-        "kartik-v/yii2-widget-datepicker": "@dev"
+        "kartik-v/yii2-widget-datepicker": "@dev",
+        "keygenqt/yii2-autocomplete-ajax": "1.0.3"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",
@@ -39,6 +40,9 @@
         "process-timeout": 1800,
         "fxp-asset": {
             "enabled": false
+        },
+        "allow-plugins": {
+            "yiisoft/yii2-composer": true
         }
     },
     "scripts": {

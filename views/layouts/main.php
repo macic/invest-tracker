@@ -18,6 +18,7 @@ use app\assets\AppAsset;
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
+<!DOCTYPE html>
     <html lang="en">
 
     <head>
@@ -40,6 +41,7 @@ AppAsset::register($this);
         <!-- Custom styles for this template-->
         <link href="css/sb-admin-2.min.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
 
     </head>
 

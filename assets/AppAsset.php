@@ -14,9 +14,9 @@ class AppAsset extends AssetBundle
     public $css = [
         'vendor/fontawesome-free/css/all.min.css',
         'https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i',
-     //   'css/sb-admin-2.min.css',
-        'cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css'
-      //  'https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css'
+        'css/sb-admin-2.min.css',
+        'https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css',
+        'https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css'
 
     ];
     public $js = [
@@ -25,11 +25,13 @@ class AppAsset extends AssetBundle
 //        'https://code.jquery.com/ui/1.12.1/jquery-ui.js',
         'vendor/chart.js/Chart.min.js',
         'js/charts.js',
-        'js/area-chart.js'
+        'js/area-chart.js',
+        'https://code.jquery.com/ui/1.13.1/jquery-ui.min.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',
         JqueryAsset::class,
-        BootstrapPluginAsset::class
+        BootstrapAsset::class,
+        BootstrapPluginAsset::class,
     ];
 }
