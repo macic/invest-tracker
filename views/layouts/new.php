@@ -3,10 +3,10 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
-use app\assets\AppAsset;
+use app\assets\WelcomeAsset;
 use yii\helpers\Html;
 
-AppAsset::register($this);
+WelcomeAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
     <!DOCTYPE html>
@@ -22,18 +22,9 @@ AppAsset::register($this);
     <body>
 <?php $this->beginBody() ?>
 <div>
-    <!-- Nested Row within Card Body -->
     <?php echo $content ?>
 </div>
-<!-- Footer -->
-<!--<footer class="sticky-footer bg-white">-->
-<!--    <div class="container my-auto">-->
-<!--        <div class="copyright text-center my-auto">-->
-<!--            <span>Copyright &copy; Ania Jeruzal 2022</span>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</footer>-->
-<!-- End of Footer -->
+
 <?php $this->endBody() ?>
     </body>
     </html>

@@ -53,14 +53,7 @@ $this->title = 'My Yii Application';
 
 
 <div class="site-index">
-    <div class="text-primary">
-        <h1>"The way to become rich is to put all your eggs in one basket and then watch that basket."
-        </h1>
 
-        <p>Andrew Carnegie</p>
-
-        <!--        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>-->
-    </div>
     <!-- Content Row -->
     <div class="row">
 
