@@ -138,10 +138,16 @@ WelcomeAsset::register($this);
     </header>
     <!-- Pricing features -->
     <section id="pricing">
-        <div class="container px-5">
-            <div class="row">
-                <div class="col-md-4">
-            <div class="card" style="width: 21rem; height: 100%">
+        <div class="container px-xl-5">
+            <div class="container mb-5">
+            <div class="text-center font-alt">
+                <h1 class="text-primary mb-2 font-alt ">Pricing Plans</h1>
+                <p class>Start out small and upgrade as you grow. No surprises, no hassle.</p>
+            </div>
+            </div>
+            <div class="row justify-content-center font-alt">
+                <div class="col-xl-4 col-lg-6 mb-4 mb-xl-0">
+            <div class="card h-100">
                 <div class="card-body text-center shadow">
                     <i class="bi-gift icon-feature text-gradient d-block mb-3"></i>
                     <p class="card-title text-muted mb-0">Most popular</p>
@@ -157,9 +163,10 @@ WelcomeAsset::register($this);
                 </div>
             </div>
                 </div>
-                <div class="col-md-4">
-            <div class="card"style="width: 21rem; height: 100%">
-                <div class="card-body text-center shadow" style="width: 21rem; height: 100%">
+                <div class="col-xl-4 col-lg-6 mb-4 mb-xl-0">
+<!--            <div class="card"style="width: 21rem; height: 100%">-->
+            <div class="card h-100">
+                <div class="card-body text-center shadow">
                     <i class="bi-phone icon-feature text-gradient d-block mb-3"></i>
                     <p class="text-muted mb-0">0,33€ per Trading Day</p>
                     <h3 class="font-alt">10€ / month</h3>
@@ -172,8 +179,8 @@ WelcomeAsset::register($this);
                 </div>
             </div>
                 </div>
-                <div class="col-md-4">
-            <div class="card" style="width: 21rem; height: 100%">
+                <div class="col-xl-4 col-lg-6 mb-4 mb-xl-0">
+            <div class="card h-100">
                 <div class="card-body text-center shadow">
                     <i class="bi-patch-check icon-feature text-gradient d-block mb-3"></i>
                     <p class="text-muted mb-0">Best offer!</p>
