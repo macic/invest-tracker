@@ -148,7 +148,7 @@ WelcomeAsset::register($this);
             <div class="row justify-content-center font-alt">
                 <div class="col-xl-4 col-lg-6 mb-4 mb-xl-0">
             <div class="card h-100">
-                <div class="card-body text-center shadow">
+                <div class="card-body text-center shadow-sm">
                     <i class="bi-gift icon-feature text-gradient d-block mb-3"></i>
                     <p class="card-title text-muted mb-0">Most popular</p>
                     <h3 class="card-title font-alt">Free Trail</h3>
@@ -181,7 +181,7 @@ WelcomeAsset::register($this);
                 </div>
                 <div class="col-xl-4 col-lg-6 mb-4 mb-xl-0">
             <div class="card h-100">
-                <div class="card-body text-center shadow">
+                <div class="card-body text-center shadow-lg">
                     <i class="bi-patch-check icon-feature text-gradient d-block mb-3"></i>
                     <p class="text-muted mb-0">Best offer!</p>
                     <h3 class="font-alt">69€ / year</h3>
