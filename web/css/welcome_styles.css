@@ -11297,8 +11297,12 @@ html {
 }
 
 .bg-gradient-primary-to-secondary {
-  background: linear-gradient(45deg, #2937f0, #9f1ae2) !important;
+  background: linear-gradient(45deg, #4e73df, #2937f0) !important;
 }
+/*TAK BYŁO*/
+/*.bg-gradient-primary-to-secondary {*/
+/*  background: linear-gradient(45deg, #2937f0, #9f1ae2) !important;*/
+/*}*/
 
 .font-alt {
   font-family: "Kanit", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;

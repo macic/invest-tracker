@@ -32,6 +32,8 @@ WelcomeAsset::register($this);
         <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,400;1,400&amp;display=swap" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
 <!--        <link href="css/welcome_styles.css" rel="stylesheet" />-->
+        <!-- Botstrap css-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
 
 
@@ -46,10 +48,10 @@ WelcomeAsset::register($this);
                     <i class="bi-list"></i>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
+                    <div class="navbar-nav ms-auto me-4 my-3 my-lg-0">
                         <li class="nav-item"><a class="nav-link me-lg-3" href="#pricing">Pricing</a></li>
                         <li class="nav-item active"><a class="nav-link me-lg-3" href="<?php yii\helpers\Url::to(['site/login'])?>">Login</a></li>
-                    </ul>
+                    </div>
                     <button class="btn btn-primary rounded-pill px-3 mb-2 mb-lg-0" data-bs-toggle="modal" data-bs-target="#feedbackModal">
                         <span class="d-flex align-items-center">
                             <i class="bi-chat-text-fill me-2"></i>
@@ -65,7 +67,7 @@ WelcomeAsset::register($this);
     <body id="page-top">
     <!-- Navigation-->
 
-    <header class="page-header-ui page-header-ui-dark bg-gradient-primary-to-secondary">
+    <header class="page-header-ui page-header-ui-dark bg-gradient-primary-to-secondary ">
         <div class="page-header-ui-content mb-n5">
             <!-- Wersja z jednym iPhonem ze zmienialnym ekranem-->
 <!--            <div class="container px-5">-->
@@ -95,7 +97,7 @@ WelcomeAsset::register($this);
                     <!-- Mashead text and app badges-->
                     <div class="mb-5 mb-lg-0 text-center text-lg-start">
                         <h1 class="display-1 lh-1 text-light mb-3 font-alt">Track your investments easier than ever!</h1>
-                        <p class="lead fw-normal text-muted mb-5 font-alt">Launch your mobile app landing page faster with this free, open source theme from Start Bootstrap!</p>
+                        <p class="lead fw-normal text-white-50 mb-5 font-alt">Launch your mobile app landing page faster with this free, open source theme from Start Bootstrap!</p>
                         <div class="d-flex flex-column flex-lg-row align-items-center">
                             <a class="me-lg-3 mb-4 mb-lg-0" href="#!"><img class="app-badge" src="assets/img/google-play-badge.svg" alt="..." /></a>
                             <a href="#!"><img class="app-badge" src="assets/img/app-store-badge.svg" alt="..." /></a>
@@ -109,7 +111,7 @@ WelcomeAsset::register($this);
             </div>
         </div>
 <!--        Fioletowe Fale -->
-        <div class="svg-border-waves text-white">
+        <div class="svg-border-waves text-white ">
             <!-- Wave SVG Border-->
             <svg class="wave" style="pointer-events: none" fill="currentColor" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1920 75">
                 <defs>
@@ -140,7 +142,7 @@ WelcomeAsset::register($this);
             <div class="row">
                 <div class="col-md-4">
             <div class="card" style="width: 21rem; height: 100%">
-                <div class="card-body text-center">
+                <div class="card-body text-center shadow">
                     <i class="bi-gift icon-feature text-gradient d-block mb-3"></i>
                     <p class="card-title text-muted mb-0">Most popular</p>
                     <h3 class="card-title font-alt">Free Trail</h3>
@@ -157,7 +159,7 @@ WelcomeAsset::register($this);
                 </div>
                 <div class="col-md-4">
             <div class="card"style="width: 21rem; height: 100%">
-                <div class="card-body text-center" style="width: 21rem; height: 100%">
+                <div class="card-body text-center shadow" style="width: 21rem; height: 100%">
                     <i class="bi-phone icon-feature text-gradient d-block mb-3"></i>
                     <p class="text-muted mb-0">0,33€ per Trading Day</p>
                     <h3 class="font-alt">10€ / month</h3>
@@ -172,7 +174,7 @@ WelcomeAsset::register($this);
                 </div>
                 <div class="col-md-4">
             <div class="card" style="width: 21rem; height: 100%">
-                <div class="card-body text-center">
+                <div class="card-body text-center shadow">
                     <i class="bi-patch-check icon-feature text-gradient d-block mb-3"></i>
                     <p class="text-muted mb-0">Best offer!</p>
                     <h3 class="font-alt">69€ / year</h3>
@@ -211,9 +213,12 @@ WelcomeAsset::register($this);
             <title _ngcontent-quo-c41="">wave</title>
             <g _ngcontent-quo-c41="" class="b">
                 <path _ngcontent-quo-c41="" d="M1963,327H-105V65A2647.49,2647.49,0,0,1,431,19c217.7,3.5,239.6,30.8,470,36,297.3,6.7,367.5-36.2,642-28a2511.41,2511.41,0,0,1,420,48" class="c"></path></g>
-            <g _ngcontent-quo-c41="" class="b"><path _ngcontent-quo-c41="" d="M-127,404H1963V44c-140.1-28-343.3-46.7-566,22-75.5,23.3-118.5,45.9-162,64-48.6,20.2-404.7,128-784,0C355.2,97.7,341.6,78.3,235,50,86.6,10.6-41.8,6.9-127,10" class="d"></path></g><g _ngcontent-quo-c41="" class="b"><path _ngcontent-quo-c41="" d="M1979,462-155,446V106C251.8,20.2,576.6,15.9,805,30c167.4,10.3,322.3,32.9,680,56,207,13.4,378,20.3,494,24" class="d"></path></g><g _ngcontent-quo-c41="" class="b"><path _ngcontent-quo-c41="" d="M1998,484H-243V100c445.8,26.8,794.2-4.1,1035-39,141-20.4,231.1-40.1,378-45,349.6-11.6,636.7,73.8,828,150" class="d"></path></g></svg></div>
+            <g _ngcontent-quo-c41="" class="b"><path _ngcontent-quo-c41="" d="M-127,404H1963V44c-140.1-28-343.3-46.7-566,22-75.5,23.3-118.5,45.9-162,64-48.6,20.2-404.7,128-784,0C355.2,97.7,341.6,78.3,235,50,86.6,10.6-41.8,6.9-127,10" class="d"></path></g><g _ngcontent-quo-c41="" class="b"><path _ngcontent-quo-c41="" d="M1979,462-155,446V106C251.8,20.2,576.6,15.9,805,30c167.4,10.3,322.3,32.9,680,56,207,13.4,378,20.3,494,24" class="d"></path></g><g _ngcontent-quo-c41="" class="b"><path _ngcontent-quo-c41="" d="M1998,484H-243V100c445.8,26.8,794.2-4.1,1035-39,141-20.4,231.1-40.1,378-45,349.6-11.6,636.7,73.8,828,150" class="d"></path></g>
+        </svg>
+    </div>
+    </body>
     <!-- Footer-->
-    <footer class="card-footer text-center py-5" style="">
+    <footer class="text-center py-5" style="background-color: #212529">
         <div class="container px-5">
             <div class="text-white-50 small">
                 <div class="mb-2">&copy; Invest Tracker</div>
@@ -300,3 +305,4 @@ WelcomeAsset::register($this);
     <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
     <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
     <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>

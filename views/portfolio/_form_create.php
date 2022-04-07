@@ -35,7 +35,13 @@ use yii\helpers\Json;
             ]])->dropdownList(ArrayHelper::map($assetsTypeData, 'id', 'name'),
             ['prompt'=>'Choose asset type here:']) ?>
 
-    <?= $form->field($portfolioStructure, 'percentage[]', ['options'=>['class'=>'form-group '.$display, 'selectors' => ['input' => '#percentage_'.$i],]])->textInput(['id'=>'percentage_'.$i,'class' => 'form-control assets']); ?>
+    <?= $form->field($portfolioStructure, 'percentage[]', [
+            'options'=>[
+                    'class'=>'form-group '.$display,
+                    'selectors' => ['input' => '#percentage_'.$i],]])->textInput([
+                        'id'=>'percentage_'.$i,
+                        'class' => 'form-control assets']);
+    ?>
 
     <?php } ?>
     </div>
