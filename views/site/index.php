@@ -10,21 +10,21 @@ AppAsset::register($this);
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 
-<!-- TUTAJ ROBIE GÓRNY DASHBOARD, kolor nie działa, klasa jest dodana do sb-admin ale nie działa -->
-<header class="width: 100% bg-gradient-primary pb-10">
-    <div class="container-xl px-4">
+<header class="width: 100% bg-gradient-primary pb-10 rounded-bottom">
+    <div class="container-fluid px-4">
         <div class="page-header-content py-3">
-            <div class="row align-items-center justify-content-between">
-                <div class="col-auto mt-4">
+            <div class="row align-items-center">
+                <div class="col-auto mt-4 mb-5">
                     <h1 class="page-header-title text-light">
                         Dashboard
                     </h1>
-                    <div class="page-header-subtitle mb-3">Example dashboard overview and content summary</div>
+<!--                    <div class="page-header-subtitle mb-3">Example dashboard overview and content summary</div>-->
                 </div>
             </div>
         </div>
     </div>
 </header>
+
 <!-- TradingView Widget BEGIN -->
 <!--<div class="trading view container-xl mt-n10">-->
 <!--    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>-->
