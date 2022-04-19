@@ -105,7 +105,6 @@ class Portfolio extends \yii\db\ActiveRecord
         require_once "converter.php";
         $assets = $this->getAssets()->all();
         $sum = 0;
-
         foreach ($assets as $asset) {
             $val = $asset->buy_price * $asset->quantity;
 
@@ -127,17 +126,6 @@ class Portfolio extends \yii\db\ActiveRecord
         return round($sum, 2);
     }
 
-//    public function getSummary() : float
-//    {
-//        $assets = $this->getAssets()->all();
-//        $summary = 0;
-//
-//        foreach ($assets as $asset) {
-//            $summary += $asset->getAssetTypeValue();
-//        }
-//
-//        return round($summary, 2);
-//    }
     public function getRealValue($asset_type_id) : float
     {
         if(($this->getSummary())==0) {
