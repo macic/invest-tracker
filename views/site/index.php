@@ -2,66 +2,70 @@
 
 /* @var $this yii\web\View */
 
-$this->title = 'My Yii Application';
+use app\assets\AppAsset;
+
+AppAsset::register($this);
 
 ?>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<!-- Custom fonts for this template-->
-<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-<link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
 
-<!-- Custom styles for this template-->
-<link href="css/sb-admin-2.min.css" rel="stylesheet">
+
+<header class="width: 100% bg-gradient-primary pb-10 rounded-bottom">
+    <div class="container-fluid px-4">
+        <div class="page-header-content py-3">
+            <div class="row align-items-center">
+                <div class="col-auto mt-4 mb-5">
+                    <h1 class="page-header-title text-light">
+                        Dashboard
+                    </h1>
+<!--                    <div class="page-header-subtitle mb-3">Example dashboard overview and content summary</div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
 
 <!-- TradingView Widget BEGIN -->
-<div class="tradingview-widget-container">
-    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
-        {
-            "symbols": [
-            {
-                "proName": "FOREXCOM:SPXUSD",
-                "title": "S&P 500"
-            },
-            {
-                "proName": "FOREXCOM:NSXUSD",
-                "title": "US 100"
-            },
-            {
-                "proName": "FX_IDC:EURUSD",
-                "title": "EUR/USD"
-            },
-            {
-                "proName": "BITSTAMP:BTCUSD",
-                "title": "Bitcoin"
-            },
-            {
-                "description": "WIG20",
-                "proName": "GPW:WIG20"
-            }
-        ],
-            "showSymbolLogo": true,
-            "colorTheme": "light",
-            "isTransparent": false,
-            "displayMode": "adaptive",
-            "locale": "en"
-        }
-    </script>
-</div><br>
+<!--<div class="trading view container-xl mt-n10">-->
+<!--    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>-->
+<!--        {-->
+<!--            "symbols": [-->
+<!--            {-->
+<!--                "proName": "FOREXCOM:SPXUSD",-->
+<!--                "title": "S&P 500"-->
+<!--            },-->
+<!--            {-->
+<!--                "proName": "FOREXCOM:NSXUSD",-->
+<!--                "title": "US 100"-->
+<!--            },-->
+<!--            {-->
+<!--                "proName": "FX_IDC:EURUSD",-->
+<!--                "title": "EUR/USD"-->
+<!--            },-->
+<!--            {-->
+<!--                "proName": "BITSTAMP:BTCUSD",-->
+<!--                "title": "Bitcoin"-->
+<!--            },-->
+<!--            {-->
+<!--                "description": "WIG20",-->
+<!--                "proName": "GPW:WIG20"-->
+<!--            }-->
+<!--        ],-->
+<!--            "showSymbolLogo": true,-->
+<!--            "colorTheme": "light",-->
+<!--            "isTransparent": false,-->
+<!--            "displayMode": "adaptive",-->
+<!--            "locale": "en"-->
+<!--        }-->
+<!--    </script>-->
+<!--</div><br>-->
 <!-- TradingView Widget END -->
 
 
 <div class="site-index">
-    <div class="text-primary">
-        <h1>"The way to become rich is to put all your eggs in one basket and then watch that basket."
-        </h1>
 
-        <p>Andrew Carnegie</p>
-
-        <!--        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>-->
-    </div>
     <!-- Content Row -->
+    <div class="container mt-n5">
     <div class="row">
 
         <!-- Safety Pillow Card -->
@@ -149,8 +153,9 @@ $this->title = 'My Yii Application';
             </div>
         </div>
     </div>
+    </div>
 
-    <div class="body-content">
+    <div class="body-content container">
 
         <div class="row">
 
