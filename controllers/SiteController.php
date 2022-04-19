@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\models\Account;
 use app\models\AccountHolder;
 use app\models\ForgotPasswordForm;
+use app\models\Portfolio;
 use app\models\SignupForm;
 use Yii;
 use yii\base\BaseObject;
@@ -79,7 +80,18 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $portfolios = Portfolio::find()->where(['user_id'=> Yii::$app->user->getId()])->all();
+
+        $sum = 0;
+        foreach ($portfolios as $portfolio) {
+            $sum += $portfolio->getSummary();
+
+        }
+
+        return $this->render('index', [
+            'items' => $portfolios,
+            'sum' => $sum
+        ]);
     }
 
     /**
