@@ -145,7 +145,7 @@ AppAsset::register($this);
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                 total balace</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">350,000 PLN</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $sum . " PLN" ?></div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-coins fa-2x text-gray-300"></i>
@@ -192,7 +192,7 @@ AppAsset::register($this);
                             <canvas id="myPieChart"></canvas>
                         </div>
                         <hr>
-                        Wealth summary:
+                        Total Balance:
                         <?php echo $sum . " PLN" ?>
                     </div>
                 </div>
