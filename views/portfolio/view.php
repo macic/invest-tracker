@@ -45,7 +45,7 @@ use yii\bootstrap4\ActiveForm;
             <td><a class="collapse-item" href="<?php echo \yii\helpers\Url::to(['/portfolio/list', 'portfolio_id'=>$structure['portfolio_id'], 'asset_type_id'=>$structure['asset_type_id']])?>"><?php echo $structure->type ?></td>
             <td><?php echo $structure->percentage ?> %</td>
             <td> <?= $item->getRealValue($structure->asset_type_id); ?> %</td>
-            <td><?= $item->getAssetTypeValue($structure->asset_type_id); ?> PLN</td>
+            <td><?= number_format($item->getAssetTypeValue($structure->asset_type_id), 2, '.',' '); ?> PLN</td>
         </tr>
         <?php endforeach; ?>
 
@@ -55,7 +55,7 @@ use yii\bootstrap4\ActiveForm;
             <td></td>
             <td></td>
             <td class="table-active">Summary:</td>
-            <td class="table-active"><?= $item->getSummary() ?> PLN</td>
+            <td class="table-active"><?= number_format($item->getSummary(), 2, '.',' ') ?> PLN</td>
             </tfoot>
         </table>
         </div>
@@ -90,7 +90,7 @@ use yii\bootstrap4\ActiveForm;
                         <canvas id="portfolio-chart-real-values"></canvas>
                     </div>
                     <hr>
-                    Chciałabym inne kolory w tym wykresie
+                    Czy to jest czytelny wykres ?
                 </div>
             </div>
         </div>
@@ -125,7 +125,8 @@ use yii\bootstrap4\ActiveForm;
    $labels = array();
    $data = array();
    $realData = array();
-   $color = ['#000000', '#1cc88a', '#36b9cc'];
+   $colors = ['#e74a3b', '#fd7e14', '#858796'];
+   $hoverColors = [];
 
    foreach ($item->portfolioStructure as $structure) {
 
@@ -151,7 +152,7 @@ use yii\bootstrap4\ActiveForm;
    $(function() {
    var labels = '. json_encode($labels). ';
    var realData = '. json_encode($realData). ';
-        displayDonut($("#portfolio-chart-real-values"), labels, realData);
+        displayDonut($("#portfolio-chart-real-values"), labels, realData, '.json_encode($colors).', '.json_encode($hoverColors).');
         
     });');
 
