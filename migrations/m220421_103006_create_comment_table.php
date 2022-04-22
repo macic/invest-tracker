@@ -22,7 +22,7 @@ class m220421_103006_create_comment_table extends Migration
             'user_id' => $this->integer(),
             'portfolio_id' => $this->integer(),
             'asset_id' => $this->integer(),
-            'date' => $this->date(),
+            'date' => $this->date()->defaultValue('NOW'),
             'textarea' => $this->text()->notNull(),
         ]);
 

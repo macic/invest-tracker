@@ -7,6 +7,7 @@ use yii\bootstrap4\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $item app\models\Portfolio */
 /* @var $assetsTypeData app\models\Asset */
+/* @var $comment app\models\Comment */
 
 //$this->title = $item->name;
 //\yii\web\YiiAsset::register($this);
@@ -108,10 +109,27 @@ use yii\bootstrap4\ActiveForm;
                             <p class="comment-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
                         </div>
                     </div>
-
+                    <?php $form = ActiveForm::begin([
+                            'id' => 'comment-form',
+                            'options' => ['class'=>'comment'],
+                            'fieldConfig' => [
+                                'template' => "{beginWrapper}\n{input}\n{hint}\n{error}\n{endWrapper}",
+                    ]]); ?>
                     <div class="card-footer bg-light p-2">
-                        <div class="d-flex flex-row align-items-start"><img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="40"><textarea class="form-control ml-1 shadow-none textarea"></textarea></div>
-                        <div class="mt-2 text-right"><button class="btn btn-primary btn-sm shadow-none" type="button">Post comment</button><button class="btn btn-outline-primary btn-outline-primary btn-sm ml-1 shadow-none" type="button">Cancel</button></div>
+                        <div class="d-flex flex-row align-items-start"><img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="40">
+                            <div class="ml-2" >
+                                <?= $form->field($comment, 'textarea', [
+                                'inputOptions' => [
+                                    'placeholder' => 'Enter your notes here...',
+                                ]])->textarea(array('rows'=>2,'cols'=>120))?>
+                            </div>
+                    </div>
+                        <div class="mt-2 text-right">
+                            <?= Html::submitButton('Post Comment', ['class' => 'btn btn-primary', 'name' => 'post-comment-button']) ?>
+                            <?= Html::submitButton('Cancel', ['class' => 'btn btn-outline-primary', 'name' => 'cancel-button']) ?>
+<!--                            <button class="btn btn-primary btn-sm shadow-none" type="button">Post comment</button>-->
+<!--                            <button class="btn btn-outline-primary btn-outline-primary btn-sm ml-1 shadow-none" type="button">Cancel</button></div>-->
+                        <?php ActiveForm::end(); ?>
                     </div>
                 </div>
             </div>
@@ -147,7 +165,7 @@ use yii\bootstrap4\ActiveForm;
    
         displayDonut($("#portfolio-chart-declared-values"), labels, data);
     });');
-        //        Real Values Chart
+//        Real Values Chart
         $this->registerJs('
    $(function() {
    var labels = '. json_encode($labels). ';

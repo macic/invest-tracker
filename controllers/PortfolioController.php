@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\Asset;
 use app\models\AssetType;
+use app\models\Comment;
 use app\models\Portfolio;
 use TheSeer\Tokenizer\Exception;
 use Yii;
@@ -57,10 +58,31 @@ class PortfolioController extends Controller
     {
         $portfolio = Portfolio::findOne($id);
 
+        $comment = new Comment();
+        $postData = Yii::$app->request->post();
+        $postData["Comment"]["user_id"] = Yii::$app->user->getId();
+        $postData["Comment"]["portfolio_id"] = $portfolio;
+        $postData["Comment"]["date"] = new \yii\db\Expression('NOW()');
+
+var_dump($comment->load($postData));
+var_dump($comment->save());
+        if ($comment->load($postData) && $comment->save()) {
+
+//            $comment->user_id = Yii::$app->user->getId();
+//            $comment->portfolio_id = $portfolio;
+//            $comment->date = Yii::$app->formatter->asDate('now');
+
+//            && ($comment->save()) {
+//                return $this->redirect(['portfolio/view', 'id' => $comment->id]);
+//
+            return $this->refresh();
+        }
+
         return $this->render('view', [
             // 'model' => $this->findModel($id),
             'assetsTypeData' => AssetType::find()->all(),
-            'item' => $portfolio
+            'item' => $portfolio,
+            'comment' => $comment
         ]);
     }
 
