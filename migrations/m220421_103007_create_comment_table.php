@@ -10,7 +10,7 @@ use yii\db\Migration;
  * - `{{%portfolio}}`
  * - `{{%asset}}`
  */
-class m220421_103006_create_comment_table extends Migration
+class m220421_103007_create_comment_table extends Migration
 {
     /**
      * {@inheritdoc}
@@ -22,7 +22,7 @@ class m220421_103006_create_comment_table extends Migration
             'user_id' => $this->integer(),
             'portfolio_id' => $this->integer(),
             'asset_id' => $this->integer(),
-            'date' => $this->date()->defaultValue('NOW'),
+            'date' => $this->date(),
             'textarea' => $this->text()->notNull(),
         ]);
 

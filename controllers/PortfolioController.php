@@ -56,27 +56,19 @@ class PortfolioController extends Controller
      */
     public function actionView(int $id)
     {
-        $portfolio = Portfolio::findOne($id);
+       $portfolio = Portfolio::findOne($id);
+       $portfolio_id = $portfolio->id;
+       $user_id = \Yii::$app->user->id;
+       $postData = Yii::$app->request->post();
 
-        $comment = new Comment();
-        $postData = Yii::$app->request->post();
-        $postData["Comment"]["user_id"] = Yii::$app->user->getId();
-        $postData["Comment"]["portfolio_id"] = $portfolio;
-        $postData["Comment"]["date"] = new \yii\db\Expression('NOW()');
+       $postData["Comment"]["user_id"] = $user_id;
+       $postData["Comment"]["portfolio_id"] = $portfolio_id;
+       $postData["Comment"]["date"] = new \yii\db\Expression('NOW()');
 
-var_dump($comment->load($postData));
-var_dump($comment->save());
-        if ($comment->load($postData) && $comment->save()) {
-
-//            $comment->user_id = Yii::$app->user->getId();
-//            $comment->portfolio_id = $portfolio;
-//            $comment->date = Yii::$app->formatter->asDate('now');
-
-//            && ($comment->save()) {
-//                return $this->redirect(['portfolio/view', 'id' => $comment->id]);
-//
-            return $this->refresh();
-        }
+       $comment = new Comment();
+       if ($comment->load($postData) && $comment->save()) {
+           return $this->refresh();
+       }
 
         return $this->render('view', [
             // 'model' => $this->findModel($id),
