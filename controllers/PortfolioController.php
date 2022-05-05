@@ -56,10 +56,12 @@ class PortfolioController extends Controller
      */
     public function actionView(int $id)
     {
+
        $portfolio = Portfolio::findOne($id);
        $portfolio_id = $portfolio->id;
        $user_id = \Yii::$app->user->id;
        $postData = Yii::$app->request->post();
+       $publishedComments = Comment::find()->where(['portfolio_id' => $portfolio])->all();
 
        $postData["Comment"]["user_id"] = $user_id;
        $postData["Comment"]["portfolio_id"] = $portfolio_id;
@@ -74,7 +76,9 @@ class PortfolioController extends Controller
             // 'model' => $this->findModel($id),
             'assetsTypeData' => AssetType::find()->all(),
             'item' => $portfolio,
-            'comment' => $comment
+            'comment' => $comment,
+            'publishedComments' => $publishedComments
+
         ]);
     }
 

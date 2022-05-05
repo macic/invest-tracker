@@ -8,6 +8,7 @@ use yii\bootstrap4\ActiveForm;
 /* @var $item app\models\Portfolio */
 /* @var $assetsTypeData app\models\Asset */
 /* @var $comment app\models\Comment */
+/* @var $publishedComments app\models\Comment */
 
 //$this->title = $item->name;
 //\yii\web\YiiAsset::register($this);
@@ -101,14 +102,17 @@ use yii\bootstrap4\ActiveForm;
         <div class="row">
             <div class="col-md-10">
                 <div class="card shadow mb-4">
-                    <div class="card-header bg-white p-2">
+                    <?php foreach($publishedComments as $publishedComment): ?>
+                    <div class="card-header bg-white">
                         <div class="d-flex flex-row user-info"><img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="40">
-                            <div class="d-flex flex-column justify-content-start ml-2"><span class="d-block font-weight-bold name">Ania Dzidka</span><span class="date text-black-50">Shared publicly - Jan 2022</span></div>
+                            <div class="d-flex flex-column justify-content-start ml-2"><span class="d-block font-weight-bold name"><?php echo ucfirst(Yii::$app->user->identity->getDisplayName()) ?></span>
+                                <span class="date text-black-50">Shared publicly <?php echo $publishedComment->date ?></span></div>
                         </div>
-                        <div class="mt-2">
-                            <p class="comment-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                        <div class="mt-1">
+                            <p class="comment-text" style="margin-bottom: 1px;"><?php echo $publishedComment->textarea ?></p>
                         </div>
                     </div>
+                    <?php endforeach; ?>
                     <?php $form = ActiveForm::begin([
                             'id' => 'comment-form',
                             'options' => ['class'=>'comment'],
