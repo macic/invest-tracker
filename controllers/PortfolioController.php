@@ -61,7 +61,7 @@ class PortfolioController extends Controller
        $portfolio_id = $portfolio->id;
        $user_id = \Yii::$app->user->id;
        $postData = Yii::$app->request->post();
-       $publishedComments = Comment::find()->where(['portfolio_id' => $portfolio])->all();
+       $publishedComments = Comment::find()->where(['portfolio_id' => $portfolio_id])->all();
 
        $postData["Comment"]["user_id"] = $user_id;
        $postData["Comment"]["portfolio_id"] = $portfolio_id;

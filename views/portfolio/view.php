@@ -139,9 +139,6 @@ use yii\bootstrap4\ActiveForm;
             </div>
         </div>
     </div>
-
-
-
    <?php
 
    $labels = array();
