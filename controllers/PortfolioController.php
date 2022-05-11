@@ -68,9 +68,10 @@ class PortfolioController extends Controller
        $postData["Comment"]["date"] = new \yii\db\Expression('NOW()');
 
        $comment = new Comment();
-       if ($comment->load($postData) && $comment->save()) {
-           return $this->refresh();
-       }
+       $comment->load($postData) && $comment->save();
+//       {
+//           return $this->refresh();
+//       }
 
         return $this->render('view', [
             // 'model' => $this->findModel($id),

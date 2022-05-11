@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use yii\bootstrap4\ActiveForm;
+use app\assets\CommentAsset;
 
 /* @var $this yii\web\View */
 /* @var $item app\models\Portfolio */
@@ -11,7 +12,7 @@ use yii\bootstrap4\ActiveForm;
 /* @var $publishedComments app\models\Comment */
 
 //$this->title = $item->name;
-//\yii\web\YiiAsset::register($this);
+CommentAsset::register($this);
 ?>
 <div class="portfolio-structure-view">
 
@@ -27,7 +28,6 @@ use yii\bootstrap4\ActiveForm;
             ],
         ]) ?>
     </p>
-
 
     <div class="row mb-3">
         <div class="col-md-10">
@@ -102,17 +102,26 @@ use yii\bootstrap4\ActiveForm;
         <div class="row">
             <div class="col-md-10">
                 <div class="card shadow mb-4">
-                    <?php foreach($publishedComments as $publishedComment): ?>
-                    <div class="card-header bg-white">
-                        <div class="d-flex flex-row user-info"><img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="40">
-                            <div class="d-flex flex-column justify-content-start ml-2"><span class="d-block font-weight-bold name"><?php echo ucfirst(Yii::$app->user->identity->getDisplayName()) ?></span>
-                                <span class="date text-black-50">Shared publicly <?php echo $publishedComment->date ?></span></div>
-                        </div>
-                        <div class="mt-1">
-                            <p class="comment-text" style="margin-bottom: 1px;"><?php echo $publishedComment->textarea ?></p>
-                        </div>
-                    </div>
-                    <?php endforeach; ?>
+
+                    <section id="comments">
+                        <?php foreach($publishedComments as $publishedComment): ?>
+                            <div class="card-header bg-white">
+                                <div class="d-flex flex-row user-info"><img class="rounded-circle"
+                                                                            src="https://i.imgur.com/RpzrMR2.jpg"
+                                                                            width="40">
+                                    <div class="d-flex flex-column justify-content-start ml-2"><span
+                                                class="d-block font-weight-bold name"><?php echo ucfirst(Yii::$app->user->identity->getDisplayName()) ?></span>
+                                        <span class="date text-black-50">Shared publicly <?php echo $publishedComment->date ?></span>
+                                    </div>
+                                </div>
+                                <div class="mt-1">
+                                    <p class="comment-text mb-1"
+                                       ><?php echo $publishedComment->textarea ?></p>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    </section>
+
                     <?php $form = ActiveForm::begin([
                             'id' => 'comment-form',
                             'options' => ['class'=>'comment'],
@@ -124,16 +133,16 @@ use yii\bootstrap4\ActiveForm;
                             <div class="ml-2" >
                                 <?= $form->field($comment, 'textarea', [
                                 'inputOptions' => [
+
                                     'placeholder' => 'Enter your notes here...',
                                 ]])->textarea(array('rows'=>2,'cols'=>120))?>
                             </div>
                     </div>
                         <div class="mt-2 text-right">
-                            <?= Html::submitButton('Post Comment', ['class' => 'btn btn-primary', 'name' => 'post-comment-button']) ?>
-                            <?= Html::submitButton('Cancel', ['class' => 'btn btn-outline-primary', 'name' => 'cancel-button']) ?>
-<!--                            <button class="btn btn-primary btn-sm shadow-none" type="button">Post comment</button>-->
-<!--                            <button class="btn btn-outline-primary btn-outline-primary btn-sm ml-1 shadow-none" type="button">Cancel</button></div>-->
-                        <?php ActiveForm::end(); ?>
+
+                                <button type="button" class="btn btn-primary "id="submit-btn">Post Comment</button>
+                                <button type="button" class="btn btn-outline-primary"id="cancel-btn">Cancel</button>
+                            <?php ActiveForm::end(); ?>
                     </div>
                 </div>
             </div>
@@ -174,5 +183,12 @@ use yii\bootstrap4\ActiveForm;
         displayDonut($("#portfolio-chart-real-values"), labels, realData, '.json_encode($colors).', '.json_encode($hoverColors).');
         
     });');
+//        New Comment Section
+        $this->registerJs('
+   $(function() {
+   var username = '. json_encode(ucfirst(Yii::$app->user->identity->getDisplayName())). ';
+   var action_url = '. json_encode('index.php?r=portfolio%2Fview&id='.$item->id). ';
+        sendComment("#submit-btn", username, action_url);
+    });');
 
-    ?>
+        ?>
