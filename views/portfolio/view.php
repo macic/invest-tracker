@@ -104,19 +104,29 @@ CommentAsset::register($this);
                 <div class="card shadow mb-4">
 
                     <section id="comments">
-                        <?php foreach($publishedComments as $publishedComment): ?>
+                        <?php foreach($publishedComments as $publishedComment):
+                        ?>
                             <div class="card-header bg-white">
-                                <div class="d-flex flex-row user-info"><img class="rounded-circle"
+                                <div class="row">
+                                    <div class="col-sm-10">
+                                        <div class="d-flex flex-row user-info"><img class="rounded-circle"
                                                                             src="https://i.imgur.com/RpzrMR2.jpg"
                                                                             width="40">
-                                    <div class="d-flex flex-column justify-content-start ml-2"><span
+                                        <div class="d-flex flex-column justify-content-start ml-2"><span
                                                 class="d-block font-weight-bold name"><?php echo ucfirst(Yii::$app->user->identity->getDisplayName()) ?></span>
+
                                         <span class="date text-black-50">Shared publicly <?php echo $publishedComment->date ?></span>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <button type="button" class="close delete-comment-btn" id="<?php echo $publishedComment->id ?>" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
                                     </div>
                                 </div>
                                 <div class="mt-1">
-                                    <p class="comment-text mb-1"
-                                       ><?php echo $publishedComment->textarea ?></p>
+                                    <p class="comment-text mb-1"><?php echo $publishedComment->textarea ?></p>
                                 </div>
                             </div>
                         <?php endforeach; ?>
@@ -161,7 +171,11 @@ CommentAsset::register($this);
        $labels[] = $structure->type;
        $data[] = $structure->percentage;
        $realData[] = $item->getRealValue($structure->asset_type_id);
-    } ?>
+
+    }
+
+   ?>
+
         <div class="chart">
             <div class="col chart-wrapper" ><canvas id="portfolio-charts"></canvas></div>
         </div>
@@ -190,5 +204,12 @@ CommentAsset::register($this);
    var action_url = '. json_encode('index.php?r=portfolio%2Fview&id='.$item->id). ';
         sendComment("#submit-btn", username, action_url);
     });');
+
+//         Delete Comment Button
+        $this->registerJs('
+    $(function () {
+    var action_url = '. json_encode('index.php?r=comment%2Fdelete&id='). ';
+        deleteComment(".delete-comment-btn", action_url);
+    });')
 
         ?>
