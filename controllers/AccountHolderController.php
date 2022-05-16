@@ -22,6 +22,4 @@ class AccountHolderController extends \yii\web\Controller
             return $this->redirect(['/account/create']);
         }
     }
-
-
 }

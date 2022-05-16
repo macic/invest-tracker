@@ -67,18 +67,8 @@ class AssetController extends Controller
     {
         $asset = Asset::findOne($id);
         $asset_id = $asset->id;
-        $user_id = \Yii::$app->user->id;
-        $postData = Yii::$app->request->post();
         $publishedComments = Comment::find()->where(['asset_id' => $asset_id])->all();
-
-        $postData["Comment"]["user_id"] = $user_id;
-        $postData["Comment"]["asset_id"] = $asset_id;
-        $postData["Comment"]["date"] = new \yii\db\Expression('NOW()');
-
         $comment = new Comment();
-        if ($comment->load($postData) && $comment->save()) {
-            return $this->refresh();
-        }
 
             return $this->render('view', [
                 'model' => $this->findModel($id),

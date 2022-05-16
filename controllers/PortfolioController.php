@@ -56,30 +56,16 @@ class PortfolioController extends Controller
      */
     public function actionView(int $id)
     {
-
        $portfolio = Portfolio::findOne($id);
        $portfolio_id = $portfolio->id;
-       $user_id = \Yii::$app->user->id;
-       $postData = Yii::$app->request->post();
        $publishedComments = Comment::find()->where(['portfolio_id' => $portfolio_id])->all();
-
-       $postData["Comment"]["user_id"] = $user_id;
-       $postData["Comment"]["portfolio_id"] = $portfolio_id;
-       $postData["Comment"]["date"] = new \yii\db\Expression('NOW()');
-
        $comment = new Comment();
-       if ($comment->load($postData) && $comment->save())
-       {
-           return $comment->id;
-       }
 
         return $this->render('view', [
-            // 'model' => $this->findModel($id),
             'assetsTypeData' => AssetType::find()->all(),
             'item' => $portfolio,
             'comment' => $comment,
             'publishedComments' => $publishedComments
-
         ]);
     }
 

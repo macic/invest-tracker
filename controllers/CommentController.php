@@ -2,12 +2,14 @@
 
 namespace app\controllers;
 
+use app\models\Asset;
 use Yii;
 use app\models\Comment;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\Portfolio;
 
 /**
  * CommentController implements the CRUD actions for Comment model.
@@ -61,13 +63,41 @@ class CommentController extends Controller
      * Creates a new Comment model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
+     * * @param integer $id
      */
-    public function actionCreate()
+    public function actionPortfolio($id)
     {
-        $model = new Comment();
+        $portfolio = Portfolio::findOne($id);
+        $portfolio_id = $portfolio->id;
+        $user_id = \Yii::$app->user->id;
+        $postData = Yii::$app->request->post();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return  $model->id;
+        $postData["Comment"]["user_id"] = $user_id;
+        $postData["Comment"]["portfolio_id"] = $portfolio_id;
+        $postData["Comment"]["date"] = new \yii\db\Expression('NOW()');
+
+        $comment = new Comment();
+        if ($comment->load($postData) && $comment->save())
+        {
+            return $comment->id;
+        }
+    }
+
+    public function actionAsset($id)
+    {
+        $asset = Asset::findOne($id);
+        $asset_id = $asset->id;
+        $user_id = \Yii::$app->user->id;
+        $postData = Yii::$app->request->post();
+
+        $postData["Comment"]["user_id"] = $user_id;
+        $postData["Comment"]["asset_id"] = $asset_id;
+        $postData["Comment"]["date"] = new \yii\db\Expression('NOW()');
+
+        $comment = new Comment();
+        if ($comment->load($postData) && $comment->save())
+        {
+            return $comment->id;
         }
     }
 

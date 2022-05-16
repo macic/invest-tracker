@@ -16,7 +16,7 @@ function sendComment(submit_button="#submit-btn", username, action_url) {
                     '<div class="col-sm-10">'+
                     '<div class="d-flex flex-row user-info"><img class="rounded-circle"' +
                     'src="https://i.imgur.com/RpzrMR2.jpg"' +
-                    'width="40">'+
+                    'width="40" height="40">'+
                     '<div class="d-flex flex-column justify-content-start ml-2"><span class="d-block font-weight-bold name">'+username+'</span>'+
                     '<span class="date text-black-50">Shared publicly '+today+'</span>' +
                     '</div></div></div><div class="col-sm-2">' +
@@ -29,6 +29,7 @@ function sendComment(submit_button="#submit-btn", username, action_url) {
                     '</div>');
 
                 deleteComment('#'.concat(comment_id), action_url);
+                clearDescription();
 
             },
             error: function() {
@@ -37,7 +38,9 @@ function sendComment(submit_button="#submit-btn", username, action_url) {
         });
     });
 };
-
+function clearDescription() {
+    $("form textarea").val("");
+}
 function deleteComment(delete_comment_btn = ".delete-comment-btn",  action_url) {
     $(delete_comment_btn).click(function (event){
         comment_id = event.currentTarget.id;

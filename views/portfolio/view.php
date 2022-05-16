@@ -111,7 +111,8 @@ CommentAsset::register($this);
                                     <div class="col-sm-10">
                                         <div class="d-flex flex-row user-info"><img class="rounded-circle"
                                                                             src="https://i.imgur.com/RpzrMR2.jpg"
-                                                                            width="40">
+                                                                            width="40" height="40"
+                                                                            >
                                         <div class="d-flex flex-column justify-content-start ml-2"><span
                                                 class="d-block font-weight-bold name"><?php echo ucfirst(Yii::$app->user->identity->getDisplayName()) ?></span>
 
@@ -134,18 +135,17 @@ CommentAsset::register($this);
 
                     <?php $form = ActiveForm::begin([
                             'id' => 'comment-form',
+                            'action' => ['comment/portfolio'],
                             'options' => ['class'=>'comment'],
                             'fieldConfig' => [
                                 'template' => "{beginWrapper}\n{input}\n{hint}\n{error}\n{endWrapper}",
                     ]]); ?>
                     <div class="card-footer bg-light p-2">
                         <div class="d-flex flex-row align-items-start"><img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="40">
-                            <div class="ml-2" >
+                            <div class="ml-2">
                                 <?= $form->field($comment, 'textarea', [
-                                'inputOptions' => [
-
-                                    'placeholder' => 'Enter your notes here...',
-                                ]])->textarea(array('rows'=>2,'cols'=>120))?>
+                                        'inputOptions' => [
+                                            'placeholder' => 'Enter your notes here...']])->textarea(array('rows'=>2,'cols'=>120))?>
                             </div>
                     </div>
                         <div class="mt-2 text-right">
@@ -201,7 +201,7 @@ CommentAsset::register($this);
         $this->registerJs('
    $(function() {
    var username = '. json_encode(ucfirst(Yii::$app->user->identity->getDisplayName())). ';
-   var action_url = '. json_encode('index.php?r=portfolio%2Fview&id='.$item->id). ';
+   var action_url = '. json_encode('index.php?r=comment%2Fportfolio&id='.$item->id). ';
         sendComment("#submit-btn", username, action_url);
     });');
 
