@@ -1,12 +1,12 @@
-function displayDonut($element, labels, data) {
+function displayDonut($element, labels, data, backgroundColor=['#4e73df', '#1cc88a', '#36b9cc'],hoverBackgroundColor=['#2e59d9', '#17a673', '#2c9faf'] ) {
     var graph = new Chart($element, {
         type: 'doughnut',
         data: {
             labels: labels,
             datasets: [{
                 data: data,
-                backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
-                hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
+                backgroundColor: backgroundColor,
+                hoverBackgroundColor: hoverBackgroundColor,
                 hoverBorderColor: "rgba(234, 236, 244, 1)",
             }],
         },

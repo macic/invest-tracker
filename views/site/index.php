@@ -145,7 +145,7 @@ AppAsset::register($this);
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                 total balace</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $sum . " PLN" ?></div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo number_format($sum, 2, '.', ' ') . " PLN" ?></div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-coins fa-2x text-gray-300"></i>
@@ -193,7 +193,7 @@ AppAsset::register($this);
                         </div>
                         <hr>
                         Total Balance:
-                        <?php echo $sum . " PLN" ?>
+                        <?php echo number_format($sum, 2, '.', ' ') . " PLN" ?>
                     </div>
                 </div>
             </div>
