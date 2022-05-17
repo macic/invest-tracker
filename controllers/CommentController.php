@@ -65,37 +65,20 @@ class CommentController extends Controller
      * @return mixed
      * * @param integer $id
      */
-    public function actionPortfolio($id)
+
+    public function actionCreate($portfolio_id = null, $asset_id = null)
     {
-        $portfolio = Portfolio::findOne($id);
-        $portfolio_id = $portfolio->id;
         $user_id = \Yii::$app->user->id;
         $postData = Yii::$app->request->post();
-
-        $postData["Comment"]["user_id"] = $user_id;
-        $postData["Comment"]["portfolio_id"] = $portfolio_id;
-        $postData["Comment"]["date"] = new \yii\db\Expression('NOW()');
 
         $comment = new Comment();
-        if ($comment->load($postData) && $comment->save())
-        {
-            return $comment->id;
-        }
-    }
-
-    public function actionAsset($id)
-    {
-        $asset = Asset::findOne($id);
-        $asset_id = $asset->id;
-        $user_id = \Yii::$app->user->id;
-        $postData = Yii::$app->request->post();
 
         $postData["Comment"]["user_id"] = $user_id;
         $postData["Comment"]["asset_id"] = $asset_id;
+        $postData["Comment"]["portfolio_id"] = $portfolio_id;
         $postData["Comment"]["date"] = new \yii\db\Expression('NOW()');
 
-        $comment = new Comment();
-        if ($comment->load($postData) && $comment->save())
+        if ($comment->load($postData) && $comment->save());
         {
             return $comment->id;
         }

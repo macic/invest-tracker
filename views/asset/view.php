@@ -133,7 +133,7 @@ CommentAsset::register($this);
 
                 <?php $form = ActiveForm::begin([
                     'id' => 'comment-form',
-                    'action' => ['comment/asset'],
+                    'action' => ['comment/create'],
                     'options' => ['class'=>'comment'],
                     'fieldConfig' => [
                         'template' => "{beginWrapper}\n{input}\n{hint}\n{error}\n{endWrapper}",
@@ -163,7 +163,7 @@ CommentAsset::register($this);
 $this->registerJs('
    $(function() {
    var username = '. json_encode(ucfirst(Yii::$app->user->identity->getDisplayName())). ';
-   var action_url = '. json_encode('index.php?r=comment%2Fasset&id='.$model->id). ';
+   var action_url = '. json_encode('index.php?r=comment%2Fcreate&asset_id='.$model->id). ';
         sendComment("#submit-btn", username, action_url);
     });');
 
