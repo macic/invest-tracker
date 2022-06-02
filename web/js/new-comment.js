@@ -1,3 +1,38 @@
+// przenieść tą funkcje do porfotlios-form.js i posprzątać
+
+// function selectIcon(icon_button="#icon-button") {
+//     $(icon_button).click(function () {
+//         $.ajax({
+//             success: function (response) {
+//                 $("#icons").show();
+//
+//                 $("li").hover(function(){
+//                     $(this).css("background-color", "grey");
+//                 }, function(){
+//                     $(this).css("background-color", "");
+//                 });
+//                 previous_class = '';
+//                 // na kazdy li click i jak kliknie ikonka pojawia sie w innym divie, do forma input type hidden, nadac id '', jak kliknie to zmieniasz mu value.
+//                 $("li").click(function (event){
+//                     var icon_id = event.currentTarget.id;
+//                     console.log(icon_id)
+//                     // zmienic ikonka
+//                     class_to_add = 'form-group col-md-2' + icon_id;
+//                     $("#icon-button").removeClass(previous_class).empty();
+//                     $("#icon-button").addClass(class_to_add).empty();
+//                     previous_class = class_to_add;
+//                     // zamknac div
+//                     $("#icons").hide();
+//                     // zapisac do input hidden
+//                     $("#portfolio-icon").val(icon_id);
+//
+//                 });
+//             }
+//         });
+//     })
+// }
+
+
 function sendComment(submit_button="#submit-btn", username, action_url) {
     $(submit_button).click(function(){
         $.ajax({

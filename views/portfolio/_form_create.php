@@ -4,21 +4,64 @@ use yii\helpers\Html;
 use yii\bootstrap4\ActiveForm;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
+use app\assets\CommentAsset;
+
 
 /* @var $this yii\web\View */
 /* @var $portfolioStructure app\models\PortfolioStructure */
 /* @var $portfolio app\models\Portfolio */
 /* @var $form yii\bootstrap4\ActiveForm */
 /* @var $assetsTypeData app\models\Asset */
+
+const color = ["info", "warning", 'success', 'primary'];
 ?>
 
-
 <div class="portfolio-structure-form">
+
     <div id="form">
 
     <?php $form = ActiveForm::begin(['validateOnSubmit' => false]); ?>
 
-    <?= $form->field($portfolio, 'name')->textInput() ?>
+        <div class="form-row">
+            <div class="form-group col-md-8">
+                <?= $form->field($portfolio, 'name')->textInput() ?>
+            </div>
+
+            <div class="form-group col-md-2">
+                <?php echo $form->field($portfolio, 'icon')->hiddenInput(['value'=> null ])->label(null )?>
+<!--                 zmienić button na diva-->
+                <button type="button" id="icon-button" class="btn btn btn-outline-secondary">Icon</button>
+<!--                niektóre ikony źle się wyświetlają-->
+
+                <div id="icons" style="display: none;"><br>
+                    <ul class="list-group list-group-horizontal">
+                        <li class="list-group-item" id="fas bi bi-credit-card"><i class="fas bi bi-credit-card fa-2x text-gray-300"></i></li>
+                        <li class="list-group-item" id="fas fa-hand-holding-usd"><i class="fas fa-hand-holding-usd fa-2x text-gray-300" style="font-size:28px;"></i></li>
+                        <li class="list-group-item" id="fas bi bi-wallet "><i class="fas bi bi-wallet fa-2x text-gray-300"></i></li>
+
+                    </ul>
+                    <ul class="list-group list-group-horizontal-sm">
+                        <li class="list-group-item" id="fas bi bi-bank"><i class="fas bi bi-bank fa-2x text-gray-300"></i></li>
+                        <li class="list-group-item" id="fas fa-coins"><i class="fas fa-coins fa-2x text-gray-300"></i></li>
+                        <li class="list-group-item" id="fas fa-chart-bar"><i class="fas fa-chart-bar fa-2x text-gray-300"></i></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="form-group col-md-2">
+                <?= $form->field($portfolio, 'color', [
+                    'inputOptions' => [
+                        'class' => 'custom-select',
+                    ]
+                ])->dropdownList([
+                    color[0] => color[0],
+                    'warning' => color[1],
+                    'success' => color[2],
+                    'primary' => color[3]
+                ],
+                    ['prompt'=>'...']) ?>
+            </div>
+        </div>
 
     <?php for($i=1;$i<=8;$i++) {
         if ($i>1) {
@@ -59,7 +102,13 @@ use yii\helpers\Json;
         'class' => 'custom-select',
     ]])->dropdownList(ArrayHelper::map($assetsTypeData, 'id', 'name'),
     ['prompt'=>'Choose asset type here:']);
-    $html .= $form->field($portfolioStructure, 'percentage[]')->textInput(); ?>
+    $html .= $form->field($portfolioStructure, 'percentage[]')->textInput();
+
+//        Select Icon
+$this->registerJs('
+   $(function() {
+        selectIcon("#icon-button");
+    });');?>
 
 
 

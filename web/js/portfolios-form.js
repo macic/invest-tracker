@@ -1,3 +1,35 @@
+function selectIcon(icon_button="#icon-button") {
+    $(icon_button).click(function () {
+        $.ajax({
+            success: function (response) {
+                $("#icons").show();
+
+                $("li").hover(function(){
+                    $(this).css("background-color", "grey");
+                }, function(){
+                    $(this).css("background-color", "");
+                });
+
+                previous_class = '';
+                $("li").click(function (event){
+                    var icon_id = event.currentTarget.id;
+                    console.log(icon_id)
+                    // zmienia ikonke (nie działa remove)
+                    class_to_add = 'form-group col-md-2' + icon_id;
+                    $("#icon-button").removeClass(previous_class).empty();
+                    $("#icon-button").addClass(class_to_add).empty();
+                    previous_class = class_to_add;
+                    // zamknac div
+                    $("#icons").hide();
+                    // zapisac do input hidden
+                    $("#portfolio-icon").val(icon_id);
+
+                });
+            }
+        });
+    })
+}
+
 $(document).ready(function(){
     $("#add-portfolio-asset-btn").click(function(){
         $("#form form .d-none").slice(0,2).removeClass('d-none');
@@ -23,5 +55,5 @@ $(document).ready(function(){
         $("#form form .d-none").each(function(){$(this).remove()});
         return true;
 
-    })
+    });
 });

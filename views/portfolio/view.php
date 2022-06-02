@@ -210,6 +210,6 @@ CommentAsset::register($this);
     $(function () {
     var action_url = '. json_encode('index.php?r=comment%2Fdelete&id='). ';
         deleteComment(".delete-comment-btn", action_url);
-    });')
+    });');
 
         ?>

@@ -11,6 +11,8 @@ use Yii;
  * @property int $id
  * @property string $name
  * @property int $user_id
+ * @property string $icon
+ * @property string $color
  *
  * @property Asset[] $assets
  * @property PortfolioStructure[] $portfolioStructures
@@ -32,7 +34,7 @@ class Portfolio extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'user_id'], 'required'],
-            [['name'], 'string', 'max' => 255],
+            [['name', 'icon', 'color'], 'string', 'max' => 255],
         ];
     }
 
@@ -44,7 +46,9 @@ class Portfolio extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'name' => 'Name',
-            'user_id' => 'User ID'
+            'user_id' => 'User ID',
+            'icon' => 'Icon',
+            'color' => 'Color'
         ];
     }
 
