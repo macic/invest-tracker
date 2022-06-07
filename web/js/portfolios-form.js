@@ -1,28 +1,64 @@
-function selectIcon(icon_button="#icon-button") {
+function selectIcon(icon_button="#icon-select") {
     $(icon_button).click(function () {
         $.ajax({
             success: function (response) {
                 $("#icons").show();
 
-                $("li").hover(function(){
+                $("#icons ul li").hover(function(){
                     $(this).css("background-color", "grey");
                 }, function(){
                     $(this).css("background-color", "");
                 });
 
-                previous_class = '';
-                $("li").click(function (event){
+                $("#icons ul li").click(function (event){
                     var icon_id = event.currentTarget.id;
                     console.log(icon_id)
-                    // zmienia ikonke (nie działa remove)
-                    class_to_add = 'form-group col-md-2' + icon_id;
-                    $("#icon-button").removeClass(previous_class).empty();
-                    $("#icon-button").addClass(class_to_add).empty();
-                    previous_class = class_to_add;
+                    // zmienia ikonke
+                    icon_to_add = '<i style="line-height: 0.75 !important;" class="' + icon_id + ' fa-2x text-gray-300" ></i>';
+                    $("#icon-select").empty();
+                    // zmienić style property
+                    // $("#icon-select").css("line-height", "0.75");
+                    // $("#icon-select").css("line-height", "");
+                    $("#icon-select").append(icon_to_add);
+
+
+
                     // zamknac div
                     $("#icons").hide();
                     // zapisac do input hidden
                     $("#portfolio-icon").val(icon_id);
+
+                });
+            }
+        });
+    })
+}
+
+function selectColor(button="#color-select") {
+    $(button).click(function () {
+        $.ajax({
+            success: function (response) {
+                $("#colors").show();
+
+                $("#colors ul li").click(function (event){
+                    var color_id = event.currentTarget.id;
+                    console.log(color_id)
+                    // zmienia color
+                    color_to_add = '<p class="bg-' + color_id + ' text-' + color_id + '">...</p>';
+                    $("#color-select").empty();
+                    // zmienić style property
+                    // $("#icon-select").css("line-height", "0.75");
+                    // $("#icon-select").css("line-height", "");
+                    $("#color-select").append(color_to_add);
+
+
+
+                    // zamknac div
+                    $("#colors").hide();
+                    // zapisac do input hidden
+                    $("#portfolio-color").val(color_id);
+
+                    // zły zapis do bazy
 
                 });
             }

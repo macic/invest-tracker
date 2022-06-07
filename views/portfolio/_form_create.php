@@ -28,9 +28,17 @@ const color = ["info", "warning", 'success', 'primary'];
             </div>
 
             <div class="form-group col-md-2">
-                <?php echo $form->field($portfolio, 'icon')->hiddenInput(['value'=> null ])->label(null )?>
-<!--                 zmienić button na diva-->
-                <button type="button" id="icon-button" class="btn btn btn-outline-secondary">Icon</button>
+                <?php echo $form->field($portfolio, 'icon', ['options' => [ 'style' => 'margin: 0px']
+                ])->hiddenInput(['value'=> null ])->label(null )?>
+
+                <div class="custom-select" id="icon-select">
+                    Select
+                </div>
+<!--                <style>-->
+<!--                    #icon-select {-->
+<!--                        line-height: 0.75;-->
+<!--                    }-->
+<!--                </style>-->
 <!--                niektóre ikony źle się wyświetlają-->
 
                 <div id="icons" style="display: none;"><br>
@@ -49,17 +57,27 @@ const color = ["info", "warning", 'success', 'primary'];
             </div>
 
             <div class="form-group col-md-2">
-                <?= $form->field($portfolio, 'color', [
-                    'inputOptions' => [
-                        'class' => 'custom-select',
-                    ]
-                ])->dropdownList([
-                    color[0] => color[0],
-                    'warning' => color[1],
-                    'success' => color[2],
-                    'primary' => color[3]
-                ],
-                    ['prompt'=>'...']) ?>
+
+                <?= $form->field($portfolio, 'color', ['options' => [ 'style' => 'margin: 0px']
+                ])->hiddenInput(['value'=> null ])->label(null )?>
+
+                    <div class="custom-select" id="color-select">
+                        <p class="bg-white">Select</p>
+                    </div>
+
+                <div id="colors" style="display: none;"><br>
+                    <ul class="list-group">
+                        <li class="list-group-item list-group-item-action" id="white">white</li>
+                        <li class="list-group-item list-group-item-action bg-primary text-white" id="primary">blue</li>
+                        <li class="list-group-item list-group-item-action bg-secondary text-white" id="secondary">grey</li>
+                        <li class="list-group-item list-group-item-action bg-success text-white" id="success">green</li>
+                        <li class="list-group-item list-group-item-action bg-danger text-white" id="danger">red</li>
+                        <li class="list-group-item list-group-item-action bg-warning text-white" id="warning">yellow</li>
+                        <li class="list-group-item list-group-item-action bg-info text-white" id="info">water</li>
+                        <li class="list-group-item list-group-item-action bg-light" id="light">light</li>
+                        <li class="list-group-item list-group-item-action bg-dark text-white" id="dark">dark</li>
+                    </ul>
+                </div>
             </div>
         </div>
 
@@ -107,8 +125,16 @@ const color = ["info", "warning", 'success', 'primary'];
 //        Select Icon
 $this->registerJs('
    $(function() {
-        selectIcon("#icon-button");
-    });');?>
+        selectIcon("#icon-select");
+    });');
+
+//      Select Color
+$this->registerJs('
+   $(function() {
+        selectColor("#color-select");
+    });');
+
+?>
 
 
 
