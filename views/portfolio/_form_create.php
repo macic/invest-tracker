@@ -5,16 +5,21 @@ use yii\bootstrap4\ActiveForm;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
 use app\assets\CommentAsset;
-
+use yii\web\View;
 
 /* @var $this yii\web\View */
 /* @var $portfolioStructure app\models\PortfolioStructure */
 /* @var $portfolio app\models\Portfolio */
 /* @var $form yii\bootstrap4\ActiveForm */
 /* @var $assetsTypeData app\models\Asset */
+/* @var $defaultIcon string */
+/* @var $defaultColor string */
 
-const color = ["info", "warning", 'success', 'primary'];
+
+
 ?>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
 
 <div class="portfolio-structure-form">
 
@@ -29,55 +34,52 @@ const color = ["info", "warning", 'success', 'primary'];
 
             <div class="form-group col-md-2">
                 <?php echo $form->field($portfolio, 'icon', ['options' => [ 'style' => 'margin: 0px']
-                ])->hiddenInput(['value'=> null ])->label(null )?>
+                ])->hiddenInput(['value'=> $defaultIcon ])->label(null )?>
 
-                <div class="custom-select" id="icon-select">
-                    Select
-                </div>
-<!--                <style>-->
-<!--                    #icon-select {-->
-<!--                        line-height: 0.75;-->
-<!--                    }-->
-<!--                </style>-->
-<!--                niektóre ikony źle się wyświetlają-->
+                <!-- Popover Icon Button-->
+                <button type="button" id="icon-button" class="btn bg-white btn-block" style="height: 38px; border: 1px solid #d1d3e2" data-container="body"
+                        data-toggle="popover" title="Select an icon for portfolio" data-placement="bottom" data-html="true" data-popper-placement="bottom"
+                        data-content="<div id='icons'><ul class='list-group list-group-horizontal'>
+                        <li class='list-group-item' id='fas bi bi-credit-card'><i class='fas bi bi-credit-card fa-fw fa-2x text-gray-300'></i></li>
+                        <li class='list-group-item' id='fas fa-hand-holding-usd'><i class='fas fa-hand-holding-usd fa-fw fa-2x text-gray-300'></i></li>
+                        <li class='list-group-item' id='fas bi bi-wallet'><i class='fas bi bi-wallet fa-fw fa-2x text-gray-300'></i></li>
+                        </ul>
+                        <ul class='list-group list-group-horizontal-sm'>
+                        <li class='list-group-item' id='fa fa-money'><i class='fa fa-money fa-fw fa-2x text-gray-300'></i></li>
+                        <li class='list-group-item' id='fas fa-coins'><i class='fas fa-coins fa-fw fa-2x text-gray-300'></i></li>
+                        <li class='list-group-item' id='fas fa-chart-bar'><i class='fas fa-chart-bar fa-fw fa-2x text-gray-300'></i></li>
+                        </ul>
+                        <ul class='list-group list-group-horizontal-sm'>
+                        <li class='list-group-item' id='fa fa-graduation-cap'><i class='fa fa-fw fa-graduation-cap fa-2x text-gray-300'></i></li>
+                        <li class='list-group-item' id='fa fa-plane'><i class='fa fa-plane fa-fw fa-2x text-gray-300'></i></li>
+                        <li class='list-group-item' id='fa fa-child'><i class='fa fa-child fa-fw fa-2x text-gray-300'></i></li>
+                        </ul></div>">
+                     Select   <i class="fas fa-angle-down"></i>
+                </button>
 
-                <div id="icons" style="display: none;"><br>
-                    <ul class="list-group list-group-horizontal">
-                        <li class="list-group-item" id="fas bi bi-credit-card"><i class="fas bi bi-credit-card fa-2x text-gray-300"></i></li>
-                        <li class="list-group-item" id="fas fa-hand-holding-usd"><i class="fas fa-hand-holding-usd fa-2x text-gray-300" style="font-size:28px;"></i></li>
-                        <li class="list-group-item" id="fas bi bi-wallet "><i class="fas bi bi-wallet fa-2x text-gray-300"></i></li>
-
-                    </ul>
-                    <ul class="list-group list-group-horizontal-sm">
-                        <li class="list-group-item" id="fas bi bi-bank"><i class="fas bi bi-bank fa-2x text-gray-300"></i></li>
-                        <li class="list-group-item" id="fas fa-coins"><i class="fas fa-coins fa-2x text-gray-300"></i></li>
-                        <li class="list-group-item" id="fas fa-chart-bar"><i class="fas fa-chart-bar fa-2x text-gray-300"></i></li>
-                    </ul>
-                </div>
             </div>
 
             <div class="form-group col-md-2">
 
                 <?= $form->field($portfolio, 'color', ['options' => [ 'style' => 'margin: 0px']
-                ])->hiddenInput(['value'=> null ])->label(null )?>
+                ])->hiddenInput(['value'=> $defaultColor ])->label(null )?>
 
-                    <div class="custom-select" id="color-select">
-                        <p class="bg-white">Select</p>
-                    </div>
-
-                <div id="colors" style="display: none;"><br>
-                    <ul class="list-group">
-                        <li class="list-group-item list-group-item-action" id="white">white</li>
-                        <li class="list-group-item list-group-item-action bg-primary text-white" id="primary">blue</li>
-                        <li class="list-group-item list-group-item-action bg-secondary text-white" id="secondary">grey</li>
-                        <li class="list-group-item list-group-item-action bg-success text-white" id="success">green</li>
-                        <li class="list-group-item list-group-item-action bg-danger text-white" id="danger">red</li>
-                        <li class="list-group-item list-group-item-action bg-warning text-white" id="warning">yellow</li>
-                        <li class="list-group-item list-group-item-action bg-info text-white" id="info">water</li>
-                        <li class="list-group-item list-group-item-action bg-light" id="light">light</li>
-                        <li class="list-group-item list-group-item-action bg-dark text-white" id="dark">dark</li>
-                    </ul>
-                </div>
+                <!-- Popover Color Button-->
+                <button type="button" id="color-button" class="btn bg-white btn-block" style="height: 38px; border: 1px solid #d1d3e2" data-container="body"
+                        data-toggle="popover" title="Select color for portfolio"  data-placement="bottom" data-html="true"
+                        data-content="<div id='colors'><ul class='list-group'>
+                <li class='list-group-item list-group-item-action' id='white'>white</li>
+                <li class='list-group-item list-group-item-action bg-primary text-white' id='primary'>blue</li>
+                <li class='list-group-item list-group-item-action bg-secondary text-white' id='secondary'>grey</li>
+                <li class='list-group-item list-group-item-action bg-success text-white' id='success'>green</li>
+                <li class='list-group-item list-group-item-action bg-danger text-white' id='danger'>red</li>
+                <li class='list-group-item list-group-item-action bg-warning text-white' id='warning'>yellow</li>
+                <li class='list-group-item list-group-item-action bg-info text-white' id='info'>water</li>
+                <li class='list-group-item list-group-item-action bg-light' id='light'>light</li>
+                <li class='list-group-item list-group-item-action bg-dark text-white' id='dark'>dark</li>
+                </ul></div>">
+                    Select   <i class="fa fa-angle-down"></i>
+                </button>
             </div>
         </div>
 
@@ -115,6 +117,9 @@ const color = ["info", "warning", 'success', 'primary'];
     <?php ActiveForm::end(); ?>
 
 </div>
+
+
+
 <?php $html = $form->field($portfolioStructure, 'asset_type_id[]',[
     'inputOptions' => [
         'class' => 'custom-select',
@@ -122,16 +127,17 @@ const color = ["info", "warning", 'success', 'primary'];
     ['prompt'=>'Choose asset type here:']);
     $html .= $form->field($portfolioStructure, 'percentage[]')->textInput();
 
-//        Select Icon
+    // Select Icon
 $this->registerJs('
    $(function() {
-        selectIcon("#icon-select");
+        selectEntity("#icon-button");
     });');
 
 //      Select Color
 $this->registerJs('
    $(function() {
-        selectColor("#color-select");
+        selectEntity("#color-button", items_selector= "#colors ul li", input_hidden="#portfolio-color", 
+        template= (icon_id) => `<p class="bg-${icon_id} text-${icon_id}">...</p>`)
     });');
 
 ?>

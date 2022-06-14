@@ -16,21 +16,42 @@ CommentAsset::register($this);
 ?>
 <div class="portfolio-structure-view">
 
-    <h1><?= Html::encode($item->name) . " Portfolio" ?></h1>
-
-    <p>
-        <?= Html::a('Update', ['update', 'id' => $item->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $item->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this portfolio?',
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
-
-    <div class="row mb-3">
+    <!-- Portfolio Cards -->
+    <div class="row">
+        <div class="col-xl-10 col-md-10 mb-4">
+        <div class="card border-left-<?php echo $item->color ?> shadow h-100 ">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="h3 card-title text font-weight-bold text-<?php echo $item->color ?> text-uppercase mb-1">
+                           <?php echo $item->name; ?> PORTFOLIO</div>
+                        <div class="h4 mb-0 font-weight-bold text-gray-800"><?php echo number_format($item->getSummary(), 2, '.', ' ') . " PLN" ?>
+                        </div>
+                    </div>
+                    <div class="col-auto p-3">
+                        <i class="<?php echo $item->icon ?> fa-5x text-gray-300"></i>
+                    </div>
+                </div>
+                <div class="row no-gutters align-items-center pt-2">
+                    <p>
+                        <?= Html::a('Update', ['update', 'id' => $item->id], ['class' => 'btn btn-primary']) ?>
+                        <?= Html::a('Delete', ['delete', 'id' => $item->id], [
+                            'class' => 'btn btn-danger',
+                            'data' => [
+                                'confirm' => 'Are you sure you want to delete this portfolio?',
+                                'method' => 'post',
+                            ],
+                        ]) ?>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- Table -->
+    <div class="row">
         <div class="col-md-10">
+            <div class="card mb-4 shadow">
         <table class="table table-sm table-hover ">
         <thead>
         <tr>
@@ -56,10 +77,11 @@ CommentAsset::register($this);
             <tfoot>
             <td></td>
             <td></td>
-            <td class="table-active">Summary:</td>
-            <td class="table-active"><?= number_format($item->getSummary(), 2, '.',' ') ?> PLN</td>
+            <td><b>Summary:</b></td>
+            <td><b><?= number_format($item->getSummary(), 2, '.',' ') ?> PLN</b></td>
             </tfoot>
         </table>
+            </div>
         </div>
     </div>
 
@@ -158,7 +180,8 @@ CommentAsset::register($this);
             </div>
         </div>
     </div>
-   <?php
+
+        <?php
 
    $labels = array();
    $data = array();

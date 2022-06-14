@@ -74,7 +74,7 @@ class PortfolioController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate($icon = "fas fa-coins", $color = "info")
+    public function actionCreate()
     {
         $assetsTypeData = AssetType::find()->all();
         $portfolio = new Portfolio();
@@ -86,8 +86,6 @@ class PortfolioController extends Controller
         if (count($postData) > 0) {
 
             $portfolio->user_id = Yii::$app->user->getId();
-            $portfolio->icon = $icon;
-            $portfolio->color = $color;
 
             if ($portfolio->load($postData) && $portfolio->save()) {
                 $count = count($postData['PortfolioStructure']['asset_type_id']);
@@ -109,9 +107,10 @@ class PortfolioController extends Controller
             'portfolioStructure' => $portfolioStructure,
             'portfolio' => $portfolio,
             'assetsTypeData' => $assetsTypeData,
+            'defaultIcon'=> 'fas fa-coins',
+            'defaultColor' => 'info'
+
         ]);
-
-
     }
 
     /**

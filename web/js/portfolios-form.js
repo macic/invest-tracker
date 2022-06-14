@@ -1,69 +1,32 @@
-function selectIcon(icon_button="#icon-select") {
-    $(icon_button).click(function () {
-        $.ajax({
-            success: function (response) {
-                $("#icons").show();
+function selectEntity(icon_button = "#icon-button", items_selector= "#icons ul li",
+                      input_hidden="#portfolio-icon",
+                      template= (icon_id) => `<i style="line-height: 0.75 !important;" class="${icon_id} fa-2x text-gray-300" ></i`) {
 
-                $("#icons ul li").hover(function(){
-                    $(this).css("background-color", "grey");
-                }, function(){
-                    $(this).css("background-color", "");
-                });
+    $(icon_button).popover().on('shown.bs.popover', function() {
+        $this=this;
 
-                $("#icons ul li").click(function (event){
-                    var icon_id = event.currentTarget.id;
-                    console.log(icon_id)
-                    // zmienia ikonke
-                    icon_to_add = '<i style="line-height: 0.75 !important;" class="' + icon_id + ' fa-2x text-gray-300" ></i>';
-                    $("#icon-select").empty();
-                    // zmienić style property
-                    // $("#icon-select").css("line-height", "0.75");
-                    // $("#icon-select").css("line-height", "");
-                    $("#icon-select").append(icon_to_add);
-
-
-
-                    // zamknac div
-                    $("#icons").hide();
-                    // zapisac do input hidden
-                    $("#portfolio-icon").val(icon_id);
-
-                });
-            }
+        $(items_selector).hover(function(){
+            $(this).css("background-color", "grey");
+        }, function(){
+            $(this).css("background-color", "");
         });
-    })
-}
 
-function selectColor(button="#color-select") {
-    $(button).click(function () {
-        $.ajax({
-            success: function (response) {
-                $("#colors").show();
+        $(items_selector).click(function (event) {
+            var icon_id = event.currentTarget.id;
+            // zmienia ikonke
+            icon_to_add = template(icon_id);
+            $(icon_button).empty();
 
-                $("#colors ul li").click(function (event){
-                    var color_id = event.currentTarget.id;
-                    console.log(color_id)
-                    // zmienia color
-                    color_to_add = '<p class="bg-' + color_id + ' text-' + color_id + '">...</p>';
-                    $("#color-select").empty();
-                    // zmienić style property
-                    // $("#icon-select").css("line-height", "0.75");
-                    // $("#icon-select").css("line-height", "");
-                    $("#color-select").append(color_to_add);
+            // zmienić style property
+            $(icon_button).append(icon_to_add);
 
+            // zapisac do input hidden
+            $(input_hidden).val(icon_id);
 
-
-                    // zamknac div
-                    $("#colors").hide();
-                    // zapisac do input hidden
-                    $("#portfolio-color").val(color_id);
-
-                    // zły zapis do bazy
-
-                });
-            }
+            //zamknąć popover
+            $(icon_button).popover('hide');
         });
-    })
+    });
 }
 
 $(document).ready(function(){
