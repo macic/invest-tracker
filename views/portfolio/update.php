@@ -6,9 +6,12 @@ use yii\helpers\Html;
 /* @var $portfolioStructure app\models\PortfolioStructure */
 /* @var $assetsTypeData app\models\Asset */
 /* @var $portfolio app\models\Portfolio */
+/* @var $defaultIcon string */
+/* @var $defaultColor string */
 
 
-//$this->title = 'Update Portfolio Structure: ' . $portfolioStructure->id;
+
+$this->title = 'Update Portfolio Structure';
 $this->params['breadcrumbs'][] = ['label' => 'Portfolio Structures', 'url' => ['index']];
 //$this->params['breadcrumbs'][] = ['label' => $portfolioStructure->id, 'url' => ['view', 'id' => $portfolioStructure->id]];
 $this->params['breadcrumbs'][] = 'Update';
@@ -21,7 +24,9 @@ $this->params['breadcrumbs'][] = 'Update';
     <?= $this->render('_form', [
         'portfolioStructure' => $portfolioStructure,
         'assetsTypeData' => $assetsTypeData,
-        'portfolio' => $portfolio
+        'portfolio' => $portfolio,
+        'defaultIcon'=> $defaultIcon,
+        'defaultColor' => $defaultColor
 
     ]) ?>
 

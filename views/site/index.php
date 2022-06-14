@@ -4,6 +4,8 @@
 /* @var $items array */
 /* @var $sum float */
 
+
+
 use app\assets\AppAsset;
 
 AppAsset::register($this);
@@ -70,72 +72,74 @@ AppAsset::register($this);
     <div class="container mt-n5">
     <div class="row">
 
-        <!-- Safety Pillow Card -->
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-primary shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                safety cushion</div>
-                            <div class="row no-gutters align-items-center">
-                                <div class="col-auto">
-                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
-                                </div>
-                                <div class="col">
-                                    <div class="progress progress-sm mr-2">
-                                        <div class="progress-bar bg-primary" role="progressbar"
-                                             style="width: 50%" aria-valuenow="50" aria-valuemin="0"
-                                             aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-bed fa-2x text-gray-300"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <!-- Safety Cushion Card Zostawiam bo fajny progress bar tu jest -->
+<!--        <div class="col-xl-3 col-md-6 mb-4">-->
+<!--            <div class="card border-left-primary shadow h-100 py-2">-->
+<!--                <div class="card-body">-->
+<!--                    <div class="row no-gutters align-items-center">-->
+<!--                        <div class="col mr-2">-->
+<!--                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">-->
+<!--                                safety cushion</div>-->
+<!--                            <div class="row no-gutters align-items-center">-->
+<!--                                <div class="col-auto">-->
+<!--                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>-->
+<!--                                </div>-->
+<!--                                <div class="col">-->
+<!--                                    <div class="progress progress-sm mr-2">-->
+<!--                                        <div class="progress-bar bg-primary" role="progressbar"-->
+<!--                                             style="width: 50%" aria-valuenow="50" aria-valuemin="0"-->
+<!--                                             aria-valuemax="100"></div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-auto">-->
+<!--                            <i class="fas fa-bed fa-2x text-gray-300"></i>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
 
-        <!-- Longterm Card -->
+        <?php foreach ($items as $portfolio):?>
+        <!-- Portfolio Cards -->
         <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-success shadow h-100 py-2">
+            <div class="card border-left-<?php echo $portfolio->color ?> shadow h-100 py-2">
                 <div class="card-body">
-                    <div class="row no-gutters align-items-center">
+                    <a class="row no-gutters align-items-center" style="text-decoration:none;" href="<?php echo yii\helpers\Url::to(['/portfolio/view', 'id'=>$portfolio['id']])?>">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                longterm savings</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">215,450 PLN</div>
+                            <div class="text-xs font-weight-bold text-<?php echo $portfolio->color ?> text-uppercase mb-1">
+                                <?php echo $portfolio->name; ?></div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo number_format($portfolio->getSummary(), 2, '.', ' ') . " PLN" ?>
+                                </div>
                         </div>
                         <div class="col-auto">
-                            <i class="fas fa-hand-holding-usd fa-2x text-gray-300"></i>
+                            <i class="<?php echo $portfolio->icon ?> fa-2x text-gray-300"></i>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
         </div>
+        <?php endforeach ?>
 
         <!-- Speculating Card -->
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-info shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Dyvidend wallet
-                            </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">21,000 PLN</div>
-
-                        </div>
-                        <div class="col-auto">
-                            <i class="fab fa-bitcoin fa-3x text-gray-300"></i>
-<!--                            <i class="fas fa-wallet fa-2x text-gray-300"></i>-->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+<!--        <div class="col-xl-3 col-md-6 mb-4">-->
+<!--            <div class="card border-left-info shadow h-100 py-2">-->
+<!--                <div class="card-body">-->
+<!--                    <div class="row no-gutters align-items-center">-->
+<!--                        <div class="col mr-2">-->
+<!--                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Dyvidend wallet-->
+<!--                            </div>-->
+<!--                            <div class="h5 mb-0 font-weight-bold text-gray-800">21,000 PLN</div>-->
+<!---->
+<!--                        </div>-->
+<!--                        <div class="col-auto">-->
+<!--                            <i class="fas fa-hand-holding-usd fa-2x text-gray-300"></i>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
 
         <!-- Total Balance Card -->
         <div class="col-xl-3 col-md-6 mb-4">
@@ -148,7 +152,7 @@ AppAsset::register($this);
                             <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo number_format($sum, 2, '.', ' ') . " PLN" ?></div>
                         </div>
                         <div class="col-auto">
-                            <i class="fas fa-coins fa-2x text-gray-300"></i>
+                            <i class="fas bi bi-bank fa-2x text-gray-300"></i>
                         </div>
                     </div>
                 </div>
