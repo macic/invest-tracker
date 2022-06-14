@@ -155,6 +155,7 @@ class PortfolioController extends Controller
                     'assetsTypeData' => $assetsTypeData,
                     'portfolio' => $portfolio,
 
+
                 ]);
 
 
@@ -172,6 +173,8 @@ class PortfolioController extends Controller
                 'portfolioStructure' => $portfolioStructure,
                 'portfolio' => $portfolio,
                 'assetsTypeData' => $assetsTypeData,
+                'defaultIcon'=> 'fas fa-coins',
+                'defaultColor' => 'info'
 
             ]);
 
