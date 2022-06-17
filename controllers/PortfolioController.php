@@ -155,10 +155,7 @@ class PortfolioController extends Controller
                     'assetsTypeData' => $assetsTypeData,
                     'portfolio' => $portfolio,
 
-
                 ]);
-
-
             }
 
         } else {

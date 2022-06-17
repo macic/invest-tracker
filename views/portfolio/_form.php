@@ -9,8 +9,7 @@ use yii\helpers\ArrayHelper;
 /* @var $portfolio app\models\Portfolio */
 /* @var $form yii\bootstrap4\ActiveForm */
 /* @var $assetsTypeData app\models\Asset */
-/* @var $defaultIcon string */
-/* @var $defaultColor string */
+
 ?>
 
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>

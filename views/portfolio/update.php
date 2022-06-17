@@ -6,8 +6,6 @@ use yii\helpers\Html;
 /* @var $portfolioStructure app\models\PortfolioStructure */
 /* @var $assetsTypeData app\models\Asset */
 /* @var $portfolio app\models\Portfolio */
-/* @var $defaultIcon string */
-/* @var $defaultColor string */
 
 
 
@@ -25,8 +23,7 @@ $this->params['breadcrumbs'][] = 'Update';
         'portfolioStructure' => $portfolioStructure,
         'assetsTypeData' => $assetsTypeData,
         'portfolio' => $portfolio,
-        'defaultIcon'=> $defaultIcon,
-        'defaultColor' => $defaultColor
+
 
     ]) ?>
 
