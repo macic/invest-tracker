@@ -1,9 +1,11 @@
 <?php
-namespace console\controllers;
+namespace app\commands;
 
 use Yii;
 use yii\helpers\Url;
 use yii\console\Controller;
+use yii\console\ExitCode;
+use http\Client;
 
 class MarketstackController extends Controller
 {
@@ -28,6 +30,51 @@ class MarketstackController extends Controller
             'date_to' => '2022-06-20',
         ]);
 
+        /***
+         * Array
+        (
+            [pagination] => Array
+                (
+                [limit] => 100
+                [offset] => 0
+                [count] => 1
+                [total] => 1
+                )
+
+            [data] => Array
+                (
+                [name] => PZU
+                [symbol] => PZU
+                [country] =>
+                [has_intraday] =>
+                [has_eod] => 1
+                [eod] => Array
+                (
+                    [0] => Array
+                    (
+                    [open] => 29.95
+                    [high] => 29.98
+                    [low] => 29.44
+                    [close] => 29.95
+                    [volume] => 1121044
+                    [adj_high] =>
+                    [adj_low] =>
+                    [adj_close] => 29.95
+                    [adj_open] =>
+                    [adj_volume] =>
+                    [split_factor] => 1
+                    [dividend] => 0
+                    [symbol] => PZU.XWAR
+                    [exchange] => XWAR
+                    [date] => 2022-06-20T00:00:00+0000
+                    )
+
+                )
+
+            )
+
+        )
+         */
         $ch = curl_init(sprintf('%s?%s', 'http://api.marketstack.com/v1/tickers/pzu.xwar/eod', $queryString));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
