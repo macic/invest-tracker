@@ -15,12 +15,12 @@ use yii\helpers\ArrayHelper;
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
 
 <div class="portfolio-structure-form">
-    <div id="form">
+    <div id="form" >
 
     <?php $form = ActiveForm::begin(); ?>
 
         <div class="form-row">
-            <div class="form-group col-md-8">
+            <div class="form-group col-md-8" style="margin-bottom: 0.5rem">
                 <?= $form->field($portfolio, 'name')->textInput() ?>
             </div>
 
@@ -80,20 +80,26 @@ use yii\helpers\ArrayHelper;
         echo $form->field($structure, '['.$i.']id')->hiddenInput(['value'=>$structure->id])->label(false);
     }?>
 
-    <?= $form->field($structure, '['.$i.']asset_type_id',[
-        'inputOptions' => [
-            'class' => 'custom-select',
-        ]])->dropdownList(ArrayHelper::map($assetsTypeData, 'id', 'name'),
-        ['prompt'=>'Choose asset type here:',
-          'options' => [$structure->asset_type_id =>["Selected"=>true]]
-            ]) ?>
-
-    <?= $form->field($structure, '['.$i.']percentage')->textInput([
-            'value' => $structure->percentage
-        ]) ?>
+    <div class="form-row">
+        <div class="form-group col-md-offset-6" style="margin-bottom: 0.5rem">
+            <?= $form->field($structure, '['.$i.']asset_type_id',[
+                'inputOptions' => [
+                    'class' => 'custom-select',
+                ]])->dropdownList(ArrayHelper::map($assetsTypeData, 'id', 'name'),
+                ['prompt'=>'Choose asset type here:',
+                  'options' => [$structure->asset_type_id =>["Selected"=>true]]
+                    ]) ?>
+        </div>
+        <div class="form-group col-md-offset-6" style="margin-bottom: 0.5rem">
+            <?= $form->field($structure, '['.$i.']percentage')->textInput([
+                    'value' => $structure->percentage
+                ]) ?>
+        </div>
+    </div>
 
     <?php $i++; endforeach; ?>
-
+<!-- tu jest coś nie tak, co to znaczy j=i ???-->
+<!--  A jakby dodać tylko 1 asset do dopisania zamiast 8       -->
     <?php $j=$i; for($i=$j;$i<=8;$i++) {
         $display = 'd-none';
         ?>
@@ -106,7 +112,8 @@ use yii\helpers\ArrayHelper;
             ['prompt'=>'Choose asset type here:']) ?>
 
         <?= $form->field($structure, '['.$i.']percentage', ['options'=>['class'=>'form-group '.$display, 'selectors' => ['input' => '#percentage_'.$i],]])->textInput(['id'=>'percentage_'.$i,'class' => 'form-control assets']); ?>
-        <?= $form->field($structure, '['.$i.']portfolio_id')->hiddenInput(['value'=>$portfolio->id])->label(false); ?>
+
+                <?= $form->field($structure, '['.$i.']portfolio_id')->hiddenInput(['value'=>$portfolio->id])->label(false); ?>
 
         <?php } ?>
 

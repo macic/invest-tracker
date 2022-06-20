@@ -34,7 +34,7 @@ class PortfolioStructure extends \yii\db\ActiveRecord
         return [
             [['portfolio_id', 'asset_type_id', 'percentage'], 'integer'],
             [['asset_type_id'], 'exist', 'skipOnError' => true, 'targetClass' => AssetType::className(), 'targetAttribute' => ['asset_type_id' => 'id']],
-            [['asset_type_id', 'percentage'], 'required'],
+//            [['asset_type_id', 'percentage'], 'required'],
             [['portfolio_id'], 'exist', 'skipOnError' => true, 'targetClass' => Portfolio::className(), 'targetAttribute' => ['portfolio_id' => 'id']],
         ];
     }

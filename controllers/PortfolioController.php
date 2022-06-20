@@ -122,18 +122,19 @@ class PortfolioController extends Controller
      */
     public function actionUpdate(int $id)
     {
-
+        //        wyłączyłam w modelu to:    [['asset_type_id', 'percentage'], 'required'],
+        //          przy submicie tworzy null w polach nieużytych,
 
         $assetsTypeData = AssetType::find()->all();
-
         $postData = Yii::$app->request->post();
+
         if (count($postData) > 0) {
             #update portfolio name
             $portfolio = Portfolio::findOne($id);
             if ($portfolio->load($postData) && $portfolio->save()) {
 
                 unset($postData['Portfolio']);
-
+                // pokazuje dane z bazy, tyle ile ich wpisano
                 $portfolioStructure = $portfolio->portfolioStructure;
                 $count = count(Yii::$app->request->post('PortfolioStructure', []));
                 for ($i = 1; $i < $count; $i++) {

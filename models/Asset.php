@@ -43,7 +43,7 @@ class Asset extends \yii\db\ActiveRecord
         return [
             [['account_id', 'quantity', 'portfolio_id', 'asset_type_id'], 'integer'],
             [['buy_date'], 'date', 'format' => 'php:Y-m-d'],
-            [['buy_price', 'quantity', 'buy_date', 'stock'], 'required'],
+            [['buy_price', 'quantity', 'buy_date', 'stock', 'account_id', 'quantity', 'portfolio_id', 'asset_type_id'], 'required'],
             [['buy_price', 'last_price'], 'number'],
             [['name', 'ticker', 'currency', 'stock'], 'string', 'max' => 255],
             [['account_id'], 'exist', 'skipOnError' => true, 'targetClass' => Account::className(), 'targetAttribute' => ['account_id' => 'id']],
@@ -107,7 +107,7 @@ class Asset extends \yii\db\ActiveRecord
         return $this->portfolio->name;
     }
 
-    public function getType()
+    public function getType(): string
     {
         return $this->assetType->name;
     }

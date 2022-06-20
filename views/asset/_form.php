@@ -26,25 +26,32 @@ const currency = ["PLN", "EUR", 'USD', 'GBP'];
         'options' => ['class'=>'asset'],
 
     ]); ?>
+
+        // dodałam do trzech poniższych 'required' => true, i w modelu dopisałam 'required'
         <div class="row">
             <div class="col">
     <?= $form->field($model, 'account_id',[
         'inputOptions' => [
-            'class' => 'custom-select',
+                'required' => true,
+                'class' => 'custom-select',
         ]])->dropdownList(ArrayHelper::map($accountsData, 'id', 'accountName'),
         ['prompt'=>'Choose account here:']) ?>
             </div>
+
             <div class="col">
     <?= $form->field($model, 'asset_type_id',[
         'inputOptions' => [
+            'required' => true,
             'class' => 'custom-select',
         ]])->dropdownList(ArrayHelper::map($assetsTypeData, 'id', 'name'),
         ['prompt'=>'Choose asset type here:']) ?>
             </div></div>
+
         <div class="row">
             <div class="col">
     <?= $form->field($model, 'portfolio_id',[
             'inputOptions' => [
+                'required' => true,
                 'class' => 'custom-select',
             ]])->dropdownList(ArrayHelper::map($portfolioData, 'id', 'name'),
             ['prompt'=>'Choose portfolio here:']) ?>

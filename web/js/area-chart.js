@@ -30,6 +30,7 @@ function displayArea($element, labels, data) {
         data: {
             labels: labels,
                 //["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+            // labels: 1 dzien kwartału danego roku np. 1 jan 2022
             datasets: [{
                 label: "Earnings",
                 lineTension: 0.3,
@@ -44,7 +45,10 @@ function displayArea($element, labels, data) {
                 pointHitRadius: 10,
                 pointBorderWidth: 2,
                 data: data
-                    // [0, 10000, 5000, 15000, 10000, 20000, 15000, 25000, 20000, 30000, 25000, 40000],
+                    // [0, 100, 10000, 5000, 15000, 10000, 20000, 15000, 25000, 20000, 30000, 25000, 40000],
+                // data to musiałby być total balance z danego dnia
+                // do tego potrzebna jest tabela assset_price_history, która pobiera dane i funkcja,
+                // którapoliczy $sumę na dany dzień
             }],
         },
         options: {
