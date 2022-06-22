@@ -12,14 +12,6 @@ use yii\helpers\ArrayHelper;
 
 
 ?>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-    $(document).ready(function(){
-        $("#add-holder-btn").click(function(){
-            $("#account-holder-div").slideToggle();
-        });
-    });
-</script>
 
         <?php $form = ActiveForm::begin([
             'id' => 'account-form',
@@ -73,6 +65,14 @@ use yii\helpers\ArrayHelper;
 <button type="button" class="btn btn-outline-info btn-sm "id="add-holder-btn">Add new holder</button>
 </div>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $("#add-holder-btn").click(function(){
+            $("#account-holder-div").slideToggle();
+        });
+    });
+</script>
 
 <div style="display: none;" id="account-holder-div" class="col-md-pull-6">
 

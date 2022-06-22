@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\Account;
 use app\models\AssetType;
+use app\models\Comment;
 use app\models\Portfolio;
 use Yii;
 use app\models\Asset;
@@ -62,19 +63,19 @@ class AssetController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionView(int $id)
     {
-        $item = Asset::find()->where(['id' => $id])->one();
-
-//        foreach ($item as $items) {
-//            $account_name = $items->account->name;
+        $asset = Asset::findOne($id);
+        $asset_id = $asset->id;
+        $publishedComments = Comment::find()->where(['asset_id' => $asset_id])->all();
+        $comment = new Comment();
 
             return $this->render('view', [
                 'model' => $this->findModel($id),
-                'item' => $item,
-     //           'account_name' => $account_name
+                'item' => $asset,
+                'comment' => $comment,
+                'publishedComments' => $publishedComments
             ]);
-    //    }
     }
 
     /**

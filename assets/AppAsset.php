@@ -25,7 +25,7 @@ class AppAsset extends AssetBundle
 //        'https://code.jquery.com/ui/1.12.1/jquery-ui.js',
         'vendor/chart.js/Chart.min.js',
         'js/charts.js',
-        'js/area-chart.js'
+        'js/area-chart.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

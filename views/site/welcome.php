@@ -40,8 +40,8 @@ WelcomeAsset::register($this);
         <nav class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm" id="mainNav">
             <div class="container px-5">
                 <a class="navbar-brand fw-bold" href="#page-top">
-                        <div class="sidebar-brand-text mx-3">
-                            <i class="fab fa-artstation" style="font-size: 1.5rem"></i> Invest Tracker</div>
+                        <div class="sidebar-brand-text mx-3 ">
+                            <i class="fab fa-artstation rotate-n-15" style="d-inline-block align-top font-size: 1.5rem "></i> Invest Tracker</div>
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
@@ -50,7 +50,7 @@ WelcomeAsset::register($this);
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <div class="navbar-nav ms-auto me-4 my-3 my-lg-0">
                         <li class="nav-item"><a class="nav-link me-lg-3" href="#pricing">Pricing</a></li>
-                        <li class="nav-item active"><a class="nav-link me-lg-3" href="<?php yii\helpers\Url::to(['site/login'])?>">Login</a></li>
+                        <li class="nav-item"><a class="nav-link me-lg-3" href="myFunction()">Login</a></li>
                     </div>
                     <button class="btn btn-primary rounded-pill px-3 mb-2 mb-lg-0" data-bs-toggle="modal" data-bs-target="#feedbackModal">
                         <span class="d-flex align-items-center">
@@ -60,7 +60,6 @@ WelcomeAsset::register($this);
                     </button>
                 </div>
             </div>
-        </div>
         </nav>
     </head>
 
@@ -138,11 +137,17 @@ WelcomeAsset::register($this);
     </header>
     <!-- Pricing features -->
     <section id="pricing">
-        <div class="container px-5">
-            <div class="row">
-                <div class="col-md-4">
-            <div class="card" style="width: 21rem; height: 100%">
-                <div class="card-body text-center shadow">
+        <div class="container px-xl-5 px-sm-1">
+            <div class="container mb-5">
+            <div class="text-center font-alt">
+                <h1 class="text-primary mb-2 font-alt ">Pricing Plans</h1>
+                <p class>Start out small and upgrade as you grow. No surprises, no hassle.</p>
+            </div>
+            </div>
+            <div class="row justify-content-center font-alt gx-3">
+                <div class="col-xl-4 col-lg-6 mb-4 mb-xl-0">
+            <div class="card h-100">
+                <div class="card-body text-center shadow-sm">
                     <i class="bi-gift icon-feature text-gradient d-block mb-3"></i>
                     <p class="card-title text-muted mb-0">Most popular</p>
                     <h3 class="card-title font-alt">Free Trail</h3>
@@ -157,9 +162,10 @@ WelcomeAsset::register($this);
                 </div>
             </div>
                 </div>
-                <div class="col-md-4">
-            <div class="card"style="width: 21rem; height: 100%">
-                <div class="card-body text-center shadow" style="width: 21rem; height: 100%">
+                <div class="col-xl-4 col-lg-6 mb-4 mb-xl-0">
+<!--            <div class="card"style="width: 21rem; height: 100%">-->
+            <div class="card h-100">
+                <div class="card-body text-center shadow">
                     <i class="bi-phone icon-feature text-gradient d-block mb-3"></i>
                     <p class="text-muted mb-0">0,33€ per Trading Day</p>
                     <h3 class="font-alt">10€ / month</h3>
@@ -172,9 +178,9 @@ WelcomeAsset::register($this);
                 </div>
             </div>
                 </div>
-                <div class="col-md-4">
-            <div class="card" style="width: 21rem; height: 100%">
-                <div class="card-body text-center shadow">
+                <div class="col-xl-4 col-lg-6 mb-4 mb-xl-0">
+            <div class="card h-100">
+                <div class="card-body text-center shadow-lg">
                     <i class="bi-patch-check icon-feature text-gradient d-block mb-3"></i>
                     <p class="text-muted mb-0">Best offer!</p>
                     <h3 class="font-alt">69€ / year</h3>
@@ -306,3 +312,8 @@ WelcomeAsset::register($this);
     <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
     <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script>
+        function myFunction() {
+            location.replace('[site/login]')
+        }
+    </script>

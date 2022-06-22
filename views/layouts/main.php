@@ -39,6 +39,8 @@ AppAsset::register($this);
         <!-- Custom styles for this template-->
         <link href="css/sb-admin-2.min.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+<!--        <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>-->
+
 
     </head>
 
@@ -333,7 +335,7 @@ AppAsset::register($this);
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">
-                                   <?php echo Yii::$app->user->identity->getDisplayName() ?>
+                                   <?php echo ucfirst(Yii::$app->user->identity->getDisplayName()) ?>
                                 </span>
                                 <img class="img-profile rounded-circle"
                                      src="img/undraw_profile.svg">

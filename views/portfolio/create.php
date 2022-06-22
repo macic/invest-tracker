@@ -6,6 +6,8 @@ use yii\helpers\Html;
 /* @var $portfolioStructure app\models\PortfolioStructure */
 /* @var $portfolio app\models\Portfolio */
 /* @var $assetsTypeData app\models\Asset */
+/* @var $defaultIcon string */
+/* @var $defaultColor string */
 
 
 $this->title = 'Create Portfolio Structure';
@@ -21,6 +23,9 @@ $this->params['breadcrumbs'][] = $this->title;
         'portfolioStructure' => $portfolioStructure,
         'portfolio' => $portfolio,
         'assetsTypeData' => $assetsTypeData,
+        'defaultIcon'=> $defaultIcon,
+        'defaultColor' => $defaultColor
+
     ]) ?>
 
 </div>

@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\Asset;
 use app\models\AssetType;
+use app\models\Comment;
 use app\models\Portfolio;
 use TheSeer\Tokenizer\Exception;
 use Yii;
@@ -55,12 +56,16 @@ class PortfolioController extends Controller
      */
     public function actionView(int $id)
     {
-        $portfolio = Portfolio::findOne($id);
+       $portfolio = Portfolio::findOne($id);
+       $portfolio_id = $portfolio->id;
+       $publishedComments = Comment::find()->where(['portfolio_id' => $portfolio_id])->all();
+       $comment = new Comment();
 
         return $this->render('view', [
-            // 'model' => $this->findModel($id),
             'assetsTypeData' => AssetType::find()->all(),
-            'item' => $portfolio
+            'item' => $portfolio,
+            'comment' => $comment,
+            'publishedComments' => $publishedComments
         ]);
     }
 
@@ -102,9 +107,10 @@ class PortfolioController extends Controller
             'portfolioStructure' => $portfolioStructure,
             'portfolio' => $portfolio,
             'assetsTypeData' => $assetsTypeData,
+            'defaultIcon'=> 'fas fa-coins',
+            'defaultColor' => 'info'
+
         ]);
-
-
     }
 
     /**
@@ -149,6 +155,7 @@ class PortfolioController extends Controller
                     'assetsTypeData' => $assetsTypeData,
                     'portfolio' => $portfolio,
 
+
                 ]);
 
 
@@ -166,6 +173,8 @@ class PortfolioController extends Controller
                 'portfolioStructure' => $portfolioStructure,
                 'portfolio' => $portfolio,
                 'assetsTypeData' => $assetsTypeData,
+                'defaultIcon'=> 'fas fa-coins',
+                'defaultColor' => 'info'
 
             ]);
 
