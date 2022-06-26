@@ -11,6 +11,7 @@ use yii\console\ExitCode;
 use GuzzleHttp\Client;
 use app\models\Asset;
 
+
 class MarketstackController extends Controller
 {
     const BASE_URI = 'http://api.marketstack.com/v1/tickers/';
@@ -29,25 +30,25 @@ class MarketstackController extends Controller
         // api quote them for last year + save to db. max 4 requests per symbol (100 items per request)
         // uber important upgrade: before hitting the API, check whether data already exists in DB :)
         $now = new DateTime();
-        $today = $now->format('Y-m-d');
-
+        $weekday = $now->format('w');
+        $previous_friday = date("Y-m-d", strtotime("previous friday"));
+        if ($weekday==0 or $weekday==6) {
+            $end_date_dt = new DateTime($previous_friday);
+            $end_date = $end_date_dt->format('Y-m-d');
+        } else {
+            $end_date = $now->format('Y-m-d');
+        }
 
         // get all unique symbols
         foreach($this->getAllDistinctAssets() as $asset){
             $start_date =MarketstackController::getMaxDateForAsset($asset);
-            if($start_date == $today) {
+            if($start_date == $end_date) {
                 // not calling API as we have the data already
                 continue;
             }
             // @WARNING assetpricehistory contains asset_id which might be duplicated between same asset+stock
             $symbol=strtolower($asset->ticker.'.'.$asset->stock);
-            // implement cache mechanism here, instead of blindly calling the API
-            print($asset->id);
-            print('
-            ');
-            print($start_date);
-            exit();
-            $prices = MarketstackController::getAssetPriceForDateRange($symbol, $start_date, $today);
+            $prices = MarketstackController::getAssetPriceForDateRange($symbol, $start_date, $end_date);
             foreach($prices as $price) {
                 // for each data point we have lets create a record
                 $asset_price = new AssetPriceHistory();
